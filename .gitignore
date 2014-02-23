@@ -1,0 +1,14 @@
+*.g.i.cs
+*.pdb
+.nuget/
+.packages/
+*.vshost.*
+*.cache
+*.lref
+*.resources
+*.baml
+*.suo
+bin/
+obj/
+*.dll
+*.exe

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AiS.Models
 {
+    /// <summary>
+    /// Trieda na ukladanie skusok.
+    /// </summary>
     public class Exam : IEquatable<Exam>
     {
         public string ID { get; set; }

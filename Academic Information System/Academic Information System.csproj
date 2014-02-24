@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Repositories\Database\Sql\StudyProgrammeRepository.cs" />
+    <Compile Include="Repositories\IImportParser.cs" />
+    <Compile Include="ViewModels\IImportWindowViewModel.cs" />
     <Compile Include="ViewModels\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\ISaveWindowViewModel.cs" />
     <Compile Include="Models\Exam.cs" />
@@ -67,7 +69,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\Csv\" />
+    <Folder Include="Repositories\Import\" />
     <Folder Include="Repositories\Xml\" />
   </ItemGroup>
   <ItemGroup>

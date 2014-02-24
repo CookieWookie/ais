@@ -7,5 +7,8 @@ namespace AiS.ViewModels
 {
     public interface IMainWindowViewModel
     {
+        void OpenImportView();
+        void OpenSaveView();
     }
+
 }

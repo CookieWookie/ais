@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
 
 namespace AiS.ViewModels
 {
-    public interface ISaveWindowViewModel<T> : INotifyPropertyChanged
+    public interface IImportWindowViewModel
     {
-        T Original { get; }
-        T WorkingCopy { get; }
+        void LoadFile(string file);
 
-        void Load(string ID);
         void Save();
         void Close();
         void SaveAndClose();

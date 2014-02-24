@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AiS.Models
 {
+    /// <summary>
+    /// Trieda na ukladanie skusok.
+    /// </summary>
     public class Exam : IEquatable<Exam>
     {
         public string ID { get; set; }
@@ -13,6 +16,7 @@ namespace AiS.Models
         public Subject Subject { get; set; }
         public Teacher Teacher { get; set; }
         public IEnumerable<Student> SignedStudents { get; set; }
+        public IEnumerable<Student> UnsignedStudents { get; set; }
 
         public bool Equals(Exam other)
         {
@@ -45,7 +49,8 @@ namespace AiS.Models
                 Time = Time,
                 Subject = Subject.Clone(),
                 Teacher = Teacher.Clone(),
-                SignedStudents = SignedStudents.Select(s => s.Clone()).ToList()
+                SignedStudents = SignedStudents.Select(s => s.Clone()).ToList(),
+                UnsignedStudents = UnsignedStudents.Select(s => s.Clone()).ToList()
             };
         }
     }

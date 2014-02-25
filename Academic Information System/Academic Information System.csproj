@@ -7,12 +7,13 @@
     <ProjectGuid>{86947B65-BEAE-4D71-99F2-8C4102F08EEE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Academic_Information_System</RootNamespace>
+    <RootNamespace>AiS</RootNamespace>
     <AssemblyName>Academic Information System</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +38,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\System.Data.SqlServerCe\4.0.0.0__89845dcd8080cc91\System.Data.SqlServerCe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,19 +61,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="ObservableObject.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="Repositories\Database\BaseDatabaseRepository.cs" />
     <Compile Include="Repositories\Database\Sql\StudyProgrammeRepository.cs" />
-    <Compile Include="Repositories\IImportParser.cs" />
+    <Compile Include="Repositories\IImportManager.cs" />
+    <Compile Include="Repositories\Import\ExamImportParser.cs" />
+    <Compile Include="Repositories\Import\StudentImportParser.cs" />
+    <Compile Include="Repositories\Import\StudyProgrammeImportParser.cs" />
+    <Compile Include="Repositories\Import\SubjectImportParser.cs" />
+    <Compile Include="Repositories\Import\TeacherImportParser.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="ViewModels\IImportWindowViewModel.cs" />
-    <Compile Include="ViewModels\IMainWindowViewModel.cs" />
-    <Compile Include="ViewModels\ISaveWindowViewModel.cs" />
-    <Compile Include="ViewModels\TestMainWindowViewModel.cs" />
-    <Compile Include="ViewModels\TestSaveWindowViewModel.cs" />
-    <Compile Include="Views\ISaveWindowView.cs" />
+    <Compile Include="ViewModels\ApplicationViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ImportViewModel.cs" />
+    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\IWindowFactory.cs" />
+    <Compile Include="Views\ApplicationView.xaml.cs">
+      <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -102,8 +118,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\Import\" />
+    <Folder Include="Repositories\Database\SqlCe\" />
     <Folder Include="Repositories\Xml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

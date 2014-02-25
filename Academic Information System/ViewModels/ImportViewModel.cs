@@ -5,10 +5,7 @@ using System.Text;
 
 namespace AiS.ViewModels
 {
-    public interface IMainWindowViewModel
+    public abstract class ImportViewModel<T> : BaseViewModel, IViewModel
     {
-        void OpenImportView();
-        void OpenSaveView();
     }
-
 }

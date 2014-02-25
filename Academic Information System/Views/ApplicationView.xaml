@@ -1,0 +1,8 @@
+﻿<Window x:Class="AiS.Views.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Path=ApplicationName}" Height="300" Width="637.218">
+    <Grid>
+        <ContentControl Content="{Binding Path=CurrentWindow}" Margin="80,0,0,0"/>
+    </Grid>
+</Window>

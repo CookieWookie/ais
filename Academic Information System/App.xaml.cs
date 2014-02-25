@@ -6,12 +6,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Academic_Information_System
+namespace AiS
 {
+    using ViewModels;
+    using Views;
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            ApplicationView view = new ApplicationView();
+            view.DataContext = new ApplicationViewModel();
+            view.Show();
+        }
     }
 }

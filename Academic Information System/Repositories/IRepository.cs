@@ -17,30 +17,32 @@ namespace AiS.Repositories
 
     public interface IStudyProgrammeRepository : IRepository<StudyProgramme>
     {
-        IEnumerable<StudyProgramme> GetByType(StudyType type);
+        IEnumerable<StudyProgramme> GetByStudyType(StudyType type);
     }
 
     public interface IStudentRepository : IRepository<Student>
     {
         IStudyProgrammeRepository StudyProgrammeRepository { get; }
 
-        IEnumerable<Student> GetStudying(StudyProgramme programme);
-        IEnumerable<Student> GetSignedTo(Exam exam);
-        IEnumerable<Student> GetUnsignedFrom(Exam exam);
+        IEnumerable<Student> GetByStudyProgramme(StudyProgramme programme);
+        IEnumerable<Student> GetByStudyProgramme(string ID);
+        IEnumerable<Student> GetByExam(Exam exam);
+        IEnumerable<Student> GetByExam(string ID);
     }
 
     public interface ISubjectRepository : IRepository<Subject>
     {
-        IEnumerable<Subject> GetInSemester(int semester);
-        IEnumerable<Subject> GetTeachedBy(Teacher teacher);
-        IEnumerable<Subject> GetTeachedBy(string ID);
+        IEnumerable<Subject> GetbySemester(int semester);
+        IEnumerable<Subject> GetByTeacher(Teacher teacher);
+        IEnumerable<Subject> GetByTeacher(string ID);
     }
 
     public interface ITeacherRepository : IRepository<Teacher>
     {
         ISubjectRepository SubjectRepository { get; }
 
-        IEnumerable<Teacher> GetAllTeaching(Subject subject);
+        IEnumerable<Teacher> GetBySubject(Subject subject);
+        IEnumerable<Teacher> GetBySubject(string ID);
     }
 
     public interface IExamRepository : IRepository<Exam>
@@ -49,7 +51,9 @@ namespace AiS.Repositories
         ITeacherRepository TeacherRepository { get; }
         ISubjectRepository SubjectRepository { get; }
 
-        IEnumerable<Exam> GetAllFrom(Subject subject);
-        IEnumerable<Exam> GetAllTeachedBy(Teacher teacher);
+        IEnumerable<Exam> GetBySubject(Subject subject);
+        IEnumerable<Exam> GetBySubject(string ID);
+        IEnumerable<Exam> GetByTeacher(Teacher teacher);
+        IEnumerable<Exam> GetByTeacher(string ID);
     }
 }

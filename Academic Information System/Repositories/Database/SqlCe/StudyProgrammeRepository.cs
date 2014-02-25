@@ -5,9 +5,9 @@ using System.Text;
 using System.Data.SqlClient;
 using AiS.Models;
 
-namespace AiS.Repositories.Database.Sql
+namespace AiS.Repositories.Database.SqlCe
 {
-    public class StudyProgrammeRepository : BaseSqlDatabaseRepository<StudyProgramme>, IStudyProgrammeRepository
+    public class StudyProgrammeRepository : BaseSqlCeDatabaseRepository<StudyProgramme>, IStudyProgrammeRepository
     {
         private const string SELECT = "SELECT [ID], [Name], [Length], [StudyType] FROM [StudyProgrammes]";
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";

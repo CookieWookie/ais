@@ -13,7 +13,7 @@ namespace AiS.Models
         public string Title { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
-        public string Title_Suffix { get; set; }
+        public string TitleSuffix { get; set; }
         public IEnumerable<Subject> Teaches { get; set; }
 
         public bool Equals(Teacher other)
@@ -33,7 +33,7 @@ namespace AiS.Models
 
         public Teacher Clone()
         {
-            return new Teacher { ID = ID, Title = Title, Name = Name, Lastname = Lastname, Title_Suffix = Title_Suffix, Teaches = Teaches.Select(x => x.Clone()).ToList() };
+            return new Teacher { ID = ID, Title = Title, Name = Name, Lastname = Lastname, TitleSuffix = TitleSuffix, Teaches = Teaches.Select(x => x.Clone()).ToList() };
         }
     }
 }

@@ -50,7 +50,7 @@ namespace AiS.Repositories.Database
             return GetValuesImpl<T>(commandString, Create, parameters);
         }
 
-        protected virtual TValue GetValuesImpl<TValue>(string commandString, params IDataParameter[] parameters)
+        protected virtual TValue GetValueImpl<TValue>(string commandString, params IDataParameter[] parameters)
         {
             return GetValuesImpl<TValue>(commandString, reader => (TValue)reader.GetValue(0), parameters).FirstOrDefault();
         }
@@ -79,6 +79,7 @@ namespace AiS.Repositories.Database
             using (var connection = GetConnection())
             using (var command = connection.CreateCommand())
             {
+                connection.Open();
                 models.ForEach(m =>
                 {
                     SaveModel(command, m);
@@ -93,6 +94,18 @@ namespace AiS.Repositories.Database
             SetParameters(command, model);
             command.ExecuteNonQuery();
             command.Parameters.Clear();
+        }
+
+        protected virtual void Exec(string commandString, params IDataParameter[] parameters)
+        {
+            using (var connection = GetConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = commandString;
+                parameters.ForEach(p => command.Parameters.Add(p));
+                connection.Open();
+                command.ExecuteNonQuery(); 
+            }
         }
 
         public virtual IEnumerable<T> GetAll()

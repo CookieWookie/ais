@@ -2,35 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 
-namespace AiS.Repositories.Database.Sql
+namespace AiS.Repositories.Database.SqlCe
 {
-    public abstract class BaseSqlDatabaseRepository<T> : BaseDatabaseRepository<T> where T : class
+    public abstract class BaseSqlCeDatabaseRepository<T> : BaseDatabaseRepository<T> where T : class
     {
-        protected BaseSqlDatabaseRepository(string connectionString, string getSingle, string getAll, string save)
+        protected BaseSqlCeDatabaseRepository(string connectionString, string getSingle, string getAll, string save)
             : base(connectionString, getSingle, getAll, save)
         {
         }
 
         protected override System.Data.IDbConnection GetConnection()
         {
-            return new SqlConnection(connectionString);
+            return new SqlCeConnection(connectionString);
         }
 
         protected override System.Data.IDataParameter CreateParameter(string name, object value)
         {
-            return new SqlParameter(name, ReferenceEquals(value, null) ? DBNull.Value : value);
+            return new SqlCeParameter(name, ReferenceEquals(value, null) ? DBNull.Value : value);
         }
 
         protected override int SaveImpl(string commandString, params T[] models)
         {
             int count = 0;
-            using (SqlConnection connection = (SqlConnection)GetConnection())
+            using (SqlCeConnection connection = (SqlCeConnection)GetConnection())
             {
                 connection.Open();
-                using (SqlTransaction transaction = connection.BeginTransaction())
-                using (SqlCommand command = new SqlCommand(commandString, connection, transaction))
+                using (SqlCeTransaction transaction = connection.BeginTransaction())
+                using (SqlCeCommand command = new SqlCeCommand(commandString, connection, transaction))
                 {
                     try
                     {

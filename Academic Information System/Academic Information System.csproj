@@ -64,7 +64,15 @@
     <Compile Include="ObservableObject.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Repositories\Database\BaseDatabaseRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\BaseSqlCeDatabaseRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\ExamRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\StudentRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\StudyProgrammeRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\SubjectRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\TeacherRepository.cs" />
     <Compile Include="Repositories\Database\Sql\BaseSqlDatabaseRepository.cs" />
+    <Compile Include="Repositories\Database\Sql\ExamRepository.cs" />
+    <Compile Include="Repositories\Database\Sql\StudentRepository.cs" />
     <Compile Include="Repositories\Database\Sql\StudyProgrammeRepository.cs" />
     <Compile Include="Repositories\Database\Sql\SubjectRepository.cs" />
     <Compile Include="Repositories\Database\Sql\TeacherRepository.cs" />
@@ -121,7 +129,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\Database\SqlCe\" />
     <Folder Include="Repositories\Xml\" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +136,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Repositories\Database\Scripts\SQL_1.0.0.0.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

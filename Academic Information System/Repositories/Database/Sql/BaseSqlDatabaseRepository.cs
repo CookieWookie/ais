@@ -23,6 +23,7 @@ namespace AiS.Repositories.Database.Sql
             return new SqlParameter(name, ReferenceEquals(value, null) ? DBNull.Value : value);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected override int SaveImpl(string commandString, params T[] models)
         {
             int count = 0;

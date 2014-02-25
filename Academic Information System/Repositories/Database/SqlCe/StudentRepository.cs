@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AiS.Models;
-using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 
 namespace AiS.Repositories.Database.SqlCe
 {
@@ -13,11 +13,8 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
         private const string SELECT_BYPROGRAMME = SELECT + " WHERE [StudyProgrammeID] = @studyProgrammeId";
         private const string SELECT_BYEXAM = SELECT + " JOIN [StudentsSignedToExam] ON [StudentID] = [ID] WHERE [ExamID] = @examId";
-        private const string SAVE =
-            "IF EXISTS(" + SELECT + " WHERE [ID] = @id) " +
-            "UPDATE [Students] SET [Name] = @name, [Lastname] = @lastname, [Semester] = @semester, [DateOfBirth] = @dateOfBirth, [StudyProgrammeID] = @studyProgrammeId WHERE [ID] = @id; " +
-            "ELSE " +
-            "INSERT INTO [Students] ([ID], [Name], [Lastname], [Semester], [DateOfBirth], [StudyProgrammeID]) VALUES (@id, @name, @lastname, @semester, @dateOfBirth, @studyProgrammeId);";
+        private const string UPDATE = "UPDATE [Students] SET [Name] = @name, [Lastname] = @lastname, [Semester] = @semester, [DateOfBirth] = @dateOfBirth, [StudyProgrammeID] = @studyProgrammeId WHERE [ID] = @id; ";
+        private const string INSERT = "INSERT INTO [Students] ([ID], [Name], [Lastname], [Semester], [DateOfBirth], [StudyProgrammeID]) VALUES (@id, @name, @lastname, @semester, @dateOfBirth, @studyProgrammeId);";
         private readonly IStudyProgrammeRepository studyProgrammeRepository;
 
         public IStudyProgrammeRepository StudyProgrammeRepository
@@ -26,7 +23,7 @@ namespace AiS.Repositories.Database.SqlCe
         }
 
         public StudentRepository(string connectionString, IStudyProgrammeRepository studyProgrammeRepository)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
         {
             studyProgrammeRepository.ThrowIfNull("studyProgrammeRepository");
             this.studyProgrammeRepository = studyProgrammeRepository;

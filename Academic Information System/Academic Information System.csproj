@@ -138,6 +138,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Repositories\Database\Scripts\SQLCE_1.0.0.0.sql" />
     <Content Include="Repositories\Database\Scripts\SQL_1.0.0.0.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

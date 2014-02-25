@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AiS.Models;
-using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 
 namespace AiS.Repositories.Database.SqlCe
 {
@@ -13,14 +13,11 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
         private const string SELECT_BYSEMESTER = SELECT + " WHERE [Semester] = @semester;";
         private const string SELECT_BYTEACHER = SELECT + " JOIN [SubjectTeachers] ON [ID] = [SubjectID] WHERE [TeacherID] = @teacherId";
-        private const string SAVE =
-            "IF EXISTS(" + SELECT + " WHERE [ID] = @id) " +
-            "UPDATE [Subjects] SET [Name] = @name, [Semester] = @semester WHERE [ID] = @id; " +
-            "ELSE " +
-            "INSERT INTO [Subjects] ([ID], [Name], [Semester]) VALUES (@id, @name, @semester);";
+        private const string UPDATE = "UPDATE [Subjects] SET [Name] = @name, [Semester] = @semester WHERE [ID] = @id; ";
+        private const string INSERT = "INSERT INTO [Subjects] ([ID], [Name], [Semester]) VALUES (@id, @name, @semester);";
 
         public SubjectRepository(string connectionString)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
         {
         }
 

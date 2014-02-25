@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 using AiS.Models;
 
 namespace AiS.Repositories.Database.SqlCe
@@ -12,11 +12,8 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT = "SELECT [ID], [Title], [Name], [Lastname], [TitleSuffix] FROM [Teachers]";
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
         private const string SELECT_BYSUBJECT = SELECT + " JOIN [SubjectTeachers] WHERE [SubjectID] = @subjectId;";
-        private const string SAVE =
-            "IF EXISTS(" + SELECT + " WHERE [ID] = @id) " +
-            "UPDATE [Teachers] SET [Title] = @title, [Name] = @name, [Lastname] = @lastname, [TitleSuffix] = @titleSuffix WHERE [ID] = @id; " +
-            "ELSE " +
-            "INSERT INTO [Teachers] ([ID], [Title], [Name], [Lastname], [TitleSuffix]) VALUES (@id, @title, @name, @lastanme, @titleSuffix);";
+        private const string UPDATE = "UPDATE [Teachers] SET [Title] = @title, [Name] = @name, [Lastname] = @lastname, [TitleSuffix] = @titleSuffix WHERE [ID] = @id;";
+        private const string INSERT = "INSERT INTO [Teachers] ([ID], [Title], [Name], [Lastname], [TitleSuffix]) VALUES (@id, @title, @name, @lastanme, @titleSuffix);";
         private const string SAVE_SUBJECTS = "INSERT INTO [SubjectTeachers] ([SubjectID], [TeacherID]) VALUES (@subjectId, @id);";
 
         private readonly ISubjectRepository subjectRepository;
@@ -27,7 +24,7 @@ namespace AiS.Repositories.Database.SqlCe
         }
 
         public TeacherRepository(string connectionString, ISubjectRepository subjectRepository)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
         {
             subjectRepository.ThrowIfNull("subjectRepository");
             this.subjectRepository = subjectRepository;
@@ -69,18 +66,17 @@ namespace AiS.Repositories.Database.SqlCe
         public override int Save(params Teacher[] models)
         {
             int count = 0;
-            using (SqlConnection connection = (SqlConnection)GetConnection())
+            using (SqlCeConnection connection = (SqlCeConnection)GetConnection())
             {
                 connection.Open();
-                using (SqlTransaction transaction = connection.BeginTransaction())
-                using (SqlCommand command = new SqlCommand("DELETE FROM [SubjectTeachers] WHERE [TeacherID] = @id", connection, transaction))
+                using (SqlCeTransaction transaction = connection.BeginTransaction())
+                using (SqlCeCommand command = new SqlCeCommand("DELETE FROM [SubjectTeachers] WHERE [TeacherID] = @id", connection, transaction))
                 {
                     try
                     {
                         command.ExecuteNonQuery();
                         models.ForEach(m =>
                         {
-                            command.CommandText = SAVE;
                             SaveModel(command, m);
                             foreach (var s in m.Teaches)
                             {

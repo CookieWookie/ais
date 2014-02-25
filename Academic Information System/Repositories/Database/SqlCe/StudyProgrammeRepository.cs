@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 using AiS.Models;
 
 namespace AiS.Repositories.Database.SqlCe
@@ -12,14 +12,11 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT = "SELECT [ID], [Name], [Length], [StudyType] FROM [StudyProgrammes]";
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
         private const string SELECT_BYTYPE = SELECT + " WHERE [StudyType] = @studyType;";
-        private const string SAVE =
-            "IF EXISTS(" + SELECT + " WHERE [ID] = @id) " +
-            "UPDATE [StudyProgrammes] SET [Name] = @name, [Length] = @length, [StudyType] = @studyType WHERE [ID] = @id; " +
-            "ELSE " +
-            "INSERT INTO [StudyProgrammes] ([ID], [Name], [Length], [StudyType]) VALUES (@id, @name, @length, @studyType);";
+        private const string UPDATE = "UPDATE [StudyProgrammes] SET [Name] = @name, [Length] = @length, [StudyType] = @studyType WHERE [ID] = @id; ";
+        private const string INSERT = "INSERT INTO [StudyProgrammes] ([ID], [Name], [Length], [StudyType]) VALUES (@id, @name, @length, @studyType);";
 
         public StudyProgrammeRepository(string connectionString)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
         {
         }
 

@@ -19,19 +19,19 @@ namespace AiS.Repositories.Database
         {
             if (string.IsNullOrWhiteSpace("connectionString"))
             {
-                throw new ArgumentNullException("connectionString");
+                throw new ArgumentException("connectionString");
             }
             if (string.IsNullOrWhiteSpace(getAll))
             {
-                throw new ArgumentNullException("getAll");
+                throw new ArgumentException("getAll");
             }
             if (string.IsNullOrWhiteSpace(save))
             {
-                throw new ArgumentNullException("save");
+                throw new ArgumentException("save");
             }
             if (string.IsNullOrWhiteSpace(getSingle))
             {
-                throw new ArgumentNullException("getSingle");
+                throw new ArgumentException("getSingle");
             }
 
             this.connectionString = connectionString;
@@ -55,6 +55,7 @@ namespace AiS.Repositories.Database
             return GetValuesImpl<TValue>(commandString, reader => (TValue)reader.GetValue(0), parameters).FirstOrDefault();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected virtual IEnumerable<TValue> GetValuesImpl<TValue>(string commandString, Func<IDataReader, TValue> selector, params IDataParameter[] parameters)
         {
             using (var connection = GetConnection())
@@ -96,6 +97,7 @@ namespace AiS.Repositories.Database
             command.Parameters.Clear();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected virtual void Exec(string commandString, params IDataParameter[] parameters)
         {
             using (var connection = GetConnection())

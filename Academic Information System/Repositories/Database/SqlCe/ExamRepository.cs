@@ -13,11 +13,8 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
         private const string SELECT_BYSUBJECT = SELECT + " WHERE [SubjectID] = @subjectId";
         private const string SELECT_BYTEACHER = SELECT + " WHERE [TeacherID] = @teacherId";
-        private const string SAVE =
-            "IF EXISTS(" + SELECT + " WHERE [ID] = @id) " +
-            "UPDATE [Exams] SET [Time] = @time, [SubjectID] = @subjectId, [TeacherID] = @teacherId WHERE [ID] = @id; " +
-            "ELSE " +
-            "INSERT INTO [Exams] ([ID], [Time], [SubjectID], [TeacherID]) VALUES (@id, @time, @subjectId, @teacherId);";
+        private const string UPDATE = "UPDATE [Exams] SET [Time] = @time, [SubjectID] = @subjectId, [TeacherID] = @teacherId WHERE [ID] = @id; ";
+        private const string INSERT = "INSERT INTO [Exams] ([ID], [Time], [SubjectID], [TeacherID]) VALUES (@id, @time, @subjectId, @teacherId);";
         private const string SAVE_STUDENTS = "INSERT INTO [StudentsSignedToExam] ([StudentID], [ExamID]) VALUES (@studentId, @id)";
 
         private readonly IStudentRepository studentRepository;
@@ -38,7 +35,7 @@ namespace AiS.Repositories.Database.SqlCe
         }
 
         public ExamRepository(string commandString, IStudentRepository studentRepository, ITeacherRepository teacherRepository, ISubjectRepository subjectRepository)
-            : base(commandString, SELECT_SINGLE, SELECT, SAVE)
+            : base(commandString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
         {
             studentRepository.ThrowIfNull("studentRepository");
             teacherRepository.ThrowIfNull("teacherRepository");
@@ -105,7 +102,6 @@ namespace AiS.Repositories.Database.SqlCe
                         command.ExecuteNonQuery();
                         models.ForEach(m =>
                         {
-                            command.CommandText = SAVE;
                             SaveModel(command, m);
                             foreach (var s in m.SignedStudents)
                             {

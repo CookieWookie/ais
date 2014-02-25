@@ -8,6 +8,7 @@ using AiS.Models;
 
 namespace AiS.Repositories.Import
 {
+    // nejaky dalsi komentar
     public class StudentImportManager : IImportManager<Student>
     {
         private readonly IRepository<Student> repository;

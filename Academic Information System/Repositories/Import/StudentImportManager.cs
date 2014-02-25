@@ -8,16 +8,16 @@ using AiS.Models;
 
 namespace AiS.Repositories.Import
 {
-    public class TeacherImportParser : IImportManager<Teacher>
+    public class StudentImportManager : IImportManager<Student>
     {
-        private readonly IRepository<Teacher> repository;
+        private readonly IRepository<Student> repository;
 
-        public IRepository<Teacher> Repository
+        public IRepository<Student> Repository
         {
             get { return repository; }
         }
 
-        public TeacherImportParser(IRepository<Teacher> repository)
+        public StudentImportManager(IRepository<Student> repository)
         {
             repository.ThrowIfNull("repository");
             this.repository = repository;

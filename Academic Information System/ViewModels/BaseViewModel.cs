@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AiS.ViewModels
 {
-    public abstract class BaseViewModel : IViewModel
+    public abstract class BaseViewModel : ObservableObject, IViewModel
     {
         public abstract string WindowName { get; }
 

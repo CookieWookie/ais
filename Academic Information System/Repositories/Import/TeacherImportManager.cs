@@ -1,4 +1,4 @@
-﻿// Assigned to: Peter Gába
+﻿// Assigned to: Adam Polák
 
 using System;
 using System.Collections.Generic;
@@ -8,16 +8,16 @@ using AiS.Models;
 
 namespace AiS.Repositories.Import
 {
-    public class ExamImportParser : IImportManager<Exam>
+    public class TeacherImportManager : IImportManager<Teacher>
     {
-        private readonly IRepository<Exam> repository;
+        private readonly IRepository<Teacher> repository;
 
-        public IRepository<Exam> Repository
+        public IRepository<Teacher> Repository
         {
             get { return repository; }
         }
 
-        public ExamImportParser(IRepository<Exam> repository)
+        public TeacherImportManager(IRepository<Teacher> repository)
         {
             repository.ThrowIfNull("repository");
             this.repository = repository;

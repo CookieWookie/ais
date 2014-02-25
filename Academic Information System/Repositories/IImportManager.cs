@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AiS.Repositories
 {
-    public interface IImportManager<T>
+    public interface IImportManager<T> where T : class
     {
         /// <summary>
         /// Repozitár, do ktorého sa uložia dáta z importu.

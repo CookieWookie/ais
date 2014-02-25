@@ -55,7 +55,6 @@ namespace AiS.Repositories.Database
             return GetValuesImpl<TValue>(commandString, reader => (TValue)reader.GetValue(0), parameters).FirstOrDefault();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected virtual IEnumerable<TValue> GetValuesImpl<TValue>(string commandString, Func<IDataReader, TValue> selector, params IDataParameter[] parameters)
         {
             using (var connection = GetConnection())

@@ -20,7 +20,7 @@ namespace AiS
             base.OnStartup(e);
 
             ApplicationView view = new ApplicationView();
-            view.DataContext = new ApplicationViewModel();
+            //view.DataContext = new ApplicationViewModel();
             view.Show();
         }
     }

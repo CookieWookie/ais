@@ -33,6 +33,7 @@ namespace AiS.Repositories
     {
         IEnumerable<Subject> GetInSemester(int semester);
         IEnumerable<Subject> GetTeachedBy(Teacher teacher);
+        IEnumerable<Subject> GetTeachedBy(string ID);
     }
 
     public interface ITeacherRepository : IRepository<Teacher>

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using AiS.Models;
 
-namespace AiS.Repositories.Database
+namespace AiS.Repositories.Database.Sql
 {
-    using Models;
-
-    public class StudyProgrammeRepository : BaseDatabaseRepository<StudyProgramme>, IStudyProgrammeRepository
+    public class StudyProgrammeRepository : BaseSqlDatabaseRepository<StudyProgramme>, IStudyProgrammeRepository
     {
         private const string SELECT = "SELECT [ID], [Name], [Length], [StudyType] FROM [StudyProgrammes]";
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
@@ -41,16 +40,6 @@ namespace AiS.Repositories.Database
             command.Parameters.Add(CreateParameter("@name", model.Name));
             command.Parameters.Add(CreateParameter("@length", model.Length));
             command.Parameters.Add(CreateParameter("@studyType", model.StudyType == StudyType.Bachelor ? 0 : 1));
-        }
-
-        protected override System.Data.IDbConnection GetConnection()
-        {
-            return new SqlConnection(connectionString);
-        }
-
-        protected override System.Data.IDataParameter CreateParameter(string name, object value)
-        {
-            return new SqlParameter(name, value);
         }
 
         public IEnumerable<StudyProgramme> GetByType(StudyType type)

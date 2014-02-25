@@ -8,7 +8,7 @@ using AiS.Models;
 
 namespace AiS.Repositories.Import
 {
-    public class SubjectImportParser : IImportManager<Subject>
+    public class SubjectImportManager : IImportManager<Subject>
     {
         private readonly IRepository<Subject> repository;
 
@@ -17,7 +17,7 @@ namespace AiS.Repositories.Import
             get { return repository; }
         }
 
-        public SubjectImportParser(IRepository<Subject> repository)
+        public SubjectImportManager(IRepository<Subject> repository)
         {
             repository.ThrowIfNull("repository");
             this.repository = repository;

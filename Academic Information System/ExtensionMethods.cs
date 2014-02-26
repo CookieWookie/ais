@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// nejaký komentár v branch 2
-
 public static class ExtensionMethods
 {
     public static void ThrowIfNull<T>(this T source)

@@ -1,4 +1,5 @@
 ﻿// Assigned to: Peter Gába
+// štruktúra: ID; Name; Semester
 
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿// Assigned to: Adam Polák
+﻿// Assigned to: Peter Gába
+// štruktúra: ID; Title; Name; Lastname; TitleSuffix; SubjectID
 
 using System;
 using System.Collections.Generic;

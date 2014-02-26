@@ -1,4 +1,5 @@
 ﻿// Assigned to: Adam Polák
+// štruktúra: ID; Name; Lastname; Semester; DateOfBirth; StudyProgrammeID
 
 using System;
 using System.Collections.Generic;

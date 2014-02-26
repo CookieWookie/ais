@@ -1,4 +1,5 @@
-﻿// Assigned to: Peter Gába
+﻿// Assigned to: Adam Polák
+// štruktúra: ID; Time; SubjectID; TeacherID; StudentID
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ using AiS.Models;
 
 namespace AiS.Repositories.Import
 {
-    // nejaky komentar
     public class ExamImportManager : IImportManager<Exam>
     {
         private readonly IRepository<Exam> repository;

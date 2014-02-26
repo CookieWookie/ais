@@ -1,4 +1,6 @@
 ﻿// Assigned to: Peter Gába
+// štruktúra: ID; Name; Length; StudyType
+// StudyType bude číslo, 0 = bakalár a 1 = magister
 
 using System;
 using System.Collections.Generic;

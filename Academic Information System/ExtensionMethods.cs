@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// nejaký komentár
+// nejaký komentár v branch 2
 
 public static class ExtensionMethods
 {

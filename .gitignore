@@ -12,5 +12,5 @@ bin/
 obj/
 *.dll
 *.exe
-test_sqlce.sdf
+*.sdf
 Test/

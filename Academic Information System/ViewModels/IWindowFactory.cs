@@ -9,5 +9,17 @@ namespace AiS.ViewModels
     public interface IWindowFactory
     {
         IViewModel CreateDefaultWindow();
+
+        IViewModel CreateImportExamWindow();
+        IViewModel CreateImportStudentWindow();
+        IViewModel CreateImportStudyProgrammeWindow();
+        IViewModel CreateImportTeacherWindow();
+        IViewModel CreateImportSubjectWindow();
+
+        IViewModel CreateAddExamWindow();
+        IViewModel CreateAddStudentWindow();
+        IViewModel CreateAddStudyProgrammeWindow();
+        IViewModel CreateAddTeacherWindow();
+        IViewModel CreateAddSubjectWindow();
     }
 }

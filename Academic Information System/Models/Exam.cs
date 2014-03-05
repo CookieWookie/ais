@@ -11,11 +11,22 @@ namespace AiS.Models
     /// </summary>
     public class Exam : IEquatable<Exam>
     {
+        private IList<Student> students;
+
         public string ID { get; set; }
         public DateTime Time { get; set; }
         public Subject Subject { get; set; }
         public Teacher Teacher { get; set; }
-        public IEnumerable<Student> SignedStudents { get; set; }
+        public IList<Student> SignedStudents
+        {
+            get
+            {
+                if (students == null)
+                    students = new List<Student>();
+                return students;
+            }
+            set { students = value; }
+        }
 
         public bool Equals(Exam other)
         {

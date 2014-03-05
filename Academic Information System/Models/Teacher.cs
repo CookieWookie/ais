@@ -9,12 +9,23 @@ namespace AiS.Models
 {
     public class Teacher : IEquatable<Teacher>
     {
+        private IList<Subject> subjects;
+
         public string ID { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string TitleSuffix { get; set; }
-        public IEnumerable<Subject> Teaches { get; set; }
+        public IList<Subject> Teaches
+        {
+            get
+            {
+                if (subjects == null)
+                    subjects = new List<Subject>();
+                return subjects;
+            }
+            set { subjects = value; }
+        }
 
         public bool Equals(Teacher other)
         {

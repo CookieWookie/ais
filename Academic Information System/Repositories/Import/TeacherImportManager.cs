@@ -32,27 +32,36 @@ namespace AiS.Repositories.Import
                 while (riadok != null)
                 {
                     string[] delenyRiadok = riadok.Split(';');
-                    Teacher sp = new Teacher();
-                    sp.ID = delenyRiadok[0];
-                    sp.Name = delenyRiadok[1];
-                    sp.Length = Convert.ToInt32(delenyRiadok[2]);
-                    if (delenyRiadok[3] == "0")
-                    {
-                        sp.StudyType = StudyType.Bachelor;
-                    }
+                    Teacher t = new Teacher();
+                    t.ID = delenyRiadok[0];
+                    t.Title = delenyRiadok[1];
+                    t.Name = delenyRiadok[2];
+                    t.Lastname = delenyRiadok[3];
+                    t.TitleSuffix = delenyRiadok[4];
+                    Subject sub = new Subject();
+                    sub.ID = delenyRiadok[5];
+                    t.Teaches.Add(sub);
+                    if (!teachers.Contains(t))
+                        teachers.Add(t);
                     else
                     {
-                        sp.StudyType = StudyType.Magister;
+                        foreach (Teacher x in teachers)
+                        {
+                            if (x.Equals(t))
+                            {
+                                x.Teaches.Add(sub);
+                                break;
+                            }
+                        }
                     }
-                    if (!studyProgrammes.Contains(sp))
-                        studyProgrammes.Add(sp);
                 }
             }
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            Repository.Save(teachers.ToArray());
+            teachers.Clear();
         }
     }
 }

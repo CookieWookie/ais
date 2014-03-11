@@ -39,7 +39,7 @@ namespace AiS.Repositories.Database.SqlCe
                 Name = reader.GetString(2),
                 Lastname = reader.GetString(3),
                 TitleSuffix = reader.GetString(4),
-                Teaches = subjectRepository.GetByTeacher(reader.GetString(0))
+                Teaches = subjectRepository.GetByTeacher(reader.GetString(0)).ToList()
             };
         }
 

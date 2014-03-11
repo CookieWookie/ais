@@ -13,6 +13,7 @@ namespace AiS.ViewModels
         private ICommand changeWindowCommand;
         private IList<IViewModel> openWindows;
         private IViewModel currentWindow;
+        private IViewModel menuWindow;
 
         public string ApplicationName
         {
@@ -23,7 +24,9 @@ namespace AiS.ViewModels
             get
             {
                 if (openWindows == null)
+                {
                     openWindows = new List<IViewModel>();
+                }
                 return openWindows;
             }
         }
@@ -38,6 +41,10 @@ namespace AiS.ViewModels
                     OnPropertyChanged("CurrentWindow");
                 }
             }
+        }
+        public IViewModel MenuWindow
+        {
+            get { return this.menuWindow; }
         }
         public ICommand ChangeWindowCommand
         {
@@ -56,6 +63,7 @@ namespace AiS.ViewModels
             windowFactory.ThrowIfNull("windowFactory");
             this.windowFactory = windowFactory;
             this.defaultWindow = windowFactory.CreateDefaultWindow();
+            this.menuWindow = windowFactory.CreateMenuWindow();
         }
 
         protected void OnViewModelClosing(object sender, EventArgs e)

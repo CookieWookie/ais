@@ -85,7 +85,11 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ImportViewModel.cs" />
+    <Compile Include="ViewModels\ImportExamViewModel.cs" />
+    <Compile Include="ViewModels\ImportStudentViewModel.cs" />
+    <Compile Include="ViewModels\ImportStudyProgrammeViewModel.cs" />
+    <Compile Include="ViewModels\ImportSubjectViewModel.cs" />
+    <Compile Include="ViewModels\ImportTeacherViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -57,7 +57,7 @@ namespace AiS.Repositories.Database.Sql
                 Time = reader.GetDateTime(1),
                 Subject = SubjectRepository.GetSingle(reader.GetString(2)),
                 Teacher = TeacherRepository.GetSingle(reader.GetString(3)),
-                SignedStudents = StudentRepository.GetByExam(reader.GetString(0))
+                SignedStudents = StudentRepository.GetByExam(reader.GetString(0)).ToList()
             };
         }
 

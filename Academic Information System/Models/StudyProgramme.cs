@@ -6,15 +6,68 @@ using System.Threading.Tasks;
 
 namespace AiS.Models
 {
-    public class StudyProgramme : IEquatable<StudyProgramme>
+    public class StudyProgramme : ObservableObject, IEquatable<StudyProgramme>
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
+        private string id;
+        private string name;
+        private int length;
+        private StudyType studyType;
+
+        public string ID
+        {
+            get { return this.id; }
+            set
+            {
+                if (this.id != value)
+                {
+                    this.id = value;
+                    this.OnPropertyChanged("ID");
+                }
+            }
+        }
+        public string Name
+        {
+            get { return this.name; }
+            set
+            {
+                if (this.name != value)
+                {
+                    this.name = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
         /// <summary>
         /// Standard length in semesters.
         /// </summary>
-        public int Length { get; set; }
-        public StudyType StudyType { get; set; }
+        public int Length
+        {
+            get { return this.length; }
+            set
+            {
+                if (this.length != value)
+                {
+                    this.length = value;
+                    this.OnPropertyChanged("Length");
+                }
+            }
+        }
+        public StudyType StudyType
+        {
+            get { return this.studyType; }
+            set
+            {
+                if (this.studyType != value)
+                {
+                    this.studyType = value;
+                    this.OnPropertyChanged("StudyType");
+                }
+            }
+        }
+
+        public StudyProgramme()
+        {
+        }
 
         public bool Equals(StudyProgramme other)
         {

@@ -15,6 +15,7 @@ namespace AiS.ViewModels
         private readonly IImportManager<StudyProgramme> importManager;
         private readonly ICommand findFileCommand;
         private readonly ICommand parseFileCommand;
+        private readonly ICommand saveCommand;
         private bool hasChanged = false;
 
         public override string WindowName
@@ -28,6 +29,10 @@ namespace AiS.ViewModels
         public ICommand ParseFileCommand
         {
             get { return this.parseFileCommand; }
+        }
+        public ICommand SaveCommand
+        {
+            get { return this.saveCommand; }
         }
         public string FilePath { get; set; }
         public bool HasChanged
@@ -45,6 +50,7 @@ namespace AiS.ViewModels
             this.importManager = importManager;
             this.findFileCommand = new RelayCommand(x => this.FindFile());
             this.parseFileCommand = new RelayCommand(x => this.ParseFile(), x => this.CanParse);
+            this.saveCommand = new RelayCommand(x => this.Save(), x => true);
         }
 
         public void Save()

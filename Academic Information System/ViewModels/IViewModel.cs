@@ -19,6 +19,7 @@ namespace AiS.ViewModels
 
     public interface ISaveViewModel : IViewModel
     {
+        ICommand SaveCommand { get; }
         bool HasChanged { get; }
 
         void Save();
@@ -33,5 +34,13 @@ namespace AiS.ViewModels
 
         void FindFile();
         void ParseFile();
+    }
+
+    public interface IAddViewModel<T> : ISaveViewModel
+    {
+        T Default { get; }
+        T WorkingCopy { get; }
+
+        void ResetToDefault();
     }
 }

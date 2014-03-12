@@ -6,11 +6,52 @@ using System.Threading.Tasks;
 
 namespace AiS.Models
 {
-    public class Subject : IEquatable<Subject>
+    public class Subject : ObservableObject, IEquatable<Subject>
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public int Semester { get; set; }
+        private string id;
+        private string name;
+        private int semester;
+
+        public string ID
+        {
+            get { return this.id; }
+            set
+            {
+                if (this.id != value)
+                {
+                    this.id = value;
+                    this.OnPropertyChanged("ID");
+                }
+            }
+        }
+        public string Name
+        {
+            get { return this.name; }
+            set
+            {
+                if (this.name != value)
+                {
+                    this.name = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+        public int Semester
+        {
+            get { return this.semester; }
+            set
+            {
+                if (this.semester != value)
+                {
+                    this.semester = value;
+                    this.OnPropertyChanged("Semester");
+                }
+            }
+        }
+
+        public Subject()
+        {
+        }
 
         public bool Equals(Subject other)
         {

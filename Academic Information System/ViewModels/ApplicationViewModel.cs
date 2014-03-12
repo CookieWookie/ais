@@ -52,7 +52,12 @@ namespace AiS.ViewModels
             {
                 if (changeWindowCommand == null)
                 {
-                    changeWindowCommand = new RelayCommand(o => CurrentWindow = (IViewModel)o, o => o is IViewModel);
+                    changeWindowCommand = new RelayCommand(o => 
+                    {
+                        IViewModel vm = (IViewModel)o;
+                        vm.ViewModelClosingEvent += this.OnViewModelClosing;
+                        CurrentWindow = vm; 
+                    }, o => o is IViewModel);
                 }
                 return changeWindowCommand;
             }

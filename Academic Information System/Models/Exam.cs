@@ -3,29 +3,112 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace AiS.Models
 {
     /// <summary>
     /// Trieda na ukladanie skusok.
     /// </summary>
-    public class Exam : IEquatable<Exam>
+    public class Exam : ObservableObject, IEquatable<Exam>
     {
-        private IList<Student> students;
+        private string id;
+        private DateTime time;
+        private Subject subject;
+        private Teacher teacher;
+        private ObservableCollection<Student> students;
 
-        public string ID { get; set; }
-        public DateTime Time { get; set; }
-        public Subject Subject { get; set; }
-        public Teacher Teacher { get; set; }
+        public string ID
+        {
+            get { return this.id; }
+            set
+            {
+                if (value != this.id)
+                {
+                    this.id = value;
+                    this.OnPropertyChanged("ID");
+                }
+            }
+        }
+        public DateTime Time
+        {
+            get { return this.time; }
+            set
+            {
+                if (value != this.time)
+                {
+                    this.time = value;
+                    this.OnPropertyChanged("Time");
+                }
+            }
+        }
+        public Subject Subject
+        {
+            get
+            {
+                if (this.subject == null)
+                {
+                    this.subject = new Subject();
+                }
+                return this.subject;
+            }
+            set
+            {
+                if (!this.subject.Equals(value))
+                {
+                    this.subject = value;
+                    this.OnPropertyChanged("Subject");
+                }
+            }
+        }
+        public Teacher Teacher
+        {
+            get
+            {
+                if (this.teacher == null)
+                {
+                    this.teacher = new Teacher();
+                }
+                return this.teacher;
+            }
+            set
+            {
+                if (!this.teacher.Equals(value))
+                {
+                    this.teacher = value;
+                    this.OnPropertyChanged("Teacher");
+                }
+            }
+        }
         public IList<Student> SignedStudents
         {
             get
             {
-                if (students == null)
-                    students = new List<Student>();
-                return students;
+                if (this.students == null)
+                {
+                    this.SetCollection(null);
+                }
+                return this.students;
             }
-            set { students = value; }
+            set
+            {
+                if (value != this.students)
+                {
+                    SetCollection(value);
+                    this.OnPropertyChanged("SignedStudents");
+                }
+            }
+        }
+
+        public Exam()
+        {
+        }
+
+        private void SetCollection(IList<Student> value)
+        {
+            this.students = value == null ? new ObservableCollection<Student>() : new ObservableCollection<Student>(value);
+            this.students.CollectionChanged += (sender, e) => this.OnPropertyChanged("SignedStudents");
         }
 
         public bool Equals(Exam other)
@@ -54,5 +137,7 @@ namespace AiS.Models
                 SignedStudents = SignedStudents.Select(s => s.Clone()).ToList()
             };
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

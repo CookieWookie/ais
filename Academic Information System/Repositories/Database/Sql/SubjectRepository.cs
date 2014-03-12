@@ -56,5 +56,15 @@ namespace AiS.Repositories.Database.Sql
         {
             return GetImpl(SELECT_BYTEACHER, CreateParameter("@teacherId", ID));
         }
+
+        public override int Save(params Subject[] models)
+        {
+            models.ForEach(m =>
+            {
+                if (string.IsNullOrWhiteSpace(m.ID))
+                    m.ID = this.GetID();
+            });
+            return base.Save(models);
+        }
     }
 }

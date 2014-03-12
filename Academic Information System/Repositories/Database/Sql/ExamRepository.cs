@@ -105,6 +105,8 @@ namespace AiS.Repositories.Database.Sql
                         command.ExecuteNonQuery();
                         models.ForEach(m =>
                         {
+                            if (string.IsNullOrWhiteSpace(m.ID))
+                                m.ID = this.GetID();
                             command.CommandText = SAVE;
                             SaveModel(command, m);
                             foreach (var s in m.SignedStudents)

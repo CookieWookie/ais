@@ -10,6 +10,11 @@ namespace AiS.Repositories.Database
 {
     public abstract class BaseDatabaseRepository<T> : IRepository<T> where T : class
     {
+        protected const int AllowedCharactersLength = AllowedCharacters.Length;
+        protected const string AllowedCharacters =
+            "abcdefghijklmopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-?:_!)([#&]<>*+$@";
+        private static readonly Random rnd = new Random();
+
         protected readonly string getSingleString;
         protected readonly string getAllString;
         protected readonly string saveString;
@@ -45,6 +50,32 @@ namespace AiS.Repositories.Database
         protected abstract IDbConnection GetConnection();
         protected abstract IDataParameter CreateParameter(string name, object value);
 
+        protected virtual string GetID()
+        {
+            string id = this.GenerateID();
+            using (var connection = GetConnection())
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.Parameters.Add(CreateParameter("@id", id));
+                while (command.ExecuteScalar() != null)
+                {
+                    ((IDataParameter)command.Parameters["@id"]).Value = (id = this.GenerateID());
+                }
+            }
+            return id;
+        }
+
+        protected virtual string GenerateID()
+        {
+            char[] array = new char[8];
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = AllowedCharacters[rnd.Next(0, AllowedCharactersLength)];
+            }
+            return new string(array);
+        }
+
         protected virtual IEnumerable<T> GetImpl(string commandString, params IDataParameter[] parameters)
         {
             return GetValuesImpl<T>(commandString, Create, parameters);
@@ -55,7 +86,6 @@ namespace AiS.Repositories.Database
             return GetValuesImpl<TValue>(commandString, reader => (TValue)reader.GetValue(0), parameters).FirstOrDefault();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected virtual IEnumerable<TValue> GetValuesImpl<TValue>(string commandString, Func<IDataReader, TValue> selector, params IDataParameter[] parameters)
         {
             using (var connection = GetConnection())
@@ -97,7 +127,6 @@ namespace AiS.Repositories.Database
             command.Parameters.Clear();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected virtual void Exec(string commandString, params IDataParameter[] parameters)
         {
             using (var connection = GetConnection())
@@ -106,7 +135,7 @@ namespace AiS.Repositories.Database
                 command.CommandText = commandString;
                 parameters.ForEach(p => command.Parameters.Add(p));
                 connection.Open();
-                command.ExecuteNonQuery(); 
+                command.ExecuteNonQuery();
             }
         }
 
@@ -122,7 +151,7 @@ namespace AiS.Repositories.Database
 
         public virtual T GetSingle(string ID)
         {
-            return GetImpl(getSingleString, CreateParameter("@ID", ID)).FirstOrDefault();
+            return GetImpl(getSingleString, CreateParameter("@id", ID)).FirstOrDefault();
         }
     }
 }

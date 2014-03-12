@@ -102,6 +102,8 @@ namespace AiS.Repositories.Database.SqlCe
                         command.ExecuteNonQuery();
                         models.ForEach(m =>
                         {
+                            if (string.IsNullOrWhiteSpace(m.ID))
+                                m.ID = this.GetID();
                             SaveModel(command, m);
                             foreach (var s in m.SignedStudents)
                             {

@@ -43,5 +43,15 @@ namespace AiS.Repositories.Database.SqlCe
         {
             return GetImpl(SELECT_BYTYPE, CreateParameter("@studyType", type == StudyType.Bachelor ? 0 : 1));
         }
+
+        public override int Save(params StudyProgramme[] models)
+        {
+            models.ForEach(m =>
+            {
+                if (string.IsNullOrWhiteSpace(m.ID))
+                    m.ID = this.GetID();
+            });
+            return base.Save(models);
+        }
     }
 }

@@ -75,8 +75,6 @@ namespace AiS.ViewModels
                 this.FilePath = fileName;
 
             }
-
-
         }
 
         public void ParseFile()

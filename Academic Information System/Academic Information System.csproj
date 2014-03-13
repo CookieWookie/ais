@@ -101,6 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\IWindowFactory.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\Xml\" />
+    <Folder Include="ViewModels\Report\" />
     <Folder Include="Views\Add\" />
     <Folder Include="Views\Import\" />
   </ItemGroup>

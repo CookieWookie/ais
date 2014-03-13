@@ -43,4 +43,24 @@ namespace AiS.ViewModels
 
         public abstract void Save();
     }
+
+    public abstract class BaseAddViewModel<T> : BaseSaveViewModel, IAddViewModel<T>
+    {
+        private readonly ICommand resetToDefaultCommand;
+
+        public virtual ICommand ResetToDefaultCommand
+        {
+            get { return this.resetToDefaultCommand; }
+        }
+        public abstract T Original { get; }
+        public abstract T WorkingCopy { get; }
+
+        public BaseAddViewModel()
+            : base()
+        {
+            this.resetToDefaultCommand = new RelayCommand(o => this.ResetToDefault(), o => true);
+        }
+
+        public abstract void ResetToDefault();
+    }
 }

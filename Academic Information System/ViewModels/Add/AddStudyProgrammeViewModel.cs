@@ -8,10 +8,9 @@ using System.Windows.Input;
 
 namespace AiS.ViewModels
 {
-    public class AddStudyProgrammeViewModel : BaseSaveViewModel, IAddViewModel<StudyProgramme>
+    public class AddStudyProgrammeViewModel : BaseAddViewModel<StudyProgramme>
     {
         private readonly IRepository<StudyProgramme> repository;
-        private readonly ICommand resetToDefaultCommand;
         private readonly StudyProgramme original;
 
         public override string WindowName
@@ -26,10 +25,6 @@ namespace AiS.ViewModels
         {
             get { throw new NotImplementedException(); }
         }
-        public ICommand ResetToDefaultCommand
-        {
-            get { throw new NotImplementedException(); }
-        }
         public bool HasChanged
         {
             get { throw new NotImplementedException(); }
@@ -41,7 +36,6 @@ namespace AiS.ViewModels
             original.ThrowIfNull("original");
             this.repository = repository;
             this.original = original;
-            this.resetToDefaultCommand = new RelayCommand(o => this.ResetToDefault(), o => true);
         }
 
         public void ResetToDefault()

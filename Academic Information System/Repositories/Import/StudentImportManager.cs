@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AiS.Models;
+using System.IO;
 
 namespace AiS.Repositories.Import
 {
@@ -13,6 +14,8 @@ namespace AiS.Repositories.Import
     public class StudentImportManager : IImportManager<Student>
     {
         private readonly IRepository<Student> repository;
+
+        List<Student> students = new List<Student>();
 
         public IRepository<Student> Repository
         {
@@ -27,12 +30,35 @@ namespace AiS.Repositories.Import
 
         public void ParseFile(string file)
         {
-            throw new NotImplementedException();
+            using (StreamReader sr = new StreamReader(file))
+            {
+                string riadok = sr.ReadLine();
+                while (riadok != null)
+                {
+                    string[] delenyRiadok = riadok.Split(';');
+                    Student s = new Student();
+                    s.ID = delenyRiadok[0];
+                    s.Name = delenyRiadok[1];
+                    s.Lastname = delenyRiadok[2];
+                    s.Semester = Convert.ToInt32(delenyRiadok[3]);
+                    s.DateOfBirth = Convert.ToDateTime(delenyRiadok[4]);
+                    
+                    StudyProgramme sp = new StudyProgramme();
+                    sp.ID = delenyRiadok[5];
+                    
+                    s.StudyProgramme = sp;
+
+                    if (!students.Contains(s))
+                        students.Add(s);
+                }
+            }
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            Repository.Save(students.ToArray());
+            students.Clear();
+
         }
     }
 }

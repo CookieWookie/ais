@@ -38,8 +38,9 @@ namespace AiS.ViewModels
 
     public interface IAddViewModel<T> : ISaveViewModel
     {
-        T Default { get; }
+        T Original { get; }
         T WorkingCopy { get; }
+        ICommand ResetToDefaultCommand { get; }
 
         void ResetToDefault();
     }

@@ -83,13 +83,18 @@
     <Compile Include="Repositories\Import\SubjectImportManager.cs" />
     <Compile Include="Repositories\Import\TeacherImportManager.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="ViewModels\Add\AddExamViewModel.cs" />
+    <Compile Include="ViewModels\Add\AddStudyProgrammeViewModel.cs" />
+    <Compile Include="ViewModels\Add\AddStudentViewModel.cs" />
+    <Compile Include="ViewModels\Add\AddSubjectViewModel.cs" />
+    <Compile Include="ViewModels\Add\AddTeacherViewModel.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ImportExamViewModel.cs" />
-    <Compile Include="ViewModels\ImportStudentViewModel.cs" />
-    <Compile Include="ViewModels\ImportStudyProgrammeViewModel.cs" />
-    <Compile Include="ViewModels\ImportSubjectViewModel.cs" />
-    <Compile Include="ViewModels\ImportTeacherViewModel.cs" />
+    <Compile Include="ViewModels\Import\ImportExamViewModel.cs" />
+    <Compile Include="ViewModels\Import\ImportStudentViewModel.cs" />
+    <Compile Include="ViewModels\Import\ImportStudyProgrammeViewModel.cs" />
+    <Compile Include="ViewModels\Import\ImportSubjectViewModel.cs" />
+    <Compile Include="ViewModels\Import\ImportTeacherViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -134,6 +139,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\Xml\" />
+    <Folder Include="Views\Add\" />
+    <Folder Include="Views\Import\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ApplicationView.xaml">

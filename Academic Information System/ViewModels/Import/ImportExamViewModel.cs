@@ -43,7 +43,7 @@ namespace AiS.ViewModels
         }
         public bool CanParse
         {
-            get {}
+            get { throw new NotImplementedException(); }
         }
 
         public ImportExamViewModel(IImportManager<Exam> importManager)

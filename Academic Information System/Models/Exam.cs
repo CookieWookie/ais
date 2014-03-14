@@ -137,7 +137,5 @@ namespace AiS.Models
                 SignedStudents = SignedStudents.Select(s => s.Clone()).ToList()
             };
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -10,7 +10,7 @@ namespace AiS.ViewModels
     {
         public abstract string WindowName { get; }
 
-        public BaseViewModel()
+        protected BaseViewModel()
         {
         }
 
@@ -35,7 +35,7 @@ namespace AiS.ViewModels
         }
         public abstract bool HasChanged { get; }
 
-        public BaseSaveViewModel()
+        protected BaseSaveViewModel()
             : base()
         {
             this.saveCommand = new RelayCommand(o => this.Save(), o => true);
@@ -55,7 +55,7 @@ namespace AiS.ViewModels
         public abstract T Original { get; }
         public abstract T WorkingCopy { get; }
 
-        public BaseAddViewModel()
+        protected BaseAddViewModel()
             : base()
         {
             this.resetToDefaultCommand = new RelayCommand(o => this.ResetToDefault(), o => true);

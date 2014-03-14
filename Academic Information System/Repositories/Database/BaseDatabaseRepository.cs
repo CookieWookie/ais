@@ -10,7 +10,6 @@ namespace AiS.Repositories.Database
 {
     public abstract class BaseDatabaseRepository<T> : IRepository<T> where T : class
     {
-        protected const int AllowedCharactersLength = AllowedCharacters.Length;
         protected const string AllowedCharacters =
             "abcdefghijklmopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-?:_!)([#&]<>*+$@";
         private static readonly Random rnd = new Random();
@@ -71,7 +70,7 @@ namespace AiS.Repositories.Database
             char[] array = new char[8];
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = AllowedCharacters[rnd.Next(0, AllowedCharactersLength)];
+                array[i] = AllowedCharacters[rnd.Next(0, AllowedCharacters.Length)];
             }
             return new string(array);
         }

@@ -12,7 +12,12 @@ namespace AiS.ViewModels
     {
         private readonly IRepository<Exam> repository;
         private readonly Exam original;
+        private readonly string windowName;
 
+        public override string WindowName
+        {
+            get { return this.windowName; }
+        }
         public override Exam Original
         {
             get { return this.original; }
@@ -21,13 +26,15 @@ namespace AiS.ViewModels
         {
             get { throw new NotImplementedException(); }
         }
-        public override string WindowName
-        {
-            get { return "Pridaj: Skúška"; }
-        }
         public override bool HasChanged
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public AddExamViewModel(IRepository<Exam> repository)
+            : this(repository, new Exam())
+        {
+            this.windowName = "Pridaj: Skúška";
         }
 
         public AddExamViewModel(IRepository<Exam> repository, Exam original)
@@ -35,6 +42,7 @@ namespace AiS.ViewModels
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
+            this.windowName = "Uprav: Skúška";
             this.repository = repository;
             this.original = original;
         }

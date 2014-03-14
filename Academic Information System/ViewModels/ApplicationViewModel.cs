@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace AiS.ViewModels
 {
     public class ApplicationViewModel : ObservableObject
     {
-        private readonly IViewModel defaultWindow;
-        private readonly IWindowFactory windowFactory;
+        private IViewModel menuWindow;
+        private IViewModel defaultWindow;
+        private IViewModel currentWindow;
         private ICommand changeWindowCommand;
         private IList<IViewModel> openWindows;
-        private IViewModel currentWindow;
-        private IViewModel menuWindow;
 
         public string ApplicationName
         {
@@ -21,24 +21,20 @@ namespace AiS.ViewModels
         }
         public IList<IViewModel> OpenWindows
         {
-            get
-            {
-                if (openWindows == null)
-                {
-                    openWindows = new List<IViewModel>();
-                }
-                return openWindows;
-            }
+            get { return this.openWindows ?? (this.openWindows = this.CreateCollection()); }
         }
         public IViewModel CurrentWindow
         {
-            get { return currentWindow; }
+            get
+            {
+                return this.currentWindow ?? (this.CurrentWindow = (this.OpenWindows.FirstOrDefault() ?? this.defaultWindow));
+            }
             set
             {
                 if (currentWindow != value)
                 {
                     currentWindow = value;
-                    OnPropertyChanged("CurrentWindow");
+                    this.OnPropertyChanged("CurrentWindow");
                 }
             }
         }
@@ -50,25 +46,29 @@ namespace AiS.ViewModels
         {
             get
             {
-                if (changeWindowCommand == null)
-                {
-                    changeWindowCommand = new RelayCommand(o => 
+                return this.changeWindowCommand ?? (this.changeWindowCommand = new RelayCommand(o =>
                     {
                         IViewModel vm = (IViewModel)o;
                         vm.ViewModelClosingEvent += this.OnViewModelClosing;
-                        CurrentWindow = vm; 
-                    }, o => o is IViewModel);
-                }
-                return changeWindowCommand;
+                        this.CurrentWindow = vm;
+                    }, o => o is IViewModel));
             }
         }
 
-        public ApplicationViewModel(IWindowFactory windowFactory)
+        public ApplicationViewModel(IMenuViewModel menuWindow, IViewModel defaultWindow)
         {
-            windowFactory.ThrowIfNull("windowFactory");
-            this.windowFactory = windowFactory;
-            this.defaultWindow = windowFactory.CreateDefaultWindow();
-            this.menuWindow = windowFactory.CreateMenuWindow();
+            menuWindow.ThrowIfNull("menuWindow");
+            defaultWindow.ThrowIfNull("defaultWindow");
+            menuWindow.ViewModelChangedEvent += this.OnViewModelChange;
+            this.menuWindow = menuWindow;
+            this.defaultWindow = defaultWindow;
+        }
+
+        private IList<IViewModel> CreateCollection()
+        {
+            ObservableCollection<IViewModel> collection = new ObservableCollection<IViewModel>();
+            collection.CollectionChanged += (sender, e) => this.OnPropertyChanged("OpenWindows");
+            return collection;
         }
 
         protected void OnViewModelClosing(object sender, EventArgs e)
@@ -79,6 +79,15 @@ namespace AiS.ViewModels
             {
                 CurrentWindow = OpenWindows.FirstOrDefault() ?? defaultWindow;
             }
+        }
+
+        protected void OnViewModelChange(object sender, ViewModelChangeEventArgs e)
+        {
+            if (this.CurrentWindow != this.defaultWindow)
+            {
+                this.OpenWindows.Add(this.CurrentWindow);
+            }
+            this.ChangeWindowCommand.Execute(e.ViewModel);
         }
     }
 }

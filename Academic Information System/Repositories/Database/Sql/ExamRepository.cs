@@ -37,8 +37,8 @@ namespace AiS.Repositories.Database.Sql
             get { return subjectRepository; }
         }
 
-        public ExamRepository(string commandString, IStudentRepository studentRepository, ITeacherRepository teacherRepository, ISubjectRepository subjectRepository)
-            : base(commandString, SELECT_SINGLE, SELECT, SAVE)
+        public ExamRepository(string connectionString, IStudentRepository studentRepository, ITeacherRepository teacherRepository, ISubjectRepository subjectRepository)
+            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
         {
             studentRepository.ThrowIfNull("studentRepository");
             teacherRepository.ThrowIfNull("teacherRepository");

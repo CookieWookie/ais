@@ -12,38 +12,46 @@ namespace AiS.ViewModels
     {
         private readonly IRepository<StudyProgramme> repository;
         private readonly StudyProgramme original;
+        private readonly string windowName;
 
         public override string WindowName
         {
-            get { return "Pridaj: Študíjny program"; }
+            get { return this.windowName; }
         }
-        public StudyProgramme Original
+        public override StudyProgramme Original
         {
             get { return this.original; }
         }
-        public StudyProgramme WorkingCopy
+        public override StudyProgramme WorkingCopy
         {
             get { throw new NotImplementedException(); }
         }
-        public bool HasChanged
+        public override bool HasChanged
         {
             get { throw new NotImplementedException(); }
+        }
+
+        public AddStudyProgrammeViewModel(IRepository<StudyProgramme> repository)
+            : this(repository, new StudyProgramme())
+        {
+            this.windowName = "Pridaj: Študíjny program";
         }
 
         public AddStudyProgrammeViewModel(IRepository<StudyProgramme> repository, StudyProgramme original)
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
+            this.windowName = "Uprav: Študíjny program";
             this.repository = repository;
             this.original = original;
         }
 
-        public void ResetToDefault()
+        public override void ResetToDefault()
         {
             throw new NotImplementedException();
         }
 
-        public void Save()
+        public override void Save()
         {
             throw new NotImplementedException();
         }

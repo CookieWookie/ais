@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using AiS.Models;
 
 namespace AiS.ViewModels
 {
-    public interface IWindowFactory
+    public interface IViewModelFactory
     {
         IViewModel CreateDefaultWindow();
         IViewModel CreateMenuWindow();
@@ -14,13 +15,13 @@ namespace AiS.ViewModels
         IViewModel CreateImportExamWindow();
         IViewModel CreateImportStudentWindow();
         IViewModel CreateImportStudyProgrammeWindow();
-        IViewModel CreateImportTeacherWindow();
         IViewModel CreateImportSubjectWindow();
+        IViewModel CreateImportTeacherWindow();
 
-        IViewModel CreateAddExamWindow();
-        IViewModel CreateAddStudentWindow();
-        IViewModel CreateAddStudyProgrammeWindow();
-        IViewModel CreateAddTeacherWindow();
-        IViewModel CreateAddSubjectWindow();
+        IViewModel CreateAddExamWindow(object o);
+        IViewModel CreateAddStudentWindow(object o);
+        IViewModel CreateAddStudyProgrammeWindow(object o);
+        IViewModel CreateAddSubjectWindow(object o);
+        IViewModel CreateAddTeacherWindow(object o);
     }
 }

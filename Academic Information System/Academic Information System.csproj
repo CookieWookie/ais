@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -72,17 +73,22 @@
     <Compile Include="Repositories\Database\SqlCe\TeacherRepository.cs" />
     <Compile Include="Repositories\Database\Sql\BaseSqlDatabaseRepository.cs" />
     <Compile Include="Repositories\Database\Sql\ExamRepository.cs" />
+    <Compile Include="Repositories\Database\SqlCe\SqlCeRepositoryFactory.cs" />
+    <Compile Include="Repositories\Database\Sql\SqlRepositoryFactory.cs" />
     <Compile Include="Repositories\Database\Sql\StudentRepository.cs" />
     <Compile Include="Repositories\Database\Sql\StudyProgrammeRepository.cs" />
     <Compile Include="Repositories\Database\Sql\SubjectRepository.cs" />
     <Compile Include="Repositories\Database\Sql\TeacherRepository.cs" />
     <Compile Include="Repositories\IImportManager.cs" />
+    <Compile Include="Repositories\IImportMangerFactory.cs" />
+    <Compile Include="Repositories\ImportManagerFactory.cs" />
     <Compile Include="Repositories\Import\ExamImportManager.cs" />
     <Compile Include="Repositories\Import\StudentImportManager.cs" />
     <Compile Include="Repositories\Import\StudyProgrammeImportManager.cs" />
     <Compile Include="Repositories\Import\SubjectImportManager.cs" />
     <Compile Include="Repositories\Import\TeacherImportManager.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRepositoryFactory.cs" />
     <Compile Include="ViewModels\Add\AddExamViewModel.cs" />
     <Compile Include="ViewModels\Add\AddStudyProgrammeViewModel.cs" />
     <Compile Include="ViewModels\Add\AddStudentViewModel.cs" />
@@ -100,8 +106,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\IWindowFactory.cs" />
+    <Compile Include="ViewModels\IViewModelFactory.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelFactory.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +150,7 @@
     <Folder Include="ViewModels\Report\" />
     <Folder Include="Views\Add\" />
     <Folder Include="Views\Import\" />
+    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ApplicationView.xaml">

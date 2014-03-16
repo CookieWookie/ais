@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="ControlBorderBrush" Color="#FF707070"/>
+
+    <SolidColorBrush x:Key="DisabledControlForegroundBrush" Color="#FF838383"/>
+    <SolidColorBrush x:Key="DisabledControlBackgroundBrush" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="DisabledControlBorderBrush" Color="#FFADB2B5"/>
+
+    <SolidColorBrush x:Key="MouseOverControlForegroundBrush" Color="Black"/>
+    <SolidColorBrush x:Key="MouseOverControlBackgroundBrush" Color="#FFBEE6FD"/>
+    <SolidColorBrush x:Key="MouseOverControlBorderBrush" Color="#FF3C7FB1"/>
+
+    <SolidColorBrush x:Key="HighlightedControlForegroundBrush" Color="Black"/>
+    <SolidColorBrush x:Key="HighlightedControlBackgroundBrush" Color="#FF99B4D1"/>
+    <SolidColorBrush x:Key="HighlightedControlBorderBrush" Color="Transparent"/>
+    
+    <SolidColorBrush x:Key="PressedControlForegroundBrush" Color="Black"/>
+    <SolidColorBrush x:Key="PressedControlBackgroundBrush" Color="#FFC4E5F6"/>
+    <SolidColorBrush x:Key="PressedControlBorderBrush" Color="#FF2C628B"/>
+    
+    <SolidColorBrush x:Key="MenuItemCloseButtonMouseOver" Color="#FFFF2222"/>
+</ResourceDictionary>

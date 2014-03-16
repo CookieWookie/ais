@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type MenuItem}" x:Key="OpenWindowsMenuItemStyle">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Foreground" Value="{StaticResource ControlForegroundBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.MessageFontFamilyKey}}"/>
+        <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"/>
+        <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ChangeWindowCommand}"/>
+        <Setter Property="CommandParameter" Value="{Binding}"/>
+        <Setter Property="Header" Value="{Binding WindowName}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="Bd" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            x:Uid="Border_38">
+                        <Grid x:Name="Grid" Uid="Grid_49">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="0" SharedSizeGroup="MenuItemIconColumnGroup" Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition SharedSizeGroup="MenuItemIGTColumnGroup" Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Path x:Name="GlyphPanel"
+                                  Data="M0,2L0,4.8 2.5,7.4 7.1,2.8, 7.1,0 2.5,4.6z"
+                                  Fill="{TemplateBinding Foreground}"
+                                  FlowDirection="LeftToRight"
+                                  Margin="4,0,6,0"
+                                  x:Uid="Path_12"
+                                  Visibility="Hidden"
+                                  VerticalAlignment="Center"/>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              Content="{TemplateBinding Header}"
+                                              Grid.Column="1"
+                                              ContentSource="Header"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              x:Uid="ContentPresenter_33"/>
+                            <Button x:Name="CloseButton"
+                                    Grid.Column="2"
+                                    Margin="5,2,0,2"
+                                    Width="15"
+                                    Height="15"
+                                    Command="{Binding CloseCommand}"
+                                    CommandParameter="{Binding}"
+                                    x:Uid="CloseButton_1"
+                                    Style="{StaticResource CloseButtonStyle}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource MouseOverControlForegroundBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource MouseOverControlBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource MouseOverControlBorderBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
+                        </Trigger>
+                        <DataTrigger Value="False">
+                            <DataTrigger.Binding>
+                                <Binding ElementName="MenuItemIcon" Path="Source"/>
+                            </DataTrigger.Binding>
+                            <Setter Property="VerticalAlignment" TargetName="ContentPresenter" Value="Center"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource HighlightedControlForegroundBrush}"/>
+                <Setter Property="Background" Value="{StaticResource HighlightedControlBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighlightedControlBorderBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource DisabledControlForegroundBrush}"/>
+                <Setter Property="Background" Value="{StaticResource DisabledControlBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource DisabledControlBorderBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

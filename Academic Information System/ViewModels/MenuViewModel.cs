@@ -143,7 +143,7 @@ namespace AiS.ViewModels
             ViewModelChangedDelegate d = this.ViewModelChangedEvent;
             if (d != null)
             {
-                d(this, new ViewModelChangeEventArgs(vm));
+                d(this, new ViewModelChangedEventArgs(vm));
             }
         }
 

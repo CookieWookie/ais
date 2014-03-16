@@ -8,8 +8,12 @@ using System.Windows;
 
 namespace AiS
 {
+    using Repositories;
+    using Repositories.Database.Sql;
+    using Repositories.Database.SqlCe;
     using ViewModels;
     using Views;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -19,9 +23,17 @@ namespace AiS
         {
             base.OnStartup(e);
 
+            bool sql = Convert.ToBoolean(ConfigurationManager.AppSettings["useSql"]);
+
+            IRepositoryFactory repositoryFactory = sql ? (IRepositoryFactory)new SqlRepositoryFactory() : new SqlCeRepositoryFactory();
+            IImportMangerFactory importManagerFactory = new ImportManagerFactory(repositoryFactory);
+            IViewModelFactory viewModelFactory = new ViewModelFactory(repositoryFactory, importManagerFactory);
+
             ApplicationView view = new ApplicationView();
-            //view.DataContext = new ApplicationViewModel();
-            view.Show();
+            ApplicationViewModel viewModel = new ApplicationViewModel(viewModelFactory.CreateMenuWindow(), viewModelFactory.CreateDefaultWindow());
+            view.DataContext = viewModel;
+
+            view.ShowDialog();
         }
     }
 }

@@ -9,26 +9,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Controls.Primitives;
-using System.ComponentModel;
 
 namespace AiS.Views
 {
     /// <summary>
-    /// Interaction logic for ApplicationView.xaml
+    /// Interaction logic for DefaultView.xaml
     /// </summary>
-    public partial class ApplicationView : Window
+    public partial class DefaultView : UserControl
     {
-        public ApplicationView()
+        public DefaultView()
         {
             InitializeComponent();
-            this.openWindowsMenu.PlacementTarget = this.openWindowsButton;
-        }
-
-        private void OpenWindowsButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.openWindowsMenu.IsOpen = true;
         }
     }
 }

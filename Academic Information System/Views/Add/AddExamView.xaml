@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="AiS.Views.Add.AddExamView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:validators="clr-namespace:AiS.Views.Validators"
+             mc:Ignorable="d" 
+             MinHeight="300" MinWidth="300">
+    <Grid>
+        <Button HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="15" Height="15" Style="{StaticResource CloseButtonStyle}" Command="{Binding CloseCommand}"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}"/>
+        <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,30,0,0" Height="25" Text="Čas" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,60,0,0" Height="25" Text="Predmet" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,90,0,0" Height="25" Text="Vyučujúci" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,120,0,0" Height="25" Text="Študenti" VerticalAlignment="Top" Width="75"/>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="90,30,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200">
+            <TextBox.Text>
+                <Binding Path="Time" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnSourceUpdated="True">
+                    <Binding.ValidationRules>
+                        <validators:DateTimeValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+    </Grid>
+</UserControl>

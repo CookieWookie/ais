@@ -6,37 +6,14 @@ using System.Windows.Input;
 
 namespace AiS.ViewModels
 {
-    public delegate void ViewModelClosingDelegate(object sender, EventArgs e);
-    public delegate void ViewModelChangedDelegate(object sender, ViewModelChangeEventArgs e);
-
-    public class ViewModelChangeEventArgs : EventArgs
-    {
-        private readonly IViewModel vm;
-
-        public IViewModel ViewModel
-        {
-            get { return this.vm; }
-        }
-
-        public ViewModelChangeEventArgs(IViewModel vm)
-        {
-            vm.ThrowIfNull("vm");
-            this.vm = vm;
-        }
-    }
-
     public interface IViewModel
     {
         string WindowName { get; }
+        ICommand CloseCommand { get; }
 
         void Close();
 
         event ViewModelClosingDelegate ViewModelClosingEvent;
-    }
-
-    public interface IMenuViewModel : IViewModel
-    {
-        event ViewModelChangedDelegate ViewModelChangedEvent;
     }
 
     public interface ISaveViewModel : IViewModel
@@ -65,5 +42,10 @@ namespace AiS.ViewModels
         ICommand ResetToDefaultCommand { get; }
 
         void ResetToDefault();
+    }
+
+    public interface IMenuViewModel : IViewModel
+    {
+        event ViewModelChangedDelegate ViewModelChangedEvent;
     }
 }

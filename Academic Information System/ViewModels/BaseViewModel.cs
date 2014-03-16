@@ -8,7 +8,13 @@ namespace AiS.ViewModels
 {
     public abstract class BaseViewModel : ObservableObject, IViewModel
     {
+        private ICommand closeCommand;
+
         public abstract string WindowName { get; }
+        public virtual ICommand CloseCommand
+        {
+            get { return this.closeCommand ?? (this.closeCommand = new RelayCommand(o => this.Close(), o => true)); }
+        }
 
         protected BaseViewModel()
         {
@@ -31,7 +37,7 @@ namespace AiS.ViewModels
 
         public virtual ICommand SaveCommand
         {
-            get { throw new NotImplementedException(); }
+            get { return this.saveCommand; }
         }
         public abstract bool HasChanged { get; }
 

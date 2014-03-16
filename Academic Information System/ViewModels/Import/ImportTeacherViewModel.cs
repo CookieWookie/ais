@@ -17,6 +17,7 @@ namespace AiS.ViewModels
         private readonly ICommand parseFileCommand;
         private readonly ICommand saveCommand;
         private bool hasChanged = false;
+        private string filePath;
 
         public override string WindowName
         {
@@ -34,10 +35,30 @@ namespace AiS.ViewModels
         {
             get { return this.saveCommand; }
         }
-        public string FilePath { get; set; }
+        public string FilePath
+        {
+            get { return this.filePath; }
+            set
+            {
+                if (value != this.filePath)
+                {
+                    this.filePath = value;
+                    this.OnPropertyChanged("FilePath");
+                    this.OnPropertyChanged("CanParse");
+                }
+            }
+        }
         public bool HasChanged
         {
             get { return this.hasChanged; }
+            set
+            {
+                if (value != this.hasChanged)
+                {
+                    this.hasChanged = value;
+                    this.OnPropertyChanged("HasChanged");
+                }
+            }
         }
         public bool CanParse
         {

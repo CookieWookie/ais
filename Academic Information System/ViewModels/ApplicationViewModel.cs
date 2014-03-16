@@ -17,7 +17,16 @@ namespace AiS.ViewModels
 
         public string ApplicationName
         {
-            get { return "Akademický informačný systém"; }
+            get
+            {
+                string name = "Akademický informačný systém";
+                IViewModel vm = this.CurrentWindow;
+                if (vm != null && vm != this.defaultWindow)
+                {
+                    name += " - " + vm.WindowName;
+                }
+                return name;
+            }
         }
         public IList<IViewModel> OpenWindows
         {
@@ -35,6 +44,7 @@ namespace AiS.ViewModels
                 {
                     currentWindow = value;
                     this.OnPropertyChanged("CurrentWindow");
+                    this.OnPropertyChanged("ApplicationName");
                 }
             }
         }
@@ -81,9 +91,9 @@ namespace AiS.ViewModels
             }
         }
 
-        protected void OnViewModelChange(object sender, ViewModelChangeEventArgs e)
+        protected void OnViewModelChange(object sender, ViewModelChangedEventArgs e)
         {
-            if (this.CurrentWindow != this.defaultWindow)
+            if (this.CurrentWindow != this.defaultWindow && !this.OpenWindows.Contains(this.CurrentWindow))
             {
                 this.OpenWindows.Add(this.CurrentWindow);
             }

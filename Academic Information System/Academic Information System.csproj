@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <ExpressionBlendVersion>12.0.41212.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,7 +49,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -96,6 +96,7 @@
     <Compile Include="ViewModels\Add\AddTeacherViewModel.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportExamViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportStudentViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportStudyProgrammeViewModel.cs" />
@@ -108,10 +109,38 @@
     </Compile>
     <Compile Include="ViewModels\IViewModelFactory.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelChangedEventArgs.cs" />
     <Compile Include="ViewModels\ViewModelFactory.cs" />
+    <Compile Include="Views\Add\AddExamView.xaml.cs">
+      <DependentUpon>AddExamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Add\AddStudentView.xaml.cs">
+      <DependentUpon>AddStudentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Add\AddStudyProgrammeView.xaml.cs">
+      <DependentUpon>AddStudyProgrammeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Add\AddSubjectView.xaml.cs">
+      <DependentUpon>AddSubjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Add\AddTeacherView.xaml.cs">
+      <DependentUpon>AddTeacherView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\StringToDateTimeConverter.cs" />
+    <Compile Include="Views\Converters\StringToIntConverter.cs" />
+    <Compile Include="Views\DefaultView.xaml.cs">
+      <DependentUpon>DefaultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Import\ImportView.xaml.cs">
+      <DependentUpon>ImportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Validators\DateTimeValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Exam.cs" />
@@ -148,12 +177,54 @@
   <ItemGroup>
     <Folder Include="Repositories\Xml\" />
     <Folder Include="ViewModels\Report\" />
-    <Folder Include="Views\Add\" />
-    <Folder Include="Views\Import\" />
     <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Add\AddExamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Add\AddStudentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Add\AddStudyProgrammeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Add\AddSubjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Add\AddTeacherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DefaultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Import\ImportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\BrushResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\CloseButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Resources\OpenWindowsMenuItemStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

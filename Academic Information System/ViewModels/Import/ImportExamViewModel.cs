@@ -19,6 +19,7 @@ namespace AiS.ViewModels
         private readonly ICommand parseFileCommand;
         private readonly ICommand saveCommand;
         private bool hasChanged = false;
+        private string filePath;
 
         public override string WindowName
         {
@@ -36,10 +37,30 @@ namespace AiS.ViewModels
         {
             get { return this.saveCommand; }
         }
-        public string FilePath { get; set; }
+        public string FilePath
+        {
+            get { return this.filePath; }
+            set
+            {
+                if (value != this.filePath)
+                {
+                    this.filePath = value;
+                    this.OnPropertyChanged("FilePath");
+                    this.OnPropertyChanged("CanParse");
+                }
+            }
+        }
         public bool HasChanged
         {
             get { return this.hasChanged; }
+            set
+            {
+                if (value != this.hasChanged)
+                {
+                    this.hasChanged = value;
+                    this.OnPropertyChanged("HasChanged");
+                }
+            }
         }
         public bool CanParse
         {
@@ -58,6 +79,7 @@ namespace AiS.ViewModels
         public void Save()
         {
             this.importManager.Save();
+            this.HasChanged = false;
             FilePath = "";
         }
         
@@ -73,7 +95,6 @@ namespace AiS.ViewModels
             {
                 string fileName = dialog.FileName;
                 this.FilePath = fileName;
-
             }
         }
 
@@ -82,6 +103,7 @@ namespace AiS.ViewModels
             if (File.Exists(this.FilePath))
             {
                 importManager.ParseFile(FilePath);
+                this.HasChanged = true;
                 FilePath = "";
             }
         }

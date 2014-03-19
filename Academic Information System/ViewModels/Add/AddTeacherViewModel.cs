@@ -22,10 +22,6 @@ namespace AiS.ViewModels
         {
             get { return this.original; }
         }
-        public override Teacher WorkingCopy
-        {
-            get { throw new NotImplementedException(); }
-        }
         public override bool HasChanged
         {
             get { throw new NotImplementedException(); }

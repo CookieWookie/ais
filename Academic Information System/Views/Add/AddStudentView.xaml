@@ -6,6 +6,50 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Button HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="15" Height="15" Style="{StaticResource CloseButtonStyle}" Command="{Binding CloseCommand}"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}"/>
+        <Label Content="Meno" Height="25" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Priezvisko" Height="25" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Semester" Height="25" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Dátum nar." Height="25" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Študíjny program" Height="25" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="110"/>
+        <TextBox Height="25" Margin="90,30,10,0" VerticalAlignment="Top">
+            <TextBox.Text>
+                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <StaticResource ResourceKey="NameValidationRule"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Height="25" Margin="90,60,10,0" VerticalAlignment="Top">
+            <TextBox.Text>
+                <Binding Path="Lastname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <StaticResource ResourceKey="NameValidationRule"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Height="25" Margin="90,90,10,0" VerticalAlignment="Top">
+            <TextBox.Text>
+                <Binding Path="Semester" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <StaticResource ResourceKey="SemesterValidationRule"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <DatePicker Height="25" Margin="90,120,10,0" VerticalAlignment="Top">
+            <DatePicker.SelectedDate>
+                <Binding Path="DateOfBirth" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <StaticResource ResourceKey="DateOfBirthValidationRule"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
     </Grid>
 </UserControl>

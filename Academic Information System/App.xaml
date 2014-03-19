@@ -1,8 +1,6 @@
 ﻿<Application x:Class="AiS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ViewModels="clr-namespace:AiS.ViewModels"
-             xmlns:Views="clr-namespace:AiS.Views"  
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d">
@@ -12,6 +10,7 @@
                 <ResourceDictionary Source="Views/Resources/BrushResource.xaml"/>
                 <ResourceDictionary Source="Views/Resources/OpenWindowsMenuItemStyle.xaml"/>
                 <ResourceDictionary Source="Views/Resources/CloseButtonStyle.xaml"/>
+                <ResourceDictionary Source="Views/Resources/Other.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

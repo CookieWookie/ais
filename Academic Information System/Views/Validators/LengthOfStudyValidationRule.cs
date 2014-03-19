@@ -6,9 +6,9 @@ using System.Windows.Controls;
 
 namespace AiS.Views.Validators
 {
-    public class DateTimeValidationRule : ValidationRule
+    public class LengthOfStudyValidationRule : ValidationRule
     {
-        public DateTimeValidationRule()
+        public LengthOfStudyValidationRule()
         {
         }
 

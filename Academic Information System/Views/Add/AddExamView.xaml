@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:validators="clr-namespace:AiS.Views.Validators"
              mc:Ignorable="d" 
              MinHeight="300" MinWidth="300">
     <Grid>
@@ -11,19 +10,34 @@
         <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}"/>
         <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}"/>
         <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,30,0,0" Height="25" Text="Čas" VerticalAlignment="Top" Width="75"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,60,0,0" Height="25" Text="Predmet" VerticalAlignment="Top" Width="75"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,90,0,0" Height="25" Text="Vyučujúci" VerticalAlignment="Top" Width="75"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,120,0,0" Height="25" Text="Študenti" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="90,30,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200">
+        <Label HorizontalAlignment="Left" Margin="10,30,0,0" Height="25" Content="Dátum" VerticalAlignment="Top" Width="75"/>
+        <Label HorizontalAlignment="Left" Margin="175,30,0,0" Height="25" Content="Čas" VerticalAlignment="Top" Width="50"/>
+        <Label HorizontalAlignment="Left" Margin="10,60,0,0" Height="25" Content="Predmet" VerticalAlignment="Top" Width="75"/>
+        <Label HorizontalAlignment="Left" Margin="10,90,0,0" Height="25" Content="Vyučujúci" VerticalAlignment="Top" Width="75"/>
+        <Label HorizontalAlignment="Left" Margin="10,120,0,0" Height="25" Content="Študenti" VerticalAlignment="Top" Width="75"/>
+
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="85,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85">
             <TextBox.Text>
-                <Binding Path="Time" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnSourceUpdated="True">
+                <Binding Path="Date" StringFormat="dd.MM.yyyy" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <validators:DateTimeValidationRule/>
+                        <StaticResource ResourceKey="ExamDateValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="230,30,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60">
+            <TextBox.Text>
+                <Binding Path="Time" StringFormat="HH:mm" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <StaticResource ResourceKey="ExamTimeValidationRule"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="{Binding Subject, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="85,60,0,0" VerticalAlignment="Top" Height="25" Width="175"/>
+        <Button Content="..." Command="{Binding SelectSubjectCommand}" HorizontalAlignment="Left" Margin="260,60,0,0" VerticalAlignment="Top" Width="30" Height="25"/>
+        <Label Content="{Binding Teacher, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="90,90,0,0" VerticalAlignment="Top" Height="25" Width="170"/>
+        <Button Content="..." Command="{Binding SelectTeacherCommand}" HorizontalAlignment="Left" Margin="260,90,0,0" VerticalAlignment="Top" Width="30" Height="25"/>
 
     </Grid>
 </UserControl>

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-// test z adamovho pc
+using System.Reflection;
+using System.ComponentModel;
 
 public static class ExtensionMethods
 {
@@ -31,6 +31,23 @@ public static class ExtensionMethods
         foreach (T element in source)
         {
             action(element);
+        }
+    }
+
+    public static string GetDescription(this Enum enumObj)
+    {
+        FieldInfo fieldInfo = enumObj.GetType().GetField(enumObj.ToString());
+
+        object[] attribArray = fieldInfo.GetCustomAttributes(false);
+
+        if (attribArray.Length == 0)
+        {
+            return enumObj.ToString();
+        }
+        else
+        {
+            DescriptionAttribute attrib = attribArray[0] as DescriptionAttribute;
+            return attrib.Description;
         }
     }
 }

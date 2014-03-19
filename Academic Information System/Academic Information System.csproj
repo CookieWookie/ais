@@ -129,8 +129,7 @@
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Converters\StringToDateTimeConverter.cs" />
-    <Compile Include="Views\Converters\StringToIntConverter.cs" />
+    <Compile Include="Views\Converters\StudyTypeConverter.cs" />
     <Compile Include="Views\DefaultView.xaml.cs">
       <DependentUpon>DefaultView.xaml</DependentUpon>
     </Compile>
@@ -140,7 +139,12 @@
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Validators\DateTimeValidator.cs" />
+    <Compile Include="Views\Validators\DateOfBirthValidationRule.cs" />
+    <Compile Include="Views\Validators\ExamDateValidationRule.cs" />
+    <Compile Include="Views\Validators\LengthOfStudyValidationRule.cs" />
+    <Compile Include="Views\Validators\NameValidationRule.cs" />
+    <Compile Include="Views\Validators\SemesterValidationRule.cs" />
+    <Compile Include="Views\Validators\ExamTimeValidationRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Exam.cs" />
@@ -225,6 +229,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Resources\OpenWindowsMenuItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\Other.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

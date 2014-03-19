@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace AiS.ViewModels
 {
@@ -35,10 +36,9 @@ namespace AiS.ViewModels
         void ParseFile();
     }
 
-    public interface IAddViewModel<T> : ISaveViewModel
+    public interface IAddViewModel<T> : ISaveViewModel, INotifyPropertyChanged
     {
         T Original { get; }
-        T WorkingCopy { get; }
         ICommand ResetToDefaultCommand { get; }
 
         void ResetToDefault();

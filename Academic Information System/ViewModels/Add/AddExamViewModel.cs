@@ -22,11 +22,15 @@ namespace AiS.ViewModels
         {
             get { return this.original; }
         }
-        public override Exam WorkingCopy
+        public override bool HasChanged
         {
             get { throw new NotImplementedException(); }
         }
-        public override bool HasChanged
+        public ICommand SelectTeacherCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
+        public ICommand SelectSubjectCommand
         {
             get { throw new NotImplementedException(); }
         }

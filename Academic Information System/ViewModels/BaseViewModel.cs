@@ -59,7 +59,6 @@ namespace AiS.ViewModels
             get { return this.resetToDefaultCommand; }
         }
         public abstract T Original { get; }
-        public abstract T WorkingCopy { get; }
 
         protected BaseAddViewModel()
             : base()

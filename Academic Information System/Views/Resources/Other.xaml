@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Views="clr-namespace:AiS.Views"  
+                    xmlns:ViewModels="clr-namespace:AiS.ViewModels"
+                    xmlns:Converters="clr-namespace:AiS.Views.Converters"
+                    xmlns:Validators="clr-namespace:AiS.Views.Validators">
+    <Converters:StudyTypeConverter x:Key="StudyTypeConverter"/>
+    
+    <Validators:ExamDateValidationRule x:Key="ExamDateValidationRule"/>
+    <Validators:ExamTimeValidationRule x:Key="ExamTimeValidationRule"/>
+    <Validators:NameValidationRule x:Key="NameValidationRule"/>
+    <Validators:SemesterValidationRule x:Key="SemesterValidationRule"/>
+    <Validators:LengthOfStudyValidationRule x:Key="LengthOfStudyValidationRule"/>
+    <Validators:DateOfBirthValidationRule x:Key="DateOfBirthValidationRule"/>
+
+</ResourceDictionary>

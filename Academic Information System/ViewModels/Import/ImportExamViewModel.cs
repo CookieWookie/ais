@@ -64,7 +64,7 @@ namespace AiS.ViewModels
         }
         public bool CanParse
         {
-            get { throw new NotImplementedException(); }
+            get { return File.Exists(this.FilePath) && this.FilePath.EndsWith(".csv", StringComparison.CurrentCultureIgnoreCase); }
         }
 
         public ImportExamViewModel(IImportManager<Exam> importManager)

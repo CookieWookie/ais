@@ -104,7 +104,7 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { return this.original.Time!= this.Time || this.orginal.}//toto je moje
+            get { return !this.original.Time.Equals(this.Time) || !this.original.Subject.Equals(this.Subject) || !this.original.Teacher.Equals(this.Teacher) || !this.original.SignedStudents.Equals(this.SignedStudents); }//toto je moje
         }
         public ICommand SelectTeacherCommand
         {
@@ -133,12 +133,25 @@ namespace AiS.ViewModels
 
         public override void ResetToDefault()
         {
-            throw new NotImplementedException();//toto je moje
+            this.Time = this.original.Time;
+            this.Subject = this.original.Subject.Clone();
+            this.Teacher = this.original.Teacher.Clone();
+            this.SignedStudents = this.original.SignedStudents;
+
+
+            
         }
 
         public override void Save()
         {
-            throw new NotImplementedException();// toto je moje
+            Exam exam= new Exam();
+            exam.Time = this.Time;
+            exam.Subject = this.Subject.Clone();
+            exam.Teacher = this.Teacher.Clone();
+            exam.SignedStudents = this.SignedStudents;
+            repository.Save(exam);
+
+            
         }
 
         private void SetCollection(IList<Student> value)

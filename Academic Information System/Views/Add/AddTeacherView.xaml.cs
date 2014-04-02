@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AiS.Views.Add
+namespace AiS.Views
 {
     /// <summary>
     /// Interaction logic for AddTeacherView.xaml

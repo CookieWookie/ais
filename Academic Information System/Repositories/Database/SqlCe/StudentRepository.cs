@@ -15,6 +15,7 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_BYEXAM = SELECT + " JOIN [StudentsSignedToExam] ON [StudentID] = [ID] WHERE [ExamID] = @examId";
         private const string UPDATE = "UPDATE [Students] SET [Name] = @name, [Lastname] = @lastname, [Semester] = @semester, [DateOfBirth] = @dateOfBirth, [StudyProgrammeID] = @studyProgrammeId WHERE [ID] = @id; ";
         private const string INSERT = "INSERT INTO [Students] ([ID], [Name], [Lastname], [Semester], [DateOfBirth], [StudyProgrammeID]) VALUES (@id, @name, @lastname, @semester, @dateOfBirth, @studyProgrammeId);";
+        private const string DELETE = "DELETE FROM [Students] WHERE [ID] = @id";
         private readonly IStudyProgrammeRepository studyProgrammeRepository;
 
         public IStudyProgrammeRepository StudyProgrammeRepository
@@ -23,7 +24,7 @@ namespace AiS.Repositories.Database.SqlCe
         }
 
         public StudentRepository(string connectionString, IStudyProgrammeRepository studyProgrammeRepository)
-            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE, DELETE)
         {
             studyProgrammeRepository.ThrowIfNull("studyProgrammeRepository");
             this.studyProgrammeRepository = studyProgrammeRepository;

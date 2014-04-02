@@ -23,6 +23,12 @@ namespace AiS.ViewModels
         private ICommand addSubjectCommand;
         private ICommand addTeacherCommand;
 
+        private ICommand showExamCommand;
+        private ICommand showStudentCommand;
+        private ICommand showStudyProgrammeCommand;
+        private ICommand showSubjectCommand;
+        private ICommand showTeacherCommand;
+
         public ICommand ImportExamCommand
         {
             get
@@ -122,6 +128,57 @@ namespace AiS.ViewModels
                     (this.addTeacherCommand = new RelayCommand(
                         o => this.RaiseViewModelChangedEvent(this.factory.CreateAddTeacherWindow(o)),
                         o => o == null || o is Teacher));
+            }
+        }
+
+        public ICommand ShowExamCommand
+        {
+            get
+            {
+                return this.showExamCommand ??
+                    (this.showExamCommand = new RelayCommand(
+                        o => this.RaiseViewModelChangedEvent(this.factory.CreateShowExamWindow()),
+                        o => true));
+            }
+        }
+        public ICommand ShowStudentCommand
+        {
+            get
+            {
+                return this.showStudentCommand ??
+                    (this.showStudentCommand = new RelayCommand(
+                        o => this.RaiseViewModelChangedEvent(this.factory.CreateShowStudentWindow()),
+                        o => true));
+            }
+        }
+        public ICommand ShowStudyProgrammeCommand
+        {
+            get
+            {
+                return this.showStudyProgrammeCommand ??
+                    (this.showStudyProgrammeCommand = new RelayCommand(
+                        o => this.RaiseViewModelChangedEvent(this.factory.CreateShowStudyProgrammeWindow()),
+                        o => true));
+            }
+        }
+        public ICommand ShowSubjectCommand
+        {
+            get
+            {
+                return this.showSubjectCommand ??
+                    (this.showSubjectCommand = new RelayCommand(
+                        o => this.RaiseViewModelChangedEvent(this.factory.CreateShowSubjectWindow()),
+                        o => true));
+            }
+        }
+        public ICommand ShowTeacherCommand
+        {
+            get
+            {
+                return this.showTeacherCommand ??
+                    (this.showTeacherCommand = new RelayCommand(
+                        o => this.RaiseViewModelChangedEvent(this.factory.CreateShowTeacherWindow()),
+                        o => true));
             }
         }
 

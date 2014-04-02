@@ -15,19 +15,13 @@ using System.Windows.Shapes;
 namespace AiS.Views
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for ShowExamView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class ShowExamView : UserControl
     {
-        public MenuView()
+        public ShowExamView()
         {
             InitializeComponent();
-            this.addModelContextMenu.PlacementTarget = this.addButton;
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.addModelContextMenu.IsOpen = true;
         }
     }
 }

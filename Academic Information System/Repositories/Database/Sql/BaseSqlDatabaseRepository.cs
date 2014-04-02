@@ -8,8 +8,8 @@ namespace AiS.Repositories.Database.Sql
 {
     public abstract class BaseSqlDatabaseRepository<T> : BaseDatabaseRepository<T> where T : class
     {
-        protected BaseSqlDatabaseRepository(string connectionString, string getSingle, string getAll, string save)
-            : base(connectionString, getSingle, getAll, save)
+        protected BaseSqlDatabaseRepository(string connectionString, string getSingle, string getAll, string save, string delete)
+            : base(connectionString, getSingle, getAll, save, delete)
         {
         }
 

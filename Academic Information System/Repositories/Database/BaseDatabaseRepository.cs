@@ -17,9 +17,10 @@ namespace AiS.Repositories.Database
         protected readonly string getSingleString;
         protected readonly string getAllString;
         protected readonly string saveString;
+        protected readonly string deleteString;
         protected readonly string connectionString;
 
-        protected BaseDatabaseRepository(string connectionString, string getSingle, string getAll, string save)
+        protected BaseDatabaseRepository(string connectionString, string getSingle, string getAll, string save, string delete)
         {
             if (string.IsNullOrWhiteSpace("connectionString"))
             {
@@ -37,11 +38,16 @@ namespace AiS.Repositories.Database
             {
                 throw new ArgumentException("getSingle");
             }
+            if (string.IsNullOrWhiteSpace(delete))
+            {
+                throw new ArgumentException("delete");
+            }
 
             this.connectionString = connectionString;
             this.getAllString = getAll;
             this.saveString = save;
             this.getSingleString = getSingle;
+            this.deleteString = delete;
         }
 
         protected abstract T Create(IDataReader reader);
@@ -106,13 +112,14 @@ namespace AiS.Repositories.Database
         protected virtual int SaveImpl(string commandString, params T[] models)
         {
             int count = 0;
-            using (var connection = GetConnection())
+            using (var connection = this.GetConnection())
             using (var command = connection.CreateCommand())
             {
                 connection.Open();
+                command.CommandText = saveString;
                 models.ForEach(m =>
                 {
-                    SaveModel(command, m);
+                    this.SaveModel(command, m);
                     count++;
                 });
             }
@@ -151,6 +158,17 @@ namespace AiS.Repositories.Database
         public virtual T GetSingle(string ID)
         {
             return GetImpl(getSingleString, CreateParameter("@id", ID)).FirstOrDefault();
+        }
+
+        public void Remove(T model)
+        {
+            using (var connection = this.GetConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = this.deleteString;
+                this.SetParameters(command, model);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ namespace AiS.Repositories
         IEnumerable<T> GetAll();
 
         int Save(params T[] models);
+        void Remove(T model);
     }
 
     public interface IStudyProgrammeRepository : IRepository<StudyProgramme>

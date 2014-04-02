@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CollectionComparer.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -109,6 +110,12 @@
     </Compile>
     <Compile Include="ViewModels\IViewModelFactory.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\Show\BaseShowViewModel.cs" />
+    <Compile Include="ViewModels\Show\ShowExamViewModel.cs" />
+    <Compile Include="ViewModels\Show\ShowStudentViewModel.cs" />
+    <Compile Include="ViewModels\Show\ShowStudyProgrammeViewModel.cs" />
+    <Compile Include="ViewModels\Show\ShowSubjectViewModel.cs" />
+    <Compile Include="ViewModels\Show\ShowTeacherViewModel.cs" />
     <Compile Include="ViewModels\ViewModelChangedEventArgs.cs" />
     <Compile Include="ViewModels\ViewModelFactory.cs" />
     <Compile Include="Views\Add\AddExamView.xaml.cs">
@@ -138,6 +145,21 @@
     </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Show\ShowExamView.xaml.cs">
+      <DependentUpon>ShowExamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Show\ShowStudentView.xaml.cs">
+      <DependentUpon>ShowStudentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Show\ShowStudyProgrammeView.xaml.cs">
+      <DependentUpon>ShowStudyProgrammeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Show\ShowSubjectView.xaml.cs">
+      <DependentUpon>ShowSubjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Show\ShowTeacherView.xaml.cs">
+      <DependentUpon>ShowTeacherView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Validators\DateOfBirthValidationRule.cs" />
     <Compile Include="Views\Validators\ExamDateValidationRule.cs" />
@@ -228,11 +250,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Resources\OpenWindowsMenuItemStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Resources\Other.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\PlusButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Show\ShowExamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Show\ShowStudentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Show\ShowStudyProgrammeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Show\ShowSubjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Show\ShowTeacherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

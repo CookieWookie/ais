@@ -15,6 +15,7 @@ namespace AiS.Repositories.Database.SqlCe
         private const string UPDATE = "UPDATE [Teachers] SET [Title] = @title, [Name] = @name, [Lastname] = @lastname, [TitleSuffix] = @titleSuffix WHERE [ID] = @id;";
         private const string INSERT = "INSERT INTO [Teachers] ([ID], [Title], [Name], [Lastname], [TitleSuffix]) VALUES (@id, @title, @name, @lastanme, @titleSuffix);";
         private const string SAVE_SUBJECTS = "INSERT INTO [SubjectTeachers] ([SubjectID], [TeacherID]) VALUES (@subjectId, @id);";
+        private const string DELETE = "DELETE FROM [Teachers] WHERE [ID] = @id";
 
         private readonly ISubjectRepository subjectRepository;
 
@@ -24,7 +25,7 @@ namespace AiS.Repositories.Database.SqlCe
         }
 
         public TeacherRepository(string connectionString, ISubjectRepository subjectRepository)
-            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE, DELETE)
         {
             subjectRepository.ThrowIfNull("subjectRepository");
             this.subjectRepository = subjectRepository;

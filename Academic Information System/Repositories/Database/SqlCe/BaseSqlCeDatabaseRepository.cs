@@ -12,8 +12,8 @@ namespace AiS.Repositories.Database.SqlCe
         protected readonly string insert;
         protected readonly string update;
 
-        protected BaseSqlCeDatabaseRepository(string connectionString, string getSingle, string getAll, string insert, string update)
-            : base(connectionString, getSingle, getAll, "NOT USING")
+        protected BaseSqlCeDatabaseRepository(string connectionString, string getSingle, string getAll, string insert, string update, string delete)
+            : base(connectionString, getSingle, getAll, "NOT USING", delete)
         {
             if (string.IsNullOrWhiteSpace(insert))
             {
@@ -27,15 +27,15 @@ namespace AiS.Repositories.Database.SqlCe
             this.insert = insert;
             this.update = update;
 
-            SqlCeConnectionStringBuilder sb = new SqlCeConnectionStringBuilder(connectionString);
-            string path = sb.DataSource;
-            if (!File.Exists(path))
-            {
-                using (SqlCeEngine engine = new SqlCeEngine(connectionString))
-                {
-                    engine.CreateDatabase();
-                }
-            }
+            //SqlCeConnectionStringBuilder sb = new SqlCeConnectionStringBuilder(connectionString);
+            //string path = sb.DataSource;
+            //if (!File.Exists(path))
+            //{
+            //    using (SqlCeEngine engine = new SqlCeEngine(connectionString))
+            //    {
+            //        engine.CreateDatabase();
+            //    }
+            //}
         }
 
         protected override System.Data.IDbConnection GetConnection()

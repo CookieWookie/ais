@@ -11,9 +11,12 @@ namespace AiS.ViewModels
 {
     public class AddExamViewModel : BaseAddViewModel<Exam>
     {
-        private readonly IRepository<Exam> repository;
+        private readonly IEqualityComparer<IEnumerable<Student>> studentComparer = new CollectionComparer<Student>();
+        private readonly IExamRepository repository;
         private readonly Exam original;
         private readonly string windowName;
+        private readonly ICommand selectTeacherCommand;
+        private readonly ICommand selectSubjectCommand;
         
         private DateTime time;
         private Subject subject;
@@ -104,24 +107,24 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { return !this.original.Time.Equals(this.Time) || !this.original.Subject.Equals(this.Subject) || !this.original.Teacher.Equals(this.Teacher) || !this.original.SignedStudents.Equals(this.SignedStudents); }//toto je moje
+            get { return !this.original.Time.Equals(this.Time) || !this.original.Subject.Equals(this.Subject) || !this.original.Teacher.Equals(this.Teacher) || !studentComparer.Equals(this.SignedStudents, this.original.SignedStudents); }//toto je moje
         }
         public ICommand SelectTeacherCommand
         {
-            get { throw new NotImplementedException(); }
+            get { return this.selectTeacherCommand; }
         }
         public ICommand SelectSubjectCommand
         {
-            get { throw new NotImplementedException(); }
+            get { return this.selectSubjectCommand; }
         }
 
-        public AddExamViewModel(IRepository<Exam> repository)
+        public AddExamViewModel(IExamRepository repository)
             : this(repository, new Exam())
         {
             this.windowName = "Pridaj: Skúška";
         }
 
-        public AddExamViewModel(IRepository<Exam> repository, Exam original)
+        public AddExamViewModel(IExamRepository repository, Exam original)
             : base()
         {
             repository.ThrowIfNull("repository");
@@ -129,6 +132,8 @@ namespace AiS.ViewModels
             this.windowName = "Uprav: Skúška";
             this.repository = repository;
             this.original = original;
+            this.selectSubjectCommand = new RelayCommand(o => this.Subject = (Subject)o, o => o is Subject);
+            this.selectTeacherCommand = new RelayCommand(o => this.Teacher = (Teacher)o, o => o is Teacher);
         }
 
         public override void ResetToDefault()
@@ -136,10 +141,7 @@ namespace AiS.ViewModels
             this.Time = this.original.Time;
             this.Subject = this.original.Subject.Clone();
             this.Teacher = this.original.Teacher.Clone();
-            this.SignedStudents = this.original.SignedStudents;
-
-
-            
+            this.SignedStudents = this.original.SignedStudents;            
         }
 
         public override void Save()
@@ -149,9 +151,7 @@ namespace AiS.ViewModels
             exam.Subject = this.Subject.Clone();
             exam.Teacher = this.Teacher.Clone();
             exam.SignedStudents = this.SignedStudents;
-            repository.Save(exam);
-
-            
+            repository.Save(exam);            
         }
 
         private void SetCollection(IList<Student> value)

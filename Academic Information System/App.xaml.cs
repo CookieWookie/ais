@@ -40,7 +40,9 @@ namespace AiS
             IViewModelFactory viewModelFactory = new ViewModelFactory(repositoryFactory, importManagerFactory);
 
             ApplicationView view = new ApplicationView();
-            ApplicationViewModel viewModel = new ApplicationViewModel(viewModelFactory.CreateMenuWindow(), viewModelFactory.CreateDefaultWindow());
+            ApplicationViewModel viewModel = new ApplicationViewModel(
+                viewModelFactory.CreateMenuWindow(), 
+                viewModelFactory.CreateDefaultWindow());
             view.DataContext = viewModel;
 
             view.ShowDialog();

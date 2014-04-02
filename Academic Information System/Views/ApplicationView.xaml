@@ -8,7 +8,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ContentControl x:Name="contentWindow" Margin="0,30,0,0"/>
+        <ContentControl x:Name="contentWindow" Margin="0,30,0,0" Content="{Binding Path=CurrentWindow}"/>
         <ContentControl x:Name="menuWindow" VerticalAlignment="Top" Height="30" Content="{Binding MenuWindow}" Margin="50,0,0,0"/>
         <Button x:Name="openWindowsButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="30" Click="OpenWindowsButton_Click">
             <Button.ContextMenu>

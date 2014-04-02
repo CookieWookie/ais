@@ -14,9 +14,10 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_BYTYPE = SELECT + " WHERE [StudyType] = @studyType;";
         private const string UPDATE = "UPDATE [StudyProgrammes] SET [Name] = @name, [Length] = @length, [StudyType] = @studyType WHERE [ID] = @id; ";
         private const string INSERT = "INSERT INTO [StudyProgrammes] ([ID], [Name], [Length], [StudyType]) VALUES (@id, @name, @length, @studyType);";
+        private const string DELETE = "DELETE FROM [StudyProgrammes] WHERE [ID] = @id";
 
         public StudyProgrammeRepository(string connectionString)
-            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE, DELETE)
         {
         }
 

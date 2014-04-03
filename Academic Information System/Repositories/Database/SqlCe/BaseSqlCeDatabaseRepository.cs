@@ -27,15 +27,21 @@ namespace AiS.Repositories.Database.SqlCe
             this.insert = insert;
             this.update = update;
 
-            //SqlCeConnectionStringBuilder sb = new SqlCeConnectionStringBuilder(connectionString);
-            //string path = sb.DataSource;
-            //if (!File.Exists(path))
-            //{
-            //    using (SqlCeEngine engine = new SqlCeEngine(connectionString))
-            //    {
-            //        engine.CreateDatabase();
-            //    }
-            //}
+            SqlCeConnectionStringBuilder sb = new SqlCeConnectionStringBuilder(connectionString);
+            string path = sb.DataSource;
+            if (!File.Exists(path))
+            {
+                using (SqlCeEngine engine = new SqlCeEngine(connectionString))
+                {
+                    engine.CreateDatabase();
+                }
+                using (SqlCeConnection connection = new SqlCeConnection(connectionString))
+                using (SqlCeCommand command = new SqlCeCommand(Properties.Resources.SQLCE_1_0_0_0, connection))
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         protected override System.Data.IDbConnection GetConnection()

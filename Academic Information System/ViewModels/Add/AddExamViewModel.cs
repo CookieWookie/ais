@@ -17,6 +17,9 @@ namespace AiS.ViewModels
         private readonly string windowName;
         private readonly ICommand selectTeacherCommand;
         private readonly ICommand selectSubjectCommand;
+
+        private readonly ObservableCollection<Teacher> teachers;
+        private readonly ObservableCollection<Subject> subjects;
         
         private DateTime time;
         private Subject subject;
@@ -97,6 +100,15 @@ namespace AiS.ViewModels
             }
         }
 
+        public ObservableCollection<Teacher> Teachers
+        {
+            get { return this.teachers; }
+        }
+        public ObservableCollection<Subject> Subjects
+        {
+            get { return this.subjects; }
+        }
+
         public override string WindowName
         {
             get { return this.windowName; }
@@ -129,11 +141,17 @@ namespace AiS.ViewModels
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
+
             this.windowName = "Uprav: Skúška";
             this.repository = repository;
             this.original = original;
             this.selectSubjectCommand = new RelayCommand(o => this.Subject = (Subject)o, o => o is Subject);
             this.selectTeacherCommand = new RelayCommand(o => this.Teacher = (Teacher)o, o => o is Teacher);
+
+            this.teachers = new ObservableCollection<Teacher>(this.repository.TeacherRepository.GetAll());
+            this.teachers.CollectionChanged += (sender, e) => this.OnPropertyChanged("Teachers");
+            this.subjects = new ObservableCollection<Subject>(this.repository.SubjectRepository.GetAll());
+            this.subjects.CollectionChanged += (sender, e) => this.OnPropertyChanged("Subjects");
         }
 
         public override void ResetToDefault()

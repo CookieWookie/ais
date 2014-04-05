@@ -36,10 +36,14 @@ namespace AiS.Repositories.Database.SqlCe
                     engine.CreateDatabase();
                 }
                 using (SqlCeConnection connection = new SqlCeConnection(connectionString))
-                using (SqlCeCommand command = new SqlCeCommand(Properties.Resources.SQLCE_1_0_0_0, connection))
+                using (SqlCeCommand command = new SqlCeCommand("", connection))
                 {
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    string[] commandStrings = Properties.Resources.SQLCE_1_0_0_0.Split(';');
+                    foreach (string commandString in commandStrings)
+                    {
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
         }
@@ -54,7 +58,6 @@ namespace AiS.Repositories.Database.SqlCe
             return new SqlCeParameter(name, ReferenceEquals(value, null) ? DBNull.Value : value);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected override int SaveImpl(string commandString, params T[] models)
         {
             int count = 0;
@@ -87,7 +90,6 @@ namespace AiS.Repositories.Database.SqlCe
             return count;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities")]
         protected override void SaveModel(System.Data.IDbCommand command, T model)
         {
             SetParameters(command, model);

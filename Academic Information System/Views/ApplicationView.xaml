@@ -8,15 +8,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ContentControl x:Name="contentWindow" Margin="0,30,0,0" Content="{Binding Path=CurrentWindow}"/>
-        <ContentControl x:Name="menuWindow" VerticalAlignment="Top" Height="30" Content="{Binding MenuWindow}" Margin="50,0,0,0"/>
-        <Button x:Name="openWindowsButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="30" Click="OpenWindowsButton_Click">
+        <Label Content="{Binding OpenWindows.Count}" HorizontalAlignment="Left" Margin="102,2,0,0" VerticalAlignment="Top"/>
+        <ContentControl x:Name="contentWindow" Margin="0,30,0,0" Content="{Binding CurrentWindow}"/>
+        <ContentControl x:Name="menuWindow" VerticalAlignment="Top" Height="30" Content="{Binding MenuWindow}" Margin="368,0,0,0"/>
+        <Button x:Name="openWindowsButton" Content="Otvorené okná" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Height="30" 
+                Click="OpenWindowsButton_Click">
             <Button.ContextMenu>
                 <ContextMenu x:Name="openWindowsMenu" 
-					StaysOpen="False"
-					Placement="Bottom"
-					ItemsSource="{Binding OpenWindows}"
-                    ItemContainerStyle="{StaticResource OpenWindowsMenuItemStyle}"/>
+                             StaysOpen="False"
+                             Placement="Bottom"
+                             ItemsSource="{Binding OpenWindows, UpdateSourceTrigger=PropertyChanged}"
+                             ItemContainerStyle="{StaticResource OpenWindowsMenuItemStyle}"/>
             </Button.ContextMenu>
         </Button>
     </Grid>

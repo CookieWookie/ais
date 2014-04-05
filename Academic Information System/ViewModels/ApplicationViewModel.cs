@@ -13,7 +13,7 @@ namespace AiS.ViewModels
         private IViewModel defaultWindow;
         private IViewModel currentWindow;
         private ICommand changeWindowCommand;
-        private IList<IViewModel> openWindows;
+        private ObservableCollection<IViewModel> openWindows;
 
         public string ApplicationName
         {
@@ -74,7 +74,7 @@ namespace AiS.ViewModels
             this.defaultWindow = defaultWindow;
         }
 
-        private IList<IViewModel> CreateCollection()
+        private ObservableCollection<IViewModel> CreateCollection()
         {
             ObservableCollection<IViewModel> collection = new ObservableCollection<IViewModel>();
             collection.CollectionChanged += (sender, e) => this.OnPropertyChanged("OpenWindows");

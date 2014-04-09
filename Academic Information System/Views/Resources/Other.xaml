@@ -5,6 +5,9 @@
                     xmlns:Converters="clr-namespace:AiS.Views.Converters"
                     xmlns:Validators="clr-namespace:AiS.Views.Validators">
     <Converters:StudyTypeConverter x:Key="StudyTypeConverter"/>
+    <Converters:TeacherConverter x:Key="TeacherConverter"/>
+    <Converters:SubjectConverter x:Key="SubjectConverter"/>
+    <Converters:StudyProgrammeConverter x:Key="StudyProgrammeConverter"/>
     
     <Validators:ExamDateValidationRule x:Key="ExamDateValidationRule"/>
     <Validators:ExamTimeValidationRule x:Key="ExamTimeValidationRule"/>

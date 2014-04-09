@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Views/Resources/Other.xaml"/>
                 <ResourceDictionary Source="Views/Resources/PlusButtonStyle.xaml"/>
                 <ResourceDictionary Source="Views/Resources/DataTemplates.xaml"/>
+                <ResourceDictionary Source="Views/Resources/ArrowDownButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

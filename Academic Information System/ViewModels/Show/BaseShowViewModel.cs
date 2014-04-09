@@ -10,7 +10,7 @@ namespace AiS.ViewModels
     public abstract class BaseShowViewModel<T> : BaseViewModel
         where T : class
     {
-        private readonly ICommand loadCommand;
+        private readonly ICommand refreshCommand;
         protected readonly ICommand deleteCommand;
         protected ObservableCollection<T> data;
         protected readonly IRepository<T> repository;
@@ -32,9 +32,9 @@ namespace AiS.ViewModels
         {
             get { return this.deleteCommand; }
         }
-        public ICommand LoadCommand
+        public ICommand RefreshCommand
         {
-            get { return this.loadCommand; }
+            get { return this.refreshCommand; }
         }
 
         protected BaseShowViewModel(IRepository<T> repository)
@@ -43,7 +43,7 @@ namespace AiS.ViewModels
             this.repository = repository;
             this.handler = (sender, e) => this.OnPropertyChanged("Data");
             this.deleteCommand = new RelayCommand(o => this.Delete((T)o), o => o is T);
-            this.loadCommand = new RelayCommand(o => this.Load(), o => true);
+            this.refreshCommand = new RelayCommand(o => this.Load(), o => true);
         }
 
         public virtual void Load()

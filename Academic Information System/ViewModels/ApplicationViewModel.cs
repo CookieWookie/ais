@@ -28,9 +28,16 @@ namespace AiS.ViewModels
                 return name;
             }
         }
-        public IList<IViewModel> OpenWindows
+        public ObservableCollection<IViewModel> OpenWindows
         {
-            get { return this.openWindows ?? (this.openWindows = this.CreateCollection()); }
+            get
+            {
+                if (this.openWindows == null)
+                {
+                    this.openWindows = this.CreateCollection();
+                }
+                return this.openWindows;
+            }
         }
         public IViewModel CurrentWindow
         {
@@ -60,6 +67,7 @@ namespace AiS.ViewModels
                     {
                         IViewModel vm = (IViewModel)o;
                         vm.ViewModelClosingEvent += this.OnViewModelClosing;
+                        this.OpenWindows.Add(vm);
                         this.CurrentWindow = vm;
                     }, o => o is IViewModel));
             }

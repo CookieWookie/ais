@@ -136,7 +136,10 @@
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\StudyProgrammeConverter.cs" />
     <Compile Include="Views\Converters\StudyTypeConverter.cs" />
+    <Compile Include="Views\Converters\SubjectConverter.cs" />
+    <Compile Include="Views\Converters\TeacherConverter.cs" />
     <Compile Include="Views\DefaultView.xaml.cs">
       <DependentUpon>DefaultView.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\ArrowDownButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

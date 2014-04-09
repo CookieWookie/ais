@@ -7,7 +7,7 @@ using AiS.Models;
 
 namespace AiS.Views.Converters
 {
-    [ValueConversion(typeof(StudyProgramme), typeof(string))]
+    [ValueConversion(typeof(Teacher), typeof(string))]
     public class StudyProgrammeConverter : IValueConverter
     {
         public StudyProgrammeConverter()
@@ -16,7 +16,7 @@ namespace AiS.Views.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            StudyProgramme sp = value as StudyProgramme;
+            StudyProgramme sp = (StudyProgramme)value;
             return sp.Name;
         }
 

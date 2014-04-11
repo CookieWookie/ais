@@ -24,6 +24,7 @@ namespace AiS
         private static IViewModelFactory vmFactory;
         private static IImportMangerFactory imFactory;
         private static IRepositoryFactory rFactory;
+        private static ApplicationViewModel appVM;
 
         public static IViewModelFactory ViewModelFactory
         {
@@ -36,6 +37,10 @@ namespace AiS
         public static IRepositoryFactory RepositoryFactory
         {
             get { return App.rFactory; }
+        }
+        public static ApplicationViewModel ApplicationViewModel
+        {
+            get { return App.appVM; }
         }
 
         static App()
@@ -58,7 +63,7 @@ namespace AiS
         {
             base.OnStartup(e);
 
-            ApplicationViewModel viewModel = new ApplicationViewModel();
+            ApplicationViewModel viewModel = App.appVM = new ApplicationViewModel();
             ApplicationView view = new ApplicationView
             {
                 DataContext = viewModel

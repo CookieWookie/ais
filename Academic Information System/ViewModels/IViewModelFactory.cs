@@ -10,7 +10,6 @@ namespace AiS.ViewModels
     public interface IViewModelFactory
     {
         IViewModel CreateDefaultWindow();
-        IMenuViewModel CreateMenuWindow();
 
         IViewModel CreateImportExamWindow();
         IViewModel CreateImportStudentWindow();

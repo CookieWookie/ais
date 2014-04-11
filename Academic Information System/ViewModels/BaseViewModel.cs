@@ -8,15 +8,26 @@ namespace AiS.ViewModels
 {
     public abstract class BaseViewModel : ObservableObject, IViewModel
     {
-        private ICommand closeCommand;
+        private readonly ICommand closeCommand;
+        private readonly ICommand refreshCommand;
 
         public abstract string WindowName { get; }
         public virtual ICommand CloseCommand
         {
-            get { return this.closeCommand ?? (this.closeCommand = new RelayCommand(o => this.Close(), o => true)); }
+            get { return this.closeCommand; }
+        }
+        public virtual ICommand RefreshCommand
+        {
+            get { return this.refreshCommand; }
         }
 
         protected BaseViewModel()
+        {
+            this.closeCommand = new RelayCommand(o => this.Close(), o => true);
+            this.refreshCommand = new RelayCommand(o => this.Refresh(), o => true);
+        }
+
+        public virtual void Refresh()
         {
         }
 

@@ -11,7 +11,6 @@ namespace AiS.ViewModels
     {
         private readonly IRepositoryFactory repositoryFactory;
         private readonly IImportMangerFactory importManagerFactory;
-        private IMenuViewModel menuViewModel;
         private IViewModel defaultViewModel;
 
         private IViewModel importExamViewModel;
@@ -37,10 +36,6 @@ namespace AiS.ViewModels
         public IViewModel CreateDefaultWindow()
         {
             return this.defaultViewModel ?? (this.defaultViewModel = new DefaultViewModel());
-        }
-        public IMenuViewModel CreateMenuWindow()
-        {
-            return this.menuViewModel ?? (this.menuViewModel = new MenuViewModel(this));
         }
 
         public IViewModel CreateImportExamWindow()

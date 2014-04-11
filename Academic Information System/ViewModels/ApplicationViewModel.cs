@@ -9,7 +9,6 @@ namespace AiS.ViewModels
 {
     public class ApplicationViewModel : ObservableObject
     {
-        private IViewModel menuWindow;
         private IViewModel defaultWindow;
         private IViewModel currentWindow;
         private ICommand changeWindowCommand;
@@ -55,10 +54,6 @@ namespace AiS.ViewModels
                 }
             }
         }
-        public IViewModel MenuWindow
-        {
-            get { return this.menuWindow; }
-        }
         public ICommand ChangeWindowCommand
         {
             get
@@ -73,13 +68,10 @@ namespace AiS.ViewModels
             }
         }
 
-        public ApplicationViewModel(IMenuViewModel menuWindow, IViewModel defaultWindow)
+        public ApplicationViewModel()
         {
-            menuWindow.ThrowIfNull("menuWindow");
-            defaultWindow.ThrowIfNull("defaultWindow");
-            menuWindow.ViewModelChangedEvent += this.OnViewModelChange;
-            this.menuWindow = menuWindow;
-            this.defaultWindow = defaultWindow;
+            WindowChangeCommands.ViewModelChangedEvent += this.OnViewModelChange;
+            this.defaultWindow = App.ViewModelFactory.CreateDefaultWindow();
         }
 
         private ObservableCollection<IViewModel> CreateCollection()

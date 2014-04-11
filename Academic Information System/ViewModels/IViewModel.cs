@@ -43,9 +43,4 @@ namespace AiS.ViewModels
 
         void ResetToDefault();
     }
-
-    public interface IMenuViewModel : IViewModel
-    {
-        event ViewModelChangedDelegate ViewModelChangedEvent;
-    }
 }

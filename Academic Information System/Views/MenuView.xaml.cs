@@ -22,12 +22,6 @@ namespace AiS.Views
         public MenuView()
         {
             InitializeComponent();
-            this.addModelContextMenu.PlacementTarget = this.addButton;
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.addModelContextMenu.IsOpen = true;
         }
     }
 }

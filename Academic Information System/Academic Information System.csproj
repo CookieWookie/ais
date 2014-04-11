@@ -61,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowChangeCommands.cs" />
     <Compile Include="CollectionComparer.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ObservableObject.cs" />
@@ -109,7 +113,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\IViewModelFactory.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\Show\BaseShowViewModel.cs" />
     <Compile Include="ViewModels\Show\ShowExamViewModel.cs" />
     <Compile Include="ViewModels\Show\ShowStudentViewModel.cs" />
@@ -147,9 +150,6 @@
     </Compile>
     <Compile Include="Views\Import\ImportView.xaml.cs">
       <DependentUpon>ImportView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Show\ShowExamView.xaml.cs">
       <DependentUpon>ShowExamView.xaml</DependentUpon>

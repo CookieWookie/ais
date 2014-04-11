@@ -32,9 +32,6 @@
     <DataTemplate DataType="{x:Type viewmodel:ImportTeacherViewModel}">
         <view:ImportView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:MenuViewModel}">
-        <view:MenuView/>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:ShowExamViewModel}">
         <view:ShowExamView/>
     </DataTemplate>

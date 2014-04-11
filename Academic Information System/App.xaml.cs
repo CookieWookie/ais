@@ -58,11 +58,11 @@ namespace AiS
         {
             base.OnStartup(e);
 
-            ApplicationView view = new ApplicationView();
-            ApplicationViewModel viewModel = new ApplicationViewModel(
-                App.ViewModelFactory.CreateMenuWindow(), 
-                App.ViewModelFactory.CreateDefaultWindow());
-            view.DataContext = viewModel;
+            ApplicationViewModel viewModel = new ApplicationViewModel();
+            ApplicationView view = new ApplicationView
+            {
+                DataContext = viewModel
+            };
 
             view.ShowDialog();
         }

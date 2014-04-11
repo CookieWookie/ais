@@ -3,27 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ais="clr-namespace:AiS"
              mc:Ignorable="d" 
              x:Name="window"
-             d:DesignHeight="300" d:DesignWidth="300">
+             MinHeight="300" MinWidth="335">
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RefreshCommand}"/>
+    </UserControl.InputBindings>
     <Grid>
         <Button HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="15" Height="15" 
                 Style="{StaticResource CloseButtonStyle}" Command="{Binding CloseCommand}"/>
-        <Button x:Name="refreshButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" 
-                Width="15" Height="15" Command="{Binding RefreshCommand}"/>
-        <DataGrid x:Name="teacherDataGrid" Margin="10,30,10,115" ItemsSource="{Binding Data}" 
+        <DataGrid x:Name="teacherDataGrid" Margin="10,30,10,145" ItemsSource="{Binding Data}" 
                   SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource CloseButtonStyle}" 
-                                    Margin="0"
-                                    Command="{Binding DeleteCommand, ElementName=window}" 
-                                    CommandParameter="{Binding SelectedItem, ElementName=teacherDataGrid}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Titul" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
@@ -31,11 +23,18 @@
                 <DataGridTextColumn Header="Počet predmetov" Binding="{Binding Teaches.Count}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="subjectsDataGrid" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="100"
+        <DataGrid x:Name="subjectsDataGrid" Margin="10,0,10,40" VerticalAlignment="Bottom" Height="100"
                   ItemsSource="{Binding SelectedItem.Teaches, ElementName=teacherDataGrid}" SelectionMode="Single"
                   SelectionUnit="FullRow">
             <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
             <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
         </DataGrid>
+        <Button Content="Pridať" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25" 
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}"/>
+        <Button Content="Upraviť" HorizontalAlignment="Left" Margin="90,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
+        <Button Content="Odstrániť" HorizontalAlignment="Left" Margin="170,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25"
+                Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
+        <Button Content="Report" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Height="25"/>
     </Grid>
 </UserControl>

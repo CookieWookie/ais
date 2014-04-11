@@ -3,22 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignWidth="300" Height="30" DataContext="{Binding}">
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Button x:Name="addButton" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="20" Height="20" 
-                Click="AddButton_Click" ContextMenuService.Placement="Bottom">
-            <Button.ContextMenu>
-                <ContextMenu x:Name="addModelContextMenu"
-                             StaysOpen="False"
-                             Placement="Bottom">
-                    <MenuItem Header="Predmet" Command="{Binding AddSubjectCommand}"/>
-                    <MenuItem Header="Skúška" Command="{Binding AddExamCommand}"/>
-                    <MenuItem Header="Študent" Command="{Binding AddStudentCommand}"/>
-                    <MenuItem Header="Študíjny program" Command="{Binding AddStudyProgrammeCommand}"/>
-                    <MenuItem Header="Učiteľ" Command="{Binding AddTeacherCommand}"/>
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
-        <MenuItem Margin="50,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20"/>
+            
     </Grid>
 </UserControl>

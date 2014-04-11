@@ -22,7 +22,7 @@ namespace AiS
     public partial class App : Application
     {
         private static IViewModelFactory vmFactory;
-        private static IImportMangerFactory imFactory;
+        private static IImportManagerFactory imFactory;
         private static IRepositoryFactory rFactory;
         private static ApplicationViewModel appVM;
 
@@ -30,7 +30,7 @@ namespace AiS
         {
             get { return App.vmFactory; }
         }
-        public static IImportMangerFactory ImportManagerFactory
+        public static IImportManagerFactory ImportManagerFactory
         {
             get { return App.imFactory; }
         }

@@ -7,7 +7,7 @@ using AiS.Repositories.Import;
 
 namespace AiS.Repositories
 {
-    public class ImportManagerFactory : IImportMangerFactory
+    public class ImportManagerFactory : IImportManagerFactory
     {
         private readonly IRepositoryFactory factory;
         private IImportManager<Exam> exam;

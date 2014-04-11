@@ -8,10 +8,9 @@
     <Grid>
         <Button x:Name="closeButton" Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}"/>
         <Button x:Name="saveButton" Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" IsEnabled="{Binding HasChanged}"/>
-        <TextBox x:Name="FilePathBox" Height="23" Margin="10,135,37,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding FilePath}"/>
-        <Button x:Name="FindFileButton" Content="..." Margin="0,135,10,0" VerticalAlignment="Top" Height="23" Command="{Binding FindFileCommand}" HorizontalAlignment="Right" Width="27"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="Súbor na import" VerticalAlignment="Top" Width="280" Height="23" LineHeight="14.667"/>
-        <Button x:Name="parseFileButton" Content="Import" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ParseFileCommand}" IsEnabled="{Binding CanParse}"/>
-        <Button x:Name="closeCrossButton" Command="{Binding CloseCommand}" Width="15" Height="15" Style="{StaticResource CloseButtonStyle}" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Label HorizontalAlignment="Left" Margin="10,10,0,0" Content="Súbor na import" VerticalAlignment="Top" Width="280" Height="25"/>
+        <TextBox x:Name="FilePathBox" Height="25" Margin="10,40,37,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding FilePath}"/>
+        <Button x:Name="FindFileButton" Content="..." Margin="0,40,10,0" VerticalAlignment="Top" Height="25" Command="{Binding FindFileCommand}" HorizontalAlignment="Right" Width="27"/>
+        <Button x:Name="parseFileButton" Content="Import" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ParseFileCommand}" IsEnabled="{Binding CanParse}" Height="25"/>
     </Grid>
 </UserControl>

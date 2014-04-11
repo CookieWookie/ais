@@ -66,7 +66,7 @@ namespace AiS.ViewModels
             }
             set
             {
-                if (!this.subject.Equals(value))
+                if (!this.Subject.Equals(value))
                 {
                     this.subject = value;
                     this.OnPropertyChanged("HasChanged");
@@ -86,7 +86,7 @@ namespace AiS.ViewModels
             }
             set
             {
-                if (!this.teacher.Equals(value))
+                if (!this.Teacher.Equals(value))
                 {
                     this.teacher = value;
                     this.OnPropertyChanged("HasChanged");
@@ -216,6 +216,13 @@ namespace AiS.ViewModels
                     this.OnPropertyChanged("SignedStudents");
                     this.OnPropertyChanged("Students");
                 };
+        }
+
+        public override void Refresh()
+        {
+            this.OnPropertyChanged("Subjects");
+            this.OnPropertyChanged("Teachers");
+            base.Refresh();
         }
     }
 }

@@ -9,8 +9,12 @@
         MinWidth="600" Width="600"
         MinHeight="400" Height="400"
         DataContext="{Binding}">
+    <Window.InputBindings>
+        <KeyBinding Key="F4" Modifiers="Alt" Command="{Binding AltF4Command}"/>
+        <KeyBinding Key="F5" Command="{Binding CurrentWindow.RefreshCommand}"/>
+    </Window.InputBindings>
     <Grid>
-        <ContentControl x:Name="contentWindow" Margin="0,35,0,0" Content="{Binding CurrentWindow}"/>
-        <views:MenuView VerticalAlignment="Top" Width="560" />
+        <views:MenuView x:Name="menuControl" VerticalAlignment="Top" Width="560" Height="25" Margin="0,1,0,0"/>
+        <ContentControl x:Name="contentWindow" Content="{Binding CurrentWindow}" Margin="0,27,0,0"/>
     </Grid>
 </Window>

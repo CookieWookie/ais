@@ -10,7 +10,7 @@ namespace AiS.ViewModels
     public class ViewModelFactory : IViewModelFactory
     {
         private readonly IRepositoryFactory repositoryFactory;
-        private readonly IImportMangerFactory importManagerFactory;
+        private readonly IImportManagerFactory importManagerFactory;
         private IViewModel defaultViewModel;
 
         private IViewModel importExamViewModel;
@@ -25,7 +25,7 @@ namespace AiS.ViewModels
         private IViewModel showSubjectViewModel;
         private IViewModel showTeacherViewModel;
 
-        public ViewModelFactory(IRepositoryFactory repositoryFactory, IImportMangerFactory importManagerFactory)
+        public ViewModelFactory(IRepositoryFactory repositoryFactory, IImportManagerFactory importManagerFactory)
         {
             repositoryFactory.ThrowIfNull("repositoryFactory");
             importManagerFactory.ThrowIfNull("importManagerFactory");

@@ -23,11 +23,23 @@ namespace AiS.Views
         {
             InitializeComponent();
             this.selectStudentContextMenu.PlacementTarget = this.plusButton;
+            this.selectSubjectContextMenu.PlacementTarget = this.selectSubjectButton;
+            this.selectTeacherContextMenu.PlacementTarget = this.selectTeacherButton;
         }
 
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
             this.selectStudentContextMenu.IsOpen = true;
+        }
+
+        private void SelectSubjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectSubjectContextMenu.IsOpen = true;
+        }
+
+        private void SelectTeacherButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectTeacherContextMenu.IsOpen = true;
         }
     }
 }

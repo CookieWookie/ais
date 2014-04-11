@@ -9,10 +9,12 @@ namespace AiS.ViewModels
 {
     public class ApplicationViewModel : ObservableObject
     {
-        private IViewModel defaultWindow;
         private IViewModel currentWindow;
-        private ICommand changeWindowCommand;
-        private ObservableCollection<IViewModel> openWindows;
+        private readonly IViewModel defaultWindow;
+        private readonly IList<IViewModel> openWindows;
+
+        private readonly ICommand altF4Command;
+        private readonly ICommand changeWindowCommand;
 
         public string ApplicationName
         {
@@ -27,28 +29,25 @@ namespace AiS.ViewModels
                 return name;
             }
         }
-        public ObservableCollection<IViewModel> OpenWindows
+        public IList<IViewModel> OpenWindows
         {
-            get
-            {
-                if (this.openWindows == null)
-                {
-                    this.openWindows = this.CreateCollection();
-                }
-                return this.openWindows;
-            }
+            get { return this.openWindows; }
         }
         public IViewModel CurrentWindow
         {
             get
             {
-                return this.currentWindow ?? (this.CurrentWindow = (this.OpenWindows.FirstOrDefault() ?? this.defaultWindow));
+                if (this.currentWindow == null)
+                {
+                    this.currentWindow = this.OpenWindows.FirstOrDefault() ?? this.defaultWindow;
+                }
+                return this.currentWindow;
             }
             set
             {
-                if (currentWindow != value)
+                if (this.currentWindow != value)
                 {
-                    currentWindow = value;
+                    this.currentWindow = value;
                     this.OnPropertyChanged("CurrentWindow");
                     this.OnPropertyChanged("ApplicationName");
                 }
@@ -56,22 +55,37 @@ namespace AiS.ViewModels
         }
         public ICommand ChangeWindowCommand
         {
-            get
-            {
-                return this.changeWindowCommand ?? (this.changeWindowCommand = new RelayCommand(o =>
-                    {
-                        IViewModel vm = (IViewModel)o;
-                        vm.ViewModelClosingEvent += this.OnViewModelClosing;
-                        this.OpenWindows.Add(vm);
-                        this.CurrentWindow = vm;
-                    }, o => o is IViewModel));
-            }
+            get { return this.changeWindowCommand; }
+        }
+        public ICommand AltF4Command
+        {
+            get { return this.altF4Command; }
         }
 
         public ApplicationViewModel()
         {
-            WindowChangeCommands.ViewModelChangedEvent += this.OnViewModelChange;
+            WindowChangeCommands.ViewModelChangedEvent += this.OnViewModelChanged;
             this.defaultWindow = App.ViewModelFactory.CreateDefaultWindow();
+            this.changeWindowCommand = new RelayCommand(o =>
+                {
+                    IViewModel vm = (IViewModel)o;
+                    vm.ViewModelClosingEvent += this.OnViewModelClosing;
+                    this.CurrentWindow = vm;
+                }, o => o is IViewModel);
+
+            this.altF4Command = new RelayCommand(o =>
+                {
+                    if (this.CurrentWindow != this.defaultWindow)
+                    {
+                        this.CurrentWindow.Close();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }, o => true);
+
+            this.openWindows = this.CreateCollection();
         }
 
         private ObservableCollection<IViewModel> CreateCollection()
@@ -91,13 +105,19 @@ namespace AiS.ViewModels
             }
         }
 
-        protected void OnViewModelChange(object sender, ViewModelChangedEventArgs e)
+        protected void OnViewModelChanged(object sender, ViewModelChangedEventArgs e)
         {
-            if (this.CurrentWindow != this.defaultWindow && !this.OpenWindows.Contains(this.CurrentWindow))
+            IViewModel vm = e.ViewModel;
+            if (vm != this.defaultWindow && !this.OpenWindows.Contains(vm))
             {
-                this.OpenWindows.Add(this.CurrentWindow);
+                this.OpenWindows.Insert(0, vm);
             }
-            this.ChangeWindowCommand.Execute(e.ViewModel);
+            this.ChangeWindowCommand.Execute(vm);
+        }
+
+        public void Close()
+        {
+            App.Current.MainWindow.Close();
         }
     }
 }

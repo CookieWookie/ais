@@ -6,7 +6,7 @@ using AiS.Models;
 
 namespace AiS.Repositories
 {
-    public interface IImportMangerFactory
+    public interface IImportManagerFactory
     {
         IImportManager<Exam> ExamImportManager { get; }
         IImportManager<Student> StudentImportManager { get; }

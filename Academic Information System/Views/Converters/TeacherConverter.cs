@@ -17,6 +17,10 @@ namespace AiS.Views.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             Teacher t = (Teacher)value;
+            if (string.IsNullOrWhiteSpace(t.Name) || string.IsNullOrWhiteSpace(t.Lastname))
+            {
+                return "";
+            }
             return t.Title + " " + t.Name + " " + t.Lastname + ", " + t.TitleSuffix;
         }
 

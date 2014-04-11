@@ -61,6 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Base\BaseAddViewModel.cs" />
+    <Compile Include="ViewModels\Base\BaseSaveViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IAddViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IImportViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\ISaveViewModel.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
@@ -85,7 +90,7 @@
     <Compile Include="Repositories\Database\Sql\SubjectRepository.cs" />
     <Compile Include="Repositories\Database\Sql\TeacherRepository.cs" />
     <Compile Include="Repositories\IImportManager.cs" />
-    <Compile Include="Repositories\IImportMangerFactory.cs" />
+    <Compile Include="Repositories\IImportManagerFactory.cs" />
     <Compile Include="Repositories\ImportManagerFactory.cs" />
     <Compile Include="Repositories\Import\ExamImportManager.cs" />
     <Compile Include="Repositories\Import\StudentImportManager.cs" />
@@ -100,19 +105,19 @@
     <Compile Include="ViewModels\Add\AddSubjectViewModel.cs" />
     <Compile Include="ViewModels\Add\AddTeacherViewModel.cs" />
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\DefaultViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportExamViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportStudentViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportStudyProgrammeViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportSubjectViewModel.cs" />
     <Compile Include="ViewModels\Import\ImportTeacherViewModel.cs" />
-    <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\Interfaces\IViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\IViewModelFactory.cs" />
+    <Compile Include="ViewModels\Interfaces\IViewModelFactory.cs" />
     <Compile Include="ViewModels\Show\BaseShowViewModel.cs" />
     <Compile Include="ViewModels\Show\ShowExamViewModel.cs" />
     <Compile Include="ViewModels\Show\ShowStudentViewModel.cs" />

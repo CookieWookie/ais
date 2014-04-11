@@ -4,8 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             x:Name="window"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Button HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="15" Height="15" 
+                Style="{StaticResource CloseButtonStyle}" Command="{Binding CloseCommand}"/>
+        <Button x:Name="refreshButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" 
+                Width="15" Height="15" Command="{Binding RefreshCommand}"/>
+        <DataGrid x:Name="studyProgrammeDataGrid" Margin="10,30,10,10" 
+                  ItemsSource="{Binding Data, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource CloseButtonStyle}" 
+                                    Margin="0"
+                                    Command="{Binding DeleteCommand, ElementName=window}" 
+                                    CommandParameter="{Binding SelectedItem, ElementName=studyProgrammeDataGrid}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Dĺžka štúdia" Binding="{Binding Length}"/>
+                <DataGridTextColumn Header="Stupeň" Binding="{Binding StudyType, Converter={StaticResource StudyTypeConverter}}"/>
+            </DataGrid.Columns>
+        </DataGrid>            
     </Grid>
 </UserControl>

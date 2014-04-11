@@ -22,6 +22,12 @@ namespace AiS.Views
         public AddExamView()
         {
             InitializeComponent();
+            this.selectStudentContextMenu.PlacementTarget = this.plusButton;
+        }
+
+        private void plusButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectStudentContextMenu.IsOpen = true;
         }
     }
 }

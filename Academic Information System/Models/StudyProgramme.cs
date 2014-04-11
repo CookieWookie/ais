@@ -34,7 +34,7 @@ namespace AiS.Models
                 if (this.name != value)
                 {
                     this.name = value;
-                    // this.OnPropertyChanged("Name");
+                    this.OnPropertyChanged("Name");
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace AiS.Models
                 if (this.studyType != value)
                 {
                     this.studyType = value;
-                    // this.OnPropertyChanged("StudyType");
+                    this.OnPropertyChanged("StudyType");
                 }
             }
         }

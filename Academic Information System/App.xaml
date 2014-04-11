@@ -11,9 +11,10 @@
                 <ResourceDictionary Source="Views/Resources/OpenWindowsMenuItemStyle.xaml"/>
                 <ResourceDictionary Source="Views/Resources/CloseButtonStyle.xaml"/>
                 <ResourceDictionary Source="Views/Resources/Other.xaml"/>
-                <ResourceDictionary Source="Views/Resources/PlusButtonStyle.xaml"/>
                 <ResourceDictionary Source="Views/Resources/DataTemplates.xaml"/>
-                <ResourceDictionary Source="Views/Resources/ArrowDownButtonStyle.xaml"/>
+                <ResourceDictionary Source="Views/Resources/ArrowButtonStyle.xaml"/>
+                <ResourceDictionary Source="Views/Resources/PlusButtonStyle.xaml"/>
+                <ResourceDictionary Source="Views/Resources/MinusButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

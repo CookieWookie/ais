@@ -44,7 +44,7 @@ namespace AiS.Models
                 if (this.semester != value)
                 {
                     this.semester = value;
-                    // this.OnPropertyChanged("Semester");
+                    this.OnPropertyChanged("Semester");
                 }
             }
         }

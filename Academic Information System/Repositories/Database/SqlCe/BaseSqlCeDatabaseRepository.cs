@@ -42,7 +42,14 @@ namespace AiS.Repositories.Database.SqlCe
                     string[] commandStrings = Properties.Resources.SQLCE_1_0_0_0.Split(';');
                     foreach (string commandString in commandStrings)
                     {
-                        command.ExecuteNonQuery();
+                        try
+                        {
+                            command.CommandText = commandString;
+                            command.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
             }

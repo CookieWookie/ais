@@ -10,7 +10,7 @@ namespace AiS.ViewModels
 {
     public class AddStudyProgrammeViewModel : BaseAddViewModel<StudyProgramme>
     {
-        private readonly IRepository<StudyProgramme> repository;
+        private readonly IStudyProgrammeRepository repository;
         private readonly StudyProgramme original;
         private readonly string windowName;
 
@@ -27,19 +27,20 @@ namespace AiS.ViewModels
             get { throw new NotImplementedException(); }
         }
 
-        public AddStudyProgrammeViewModel(IRepository<StudyProgramme> repository)
+        public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository)
             : this(repository, new StudyProgramme())
         {
             this.windowName = "Pridaj: Študíjny program";
         }
 
-        public AddStudyProgrammeViewModel(IRepository<StudyProgramme> repository, StudyProgramme original)
+        public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository, StudyProgramme original)
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
             this.windowName = "Uprav: Študíjny program";
             this.repository = repository;
             this.original = original;
+            this.ResetToDefault();
         }
 
         public override void ResetToDefault()

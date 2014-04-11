@@ -121,12 +121,16 @@ namespace AiS.ViewModels
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
+
             this.windowName = "Uprav: Študent";
             this.repository = repository;
             this.original = original;
             this.selectStudyProgrammeCommand = new RelayCommand(o => this.StudyProgramme = (StudyProgramme)o, o => o is StudyProgramme);
+
             this.studyProgrammes = new ObservableCollection<StudyProgramme>(this.repository.StudyProgrammeRepository.GetAll());
             this.studyProgrammes.CollectionChanged += (sender, e) => this.OnPropertyChanged("StudyProgrammes");
+
+            this.ResetToDefault();
         }
 
         public override void ResetToDefault()

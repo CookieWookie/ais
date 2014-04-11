@@ -92,7 +92,7 @@ namespace AiS.Models
                 if (value != this.subjects)
                 {
                     this.SetCollection(value);
-                    // this.OnPropertyChanged("Teaches");
+                    this.OnPropertyChanged("Teaches");
                 }
             }
         }

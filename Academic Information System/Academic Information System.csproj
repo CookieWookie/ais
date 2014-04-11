@@ -136,6 +136,8 @@
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\OpenWindowsMenuVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\StudentConverter.cs" />
     <Compile Include="Views\Converters\StudyProgrammeConverter.cs" />
     <Compile Include="Views\Converters\StudyTypeConverter.cs" />
     <Compile Include="Views\Converters\SubjectConverter.cs" />
@@ -245,7 +247,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Resources\ArrowDownButtonStyle.xaml">
+    <Page Include="Views\Resources\ArrowButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,6 +260,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\MinusButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

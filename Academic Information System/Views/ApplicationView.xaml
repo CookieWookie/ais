@@ -16,6 +16,7 @@
                 <ContextMenu x:Name="openWindowsMenu" 
                              StaysOpen="False"
                              Placement="Bottom"
+                             Visibility="{Binding OpenWindows, Converter={StaticResource OpenWindowsMenuVisibilityConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                              ItemsSource="{Binding OpenWindows}"
                              ItemContainerStyle="{StaticResource OpenWindowsMenuItemStyle}"/>
             </Button.ContextMenu>

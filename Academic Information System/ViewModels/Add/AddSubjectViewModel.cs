@@ -10,7 +10,7 @@ namespace AiS.ViewModels
 {
     public class AddSubjectViewModel : BaseAddViewModel<Subject>
     {
-        private readonly IRepository<Subject> repository;
+        private readonly ISubjectRepository repository;
         private readonly Subject original;
         private readonly string windowName;
 
@@ -27,19 +27,21 @@ namespace AiS.ViewModels
             get { throw new NotImplementedException(); }
         }
 
-        public AddSubjectViewModel(IRepository<Subject> repository)
+        public AddSubjectViewModel(ISubjectRepository repository)
             : this(repository, new Subject())
         {
             this.windowName = "Pridaj: Predmet";
         }
 
-        public AddSubjectViewModel(IRepository<Subject> repository, Subject original)
+        public AddSubjectViewModel(ISubjectRepository repository, Subject original)
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
+
             this.windowName = "Uprav: Predmet";
             this.repository = repository;
             this.original = original;
+            this.ResetToDefault();
         }
 
         public override void ResetToDefault()

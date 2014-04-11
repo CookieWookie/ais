@@ -15,18 +15,20 @@ namespace AiS.ViewModels
         private readonly IExamRepository repository;
         private readonly Exam original;
         private readonly string windowName;
+
         private readonly ICommand selectTeacherCommand;
         private readonly ICommand selectSubjectCommand;
+        private readonly ICommand removeStudentCommand;
+        private readonly ICommand addStudentCommand;
+        private List<Student> students;
 
-        private readonly ObservableCollection<Teacher> teachers;
-        private readonly ObservableCollection<Subject> subjects;
-        
-        private DateTime time;
+        private TimeSpan time;
+        private DateTime date;
         private Subject subject;
         private Teacher teacher;
-        private ObservableCollection<Student> students;
+        private ObservableCollection<Student> signedStudents;
 
-        public DateTime Time
+        public TimeSpan Time
         {
             get { return this.time; }
             set
@@ -36,6 +38,19 @@ namespace AiS.ViewModels
                     this.time = value;
                     this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("Time");
+                }
+            }
+        }
+        public DateTime Date
+        {
+            get { return this.date; }
+            set
+            {
+                if (value != this.date)
+                {
+                    this.date = value;
+                    this.OnPropertyChanged("HasChanged");
+                    this.OnPropertyChanged("Date");
                 }
             }
         }
@@ -83,15 +98,15 @@ namespace AiS.ViewModels
         {
             get
             {
-                if (this.students == null)
+                if (this.signedStudents == null)
                 {
                     this.SetCollection(null);
                 }
-                return this.students;
+                return this.signedStudents;
             }
             set
             {
-                if (value != this.students)
+                if (value != this.signedStudents)
                 {
                     SetCollection(value);
                     this.OnPropertyChanged("HasChanged");
@@ -100,13 +115,17 @@ namespace AiS.ViewModels
             }
         }
 
-        public ObservableCollection<Teacher> Teachers
+        public IEnumerable<Teacher> Teachers
         {
-            get { return this.teachers; }
+            get { return this.repository.TeacherRepository.GetAll(); }
         }
-        public ObservableCollection<Subject> Subjects
+        public IEnumerable<Subject> Subjects
         {
-            get { return this.subjects; }
+            get { return this.repository.SubjectRepository.GetAll(); }
+        }
+        public IEnumerable<Student> Students
+        {
+            get { return this.students.Except(this.SignedStudents); }
         }
 
         public override string WindowName
@@ -119,7 +138,13 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { return !this.original.Time.Equals(this.Time) || !this.original.Subject.Equals(this.Subject) || !this.original.Teacher.Equals(this.Teacher) || !studentComparer.Equals(this.SignedStudents, this.original.SignedStudents); }//toto je moje
+            get
+            {
+                return this.original.Time != this.Date.Add(Time) ||
+                  !this.original.Subject.Equals(this.Subject) ||
+                  !this.original.Teacher.Equals(this.Teacher) ||
+                  !studentComparer.Equals(this.SignedStudents, this.original.SignedStudents);
+            }
         }
         public ICommand SelectTeacherCommand
         {
@@ -128,6 +153,14 @@ namespace AiS.ViewModels
         public ICommand SelectSubjectCommand
         {
             get { return this.selectSubjectCommand; }
+        }
+        public ICommand RemoveStudentCommand
+        {
+            get { return this.removeStudentCommand; }
+        }
+        public ICommand AddStudentCommand
+        {
+            get { return this.addStudentCommand; }
         }
 
         public AddExamViewModel(IExamRepository repository)
@@ -145,37 +178,44 @@ namespace AiS.ViewModels
             this.windowName = "Uprav: Skúška";
             this.repository = repository;
             this.original = original;
+
             this.selectSubjectCommand = new RelayCommand(o => this.Subject = (Subject)o, o => o is Subject);
             this.selectTeacherCommand = new RelayCommand(o => this.Teacher = (Teacher)o, o => o is Teacher);
+            this.removeStudentCommand = new RelayCommand(o => this.SignedStudents.Remove((Student)o), o => o is Student);
+            this.addStudentCommand = new RelayCommand(o => this.SignedStudents.Add((Student)o), o => o is Student);
 
-            this.teachers = new ObservableCollection<Teacher>(this.repository.TeacherRepository.GetAll());
-            this.teachers.CollectionChanged += (sender, e) => this.OnPropertyChanged("Teachers");
-            this.subjects = new ObservableCollection<Subject>(this.repository.SubjectRepository.GetAll());
-            this.subjects.CollectionChanged += (sender, e) => this.OnPropertyChanged("Subjects");
+            this.students = this.repository.StudentRepository.GetAll().ToList();
+            this.ResetToDefault();
         }
 
         public override void ResetToDefault()
         {
-            this.Time = this.original.Time;
+            this.Time = this.original.Time.TimeOfDay;
+            this.Date = this.original.Time.Date;
             this.Subject = this.original.Subject.Clone();
             this.Teacher = this.original.Teacher.Clone();
-            this.SignedStudents = this.original.SignedStudents;            
+            this.SignedStudents = this.original.SignedStudents;
         }
 
         public override void Save()
         {
-            Exam exam= new Exam();
-            exam.Time = this.Time;
+            Exam exam = new Exam();
+            exam.Time = this.Date.Add(this.Time);
             exam.Subject = this.Subject.Clone();
             exam.Teacher = this.Teacher.Clone();
             exam.SignedStudents = this.SignedStudents;
-            repository.Save(exam);            
+            repository.Save(exam);
         }
 
         private void SetCollection(IList<Student> value)
         {
-            this.students = value == null ? new ObservableCollection<Student>() : new ObservableCollection<Student>(value);
-            this.students.CollectionChanged += (sender, e) => this.OnPropertyChanged("SignedStudents");
+            value = value ?? new List<Student>();
+            this.signedStudents = new ObservableCollection<Student>(value);
+            this.signedStudents.CollectionChanged += (sender, e) =>
+                {
+                    this.OnPropertyChanged("SignedStudents");
+                    this.OnPropertyChanged("Students");
+                };
         }
     }
 }

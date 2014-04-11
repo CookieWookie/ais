@@ -95,7 +95,7 @@ namespace AiS.Models
             {
                 if (value != this.students)
                 {
-                    SetCollection(value);
+                    this.SetCollection(value);
                     this.OnPropertyChanged("SignedStudents");
                 }
             }

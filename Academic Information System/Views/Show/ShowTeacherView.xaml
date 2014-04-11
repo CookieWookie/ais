@@ -4,8 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             x:Name="window"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Button HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="15" Height="15" 
+                Style="{StaticResource CloseButtonStyle}" Command="{Binding CloseCommand}"/>
+        <Button x:Name="refreshButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" 
+                Width="15" Height="15" Command="{Binding RefreshCommand}"/>
+        <DataGrid x:Name="teacherDataGrid" Margin="10,30,10,115" ItemsSource="{Binding Data}" 
+                  SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource CloseButtonStyle}" 
+                                    Margin="0"
+                                    Command="{Binding DeleteCommand, ElementName=window}" 
+                                    CommandParameter="{Binding SelectedItem, ElementName=teacherDataGrid}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Titul" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
+                <DataGridTextColumn Header="Titul suffix" Binding="{Binding TitleSuffix}"/>
+                <DataGridTextColumn Header="Počet predmetov" Binding="{Binding Teaches.Count}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="subjectsDataGrid" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="100"
+                  ItemsSource="{Binding SelectedItem.Teaches, ElementName=teacherDataGrid}" SelectionMode="Single"
+                  SelectionUnit="FullRow">
+            <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
+            <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
+        </DataGrid>
     </Grid>
 </UserControl>

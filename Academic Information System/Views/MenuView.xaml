@@ -19,6 +19,6 @@
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-
+        <MenuItem Margin="50,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20"/>
     </Grid>
 </UserControl>

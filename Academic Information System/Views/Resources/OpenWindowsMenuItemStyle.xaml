@@ -13,7 +13,7 @@
         <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MessageFontWeightKey}}"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=ChangeWindowCommand}"/>
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ChangeWindowCommand}"/>
         <Setter Property="CommandParameter" Value="{Binding}"/>
         <Setter Property="Header" Value="{Binding WindowName}"/>
         <Setter Property="Template">

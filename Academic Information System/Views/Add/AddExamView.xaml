@@ -67,7 +67,7 @@
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-        <DataGrid x:Name="studentDataGrid" Margin="10,130,10,10" 
+        <DataGrid x:Name="studentDataGrid" Margin="10,130,10,10" AutoGenerateColumns="False"
                   ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>

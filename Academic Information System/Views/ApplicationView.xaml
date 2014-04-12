@@ -14,7 +14,13 @@
         <KeyBinding Key="F5" Command="{Binding CurrentWindow.RefreshCommand}"/>
     </Window.InputBindings>
     <Grid>
-        <views:MenuView x:Name="menuControl" VerticalAlignment="Top" Width="560" Height="25" Margin="0,1,0,0"/>
-        <ContentControl x:Name="contentWindow" Content="{Binding CurrentWindow}" Margin="0,27,0,0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <views:MenuView x:Name="menuControl" VerticalAlignment="Top" Width="560" Height="25" Grid.Row="1"/>
+        <ContentControl x:Name="contentWindow" Content="{Binding CurrentWindow}" Grid.Row="3"/>
     </Grid>
 </Window>

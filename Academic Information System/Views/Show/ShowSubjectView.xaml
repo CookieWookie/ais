@@ -8,19 +8,26 @@
              x:Name="window"
              MinHeight="300" MinWidth="335">
     <Grid>
-        <DataGrid x:Name="subjectDataGrid" Margin="10,10,10,40" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="subjectDataGrid" Grid.Row="1" Margin="10,0,10,0" AutoGenerateColumns="False" CanUserAddRows="False"
                   ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Pridať" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25" 
+        <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="3" Margin="10,0,0,0" Width="75" Height="25" 
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddSubjectCommand}}"/>
-        <Button Content="Upraviť" HorizontalAlignment="Left" Margin="90,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25"
+        <Button Content="Upraviť" HorizontalAlignment="Left" Grid.Row="3" Margin="90,0,0,0" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddSubjectCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=subjectDataGrid}"/>
-        <Button Content="Odstrániť" HorizontalAlignment="Left" Margin="170,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25"
+        <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="3" Margin="170,0,0,0" Width="75" Height="25"
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=subjectDataGrid}"/>
-        <Button Content="Report" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Height="25"/>
+        <Button Content="Report" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,10,0" Width="75" Height="25"/>
     </Grid>
 </UserControl>

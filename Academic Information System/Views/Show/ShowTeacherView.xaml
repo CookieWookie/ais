@@ -8,8 +8,17 @@
              x:Name="window"
              MinHeight="300" MinWidth="335">
     <Grid>
-        <DataGrid x:Name="teacherDataGrid" Margin="10,10,10,145" ItemsSource="{Binding Data}" 
-                  SelectionMode="Single" SelectionUnit="FullRow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="teacherDataGrid" Margin="10,0,10,0" Grid.Row="1" ItemsSource="{Binding Data}" CanUserAddRows="False" 
+                  SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titul" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
@@ -18,18 +27,20 @@
                 <DataGridTextColumn Header="Počet predmetov" Binding="{Binding Teaches.Count}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="subjectsDataGrid" Margin="10,0,10,40" VerticalAlignment="Bottom" Height="100"
+        <DataGrid x:Name="subjectsDataGrid" Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Bottom" Height="100" AutoGenerateColumns="False"
                   ItemsSource="{Binding SelectedItem.Teaches, ElementName=teacherDataGrid}" SelectionMode="Single"
                   SelectionUnit="FullRow">
-            <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
-            <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Pridať" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25" 
+        <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="75" Height="25" 
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}"/>
-        <Button Content="Upraviť" HorizontalAlignment="Left" Margin="90,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25"
+        <Button Content="Upraviť" HorizontalAlignment="Left" Grid.Row="5" Margin="90,0,0,0" VerticalAlignment="Bottom" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
-        <Button Content="Odstrániť" HorizontalAlignment="Left" Margin="170,0,0,10" VerticalAlignment="Bottom" Width="75" Height="25"
+        <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="5" Margin="170,0,0,0" VerticalAlignment="Bottom" Width="75" Height="25"
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
-        <Button Content="Report" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Height="25"/>
+        <Button Content="Report" HorizontalAlignment="Right" Grid.Row="5" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="75" Height="25"/>
     </Grid>
 </UserControl>

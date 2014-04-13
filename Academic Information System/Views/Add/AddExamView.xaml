@@ -5,10 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              MinHeight="300" MinWidth="300" DataContext="{Binding}">
+    <UserControl.InputBindings>
+        <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}"/>
+    </UserControl.InputBindings>
     <Grid>
-        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}"/>
-        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}"/>
-        <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25"
+                IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"/>
         <Label HorizontalAlignment="Left" Margin="10,10,0,0" Height="25" Content="Dátum" VerticalAlignment="Top" Width="75"/>
         <Label HorizontalAlignment="Left" Margin="175,10,0,0" Height="25" Content="Čas" VerticalAlignment="Top" Width="50"/>
         <Label HorizontalAlignment="Left" Margin="10,40,0,0" Height="25" Content="Predmet" VerticalAlignment="Top" Width="75"/>
@@ -47,7 +51,7 @@
                             <Setter Property="CommandParameter" Value="{Binding}"/>
                         </Style>
                     </ContextMenu.ItemContainerStyle>
-                </ContextMenu>                             
+                </ContextMenu>
             </Button.ContextMenu>
         </Button>
         <Label Content="{Binding Teacher, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TeacherConverter}}" Margin="115,70,15,0" VerticalAlignment="Top" Height="25"/>
@@ -67,7 +71,7 @@
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-        <DataGrid x:Name="studentDataGrid" Margin="10,130,10,10" AutoGenerateColumns="False"
+        <DataGrid x:Name="studentDataGrid" Margin="10,130,10,40" AutoGenerateColumns="False"
                   ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
@@ -85,7 +89,7 @@
                              StaysOpen="False"
                              ItemsSource="{Binding Students}">
                     <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
+                        <Style TargetType="{x:Type MenuItem}">
                             <Setter Property="Header" Value="{Binding Converter={StaticResource StudentConverter}}"/>
                             <Setter Property="Command" Value="{Binding AddStudentCommand}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>

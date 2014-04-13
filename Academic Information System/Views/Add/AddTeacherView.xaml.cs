@@ -22,6 +22,13 @@ namespace AiS.Views
         public AddTeacherView()
         {
             InitializeComponent();
+            this.selectSubjectContextMenu.PlacementTarget = this.plusButton;
+        }
+
+        private void PlusButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectSubjectContextMenu.IsOpen = true;
+            e.Handled = true;
         }
     }
 }

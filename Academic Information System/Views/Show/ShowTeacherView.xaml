@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              x:Name="window"
              MinHeight="300" MinWidth="335">
+    <UserControl.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}"/>
+        <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" 
+                    CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
+        <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportTeacherCommand}}"/>
+        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
@@ -35,12 +42,13 @@
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="75" Height="25" 
+        <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" Width="75" Height="25" 
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}"/>
-        <Button Content="Upraviť" HorizontalAlignment="Left" Grid.Row="5" Margin="90,0,0,0" VerticalAlignment="Bottom" Width="75" Height="25"
+        <Button Content="Upraviť" HorizontalAlignment="Left" Grid.Row="5" Margin="90,0,0,0" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
-        <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="5" Margin="170,0,0,0" VerticalAlignment="Bottom" Width="75" Height="25"
+        <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="5" Margin="170,0,0,0" Width="75" Height="25"
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
-        <Button Content="Report" HorizontalAlignment="Right" Grid.Row="5" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="75" Height="25"/>
+        <Button Content="Import" HorizontalAlignment="Left" Grid.Row="5" Margin="250,0,0,0" Width="75" Height="25"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportTeacherCommand}}"/>
     </Grid>
 </UserControl>

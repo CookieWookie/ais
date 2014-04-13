@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              x:Name="window"
              MinHeight="300" MinWidth="335">
+    <UserControl.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudyProgrammeCommand}}"/>
+        <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudyProgrammeCommand}}" 
+                    CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
+        <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportStudyProgrammeCommand}}"/>
+        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
+    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
@@ -29,6 +36,7 @@
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudyProgrammeCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
         <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="3" Margin="170,0,0,0" Width="75" Height="25"
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
-        <Button Content="Report" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,10,0" Width="75" Height="25"/>
+        <Button Content="Import" HorizontalAlignment="Left" Grid.Row="3" Margin="250,0,0,0" Width="75" Height="25"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportStudyProgrammeCommand}}"/>
     </Grid>
 </UserControl>

@@ -151,6 +151,7 @@ namespace AiS.ViewModels
             student.Semester = this.Semester;
             student.StudyProgramme = this.StudyProgramme;
             repository.Save(student);
+            this.Close();
         }
     }
 }

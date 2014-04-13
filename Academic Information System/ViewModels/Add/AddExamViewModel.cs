@@ -205,6 +205,7 @@ namespace AiS.ViewModels
             exam.Teacher = this.Teacher.Clone();
             exam.SignedStudents = this.SignedStudents;
             repository.Save(exam);
+            this.Close();
         }
 
         private void SetCollection(IList<Student> value)

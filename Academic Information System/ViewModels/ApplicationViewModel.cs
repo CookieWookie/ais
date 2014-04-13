@@ -75,14 +75,7 @@ namespace AiS.ViewModels
 
             this.altF4Command = new RelayCommand(o =>
                 {
-                    if (this.CurrentWindow != this.defaultWindow)
-                    {
-                        this.CurrentWindow.Close();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
+                    this.Close();
                 }, o => true);
 
             this.openWindows = this.CreateCollection();
@@ -117,7 +110,14 @@ namespace AiS.ViewModels
 
         public void Close()
         {
-            App.Current.MainWindow.Close();
+            if (this.CurrentWindow != this.defaultWindow)
+            {
+                this.CurrentWindow.Close();
+            }
+            else
+            {
+                App.Current.Shutdown();
+            }
         }
     }
 }

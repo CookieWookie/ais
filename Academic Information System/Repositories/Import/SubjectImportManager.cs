@@ -36,7 +36,7 @@ namespace AiS.Repositories.Import
                     Subject sub = new Subject();
                     sub.ID = delenyRiadok[0];
                     sub.Name = delenyRiadok[1];
-                    sub.Semester = Convert.ToInt32(delenyRiadok[3]);
+                    sub.Semester = Convert.ToInt32(delenyRiadok[2]);
                     if (!subjects.Contains(sub))
                         subjects.Add(sub);
                 }

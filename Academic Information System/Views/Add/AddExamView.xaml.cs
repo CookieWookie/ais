@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AiS.Views.Add
+namespace AiS.Views
 {
     /// <summary>
     /// Interaction logic for AddExamView.xaml
@@ -22,6 +22,24 @@ namespace AiS.Views.Add
         public AddExamView()
         {
             InitializeComponent();
+            this.selectStudentContextMenu.PlacementTarget = this.plusButton;
+            this.selectSubjectContextMenu.PlacementTarget = this.selectSubjectButton;
+            this.selectTeacherContextMenu.PlacementTarget = this.selectTeacherButton;
+        }
+
+        private void plusButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectStudentContextMenu.IsOpen = true;
+        }
+
+        private void SelectSubjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectSubjectContextMenu.IsOpen = true;
+        }
+
+        private void SelectTeacherButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.selectTeacherContextMenu.IsOpen = true;
         }
     }
 }

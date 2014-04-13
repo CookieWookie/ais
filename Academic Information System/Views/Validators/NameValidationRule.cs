@@ -14,7 +14,16 @@ namespace AiS.Views.Validators
 
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            throw new NotImplementedException();
+            if (value == null)
+            {
+                return new ValidationResult(false, "Hodnota nie je platná.");
+            }
+            string s = (string)value;
+            if (string.IsNullOrEmpty(s))
+            {
+                return new ValidationResult(false, "Hodnota nie je platná.");
+            }
+            return new ValidationResult(true, "");
         }
     }
 }

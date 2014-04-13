@@ -18,9 +18,10 @@ namespace AiS.Repositories.Database.Sql
             "UPDATE [Subjects] SET [Name] = @name, [Semester] = @semester WHERE [ID] = @id; " +
             "ELSE " +
             "INSERT INTO [Subjects] ([ID], [Name], [Semester]) VALUES (@id, @name, @semester);";
+        private const string DELETE = "DELETE FROM [Subjects] WHERE [ID] = @id";
 
         public SubjectRepository(string connectionString)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, SAVE, DELETE)
         {
         }
 

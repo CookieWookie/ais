@@ -25,7 +25,7 @@ namespace AiS.Models
                 if (value != this.id)
                 {
                     this.id = value;
-                    // this.OnPropertyChanged("ID");
+                    this.OnPropertyChanged("ID");
                 }
             }
         }
@@ -37,7 +37,7 @@ namespace AiS.Models
                 if (value != this.title)
                 {
                     this.title = value;
-                    // this.OnPropertyChanged("Title");
+                    this.OnPropertyChanged("Title");
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace AiS.Models
                 if (value != this.name)
                 {
                     this.name = value;
-                    // this.OnPropertyChanged("Name");
+                    this.OnPropertyChanged("Name");
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace AiS.Models
                 if (value != this.lastname)
                 {
                     this.lastname = value;
-                    // this.OnPropertyChanged("Lastname");
+                    this.OnPropertyChanged("Lastname");
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace AiS.Models
                 if (value != this.titleSuffix)
                 {
                     this.titleSuffix = value;
-                    // this.OnPropertyChanged("TitleSuffix");
+                    this.OnPropertyChanged("TitleSuffix");
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace AiS.Models
                 if (value != this.subjects)
                 {
                     this.SetCollection(value);
-                    // this.OnPropertyChanged("Teaches");
+                    this.OnPropertyChanged("Teaches");
                 }
             }
         }

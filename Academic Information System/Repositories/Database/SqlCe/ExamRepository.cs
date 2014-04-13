@@ -16,6 +16,7 @@ namespace AiS.Repositories.Database.SqlCe
         private const string UPDATE = "UPDATE [Exams] SET [Time] = @time, [SubjectID] = @subjectId, [TeacherID] = @teacherId WHERE [ID] = @id; ";
         private const string INSERT = "INSERT INTO [Exams] ([ID], [Time], [SubjectID], [TeacherID]) VALUES (@id, @time, @subjectId, @teacherId);";
         private const string SAVE_STUDENTS = "INSERT INTO [StudentsSignedToExam] ([StudentID], [ExamID]) VALUES (@studentId, @id)";
+        private const string DELETE = "DELETE FROM [Exams] WHERE [ID] = @id";
 
         private readonly IStudentRepository studentRepository;
         private readonly ITeacherRepository teacherRepository;
@@ -35,7 +36,7 @@ namespace AiS.Repositories.Database.SqlCe
         }
 
         public ExamRepository(string commandString, IStudentRepository studentRepository, ITeacherRepository teacherRepository, ISubjectRepository subjectRepository)
-            : base(commandString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
+            : base(commandString, SELECT_SINGLE, SELECT, INSERT, UPDATE, DELETE)
         {
             studentRepository.ThrowIfNull("studentRepository");
             teacherRepository.ThrowIfNull("teacherRepository");

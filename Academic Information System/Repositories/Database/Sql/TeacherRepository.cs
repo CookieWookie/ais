@@ -18,6 +18,7 @@ namespace AiS.Repositories.Database.Sql
             "ELSE " +
             "INSERT INTO [Teachers] ([ID], [Title], [Name], [Lastname], [TitleSuffix]) VALUES (@id, @title, @name, @lastanme, @titleSuffix);";
         private const string SAVE_SUBJECTS = "INSERT INTO [SubjectTeachers] ([SubjectID], [TeacherID]) VALUES (@subjectId, @id);";
+        private const string DELETE = "DELETE FROM [SubjectTeachers] WHERE [ID] = @id";
 
         private readonly ISubjectRepository subjectRepository;
 
@@ -27,7 +28,7 @@ namespace AiS.Repositories.Database.Sql
         }
 
         public TeacherRepository(string connectionString, ISubjectRepository subjectRepository)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, SAVE, DELETE)
         {
             subjectRepository.ThrowIfNull("subjectRepository");
             this.subjectRepository = subjectRepository;

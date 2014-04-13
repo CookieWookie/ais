@@ -10,14 +10,14 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
                         <Path x:Name="ButtonPath"                          
-                          Margin="3"
-                          Stroke="{TemplateBinding Foreground}"
-                          StrokeThickness="1.5"
-                          StrokeStartLineCap="Square"
-                          StrokeEndLineCap="Square"
-                          Stretch="Uniform"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center">
+                              Margin="3"
+                              Stroke="{TemplateBinding Foreground}"
+                              StrokeThickness="1.5"
+                              StrokeStartLineCap="Square"
+                              StrokeEndLineCap="Square"
+                              Stretch="Uniform"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center">
                             <Path.Data>
                                 <PathGeometry>
                                     <PathGeometry.Figures>

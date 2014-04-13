@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.ComponentModel;
+using AiS.ViewModels;
 
 namespace AiS.Views
 {
@@ -20,15 +21,20 @@ namespace AiS.Views
     /// </summary>
     public partial class ApplicationView : Window
     {
+        protected ApplicationViewModel ViewModel
+        {
+            get { return (ApplicationViewModel)this.DataContext; }
+        }
+
         public ApplicationView()
         {
             InitializeComponent();
-            this.openWindowsMenu.PlacementTarget = this.openWindowsButton;
         }
 
-        private void OpenWindowsButton_Click(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
-            this.openWindowsMenu.IsOpen = true;
+            this.ViewModel.Close();
+            e.Cancel = true;
         }
     }
 }

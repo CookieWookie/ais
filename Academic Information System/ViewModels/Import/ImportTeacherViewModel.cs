@@ -7,6 +7,8 @@ using System.Text;
 using AiS.Models;
 using AiS.Repositories;
 using System.Windows.Input;
+using System.IO;
+using Microsoft.Win32;
 
 namespace AiS.ViewModels
 {
@@ -62,7 +64,7 @@ namespace AiS.ViewModels
         }
         public bool CanParse
         {
-            get { throw new NotImplementedException(); }
+            get { return File.Exists(this.FilePath) && this.FilePath.EndsWith(".csv", StringComparison.CurrentCultureIgnoreCase); }
         }
 
         public ImportTeacherViewModel(IImportManager<Teacher> importManager)
@@ -76,17 +78,34 @@ namespace AiS.ViewModels
 
         public void Save()
         {
-            throw new NotImplementedException();
+            this.importManager.Save();
+            this.HasChanged = false;
+            FilePath = "";
         }
 
         public void FindFile()
         {
-            throw new NotImplementedException();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Multiselect = false;
+            dialog.DefaultExt = ".csv";
+            dialog.Filter = "CSV Files (*.csv)|*.csv";
+            bool? result;
+            result = dialog.ShowDialog();
+            if (result != null && result.Value)
+            {
+                string fileName = dialog.FileName;
+                this.FilePath = fileName;
+            }
         }
 
         public void ParseFile()
         {
-            throw new NotImplementedException();
+            if (File.Exists(this.FilePath))
+            {
+                importManager.ParseFile(FilePath);
+                this.HasChanged = true;
+                FilePath = "";
+            }
         }
     }
 }

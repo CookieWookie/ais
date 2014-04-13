@@ -59,5 +59,59 @@ namespace AiS.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DECLARE @transaction varchar(50) = &apos;UpdateStructureTransaction&apos;;
+        ///DECLARE @errorCode int;
+        ///DECLARE @version varchar(30) = &apos;1.0.0.0&apos;;
+        ///
+        ///BEGIN TRANSACTION @transaction;
+        ///
+        ///SET ANSI_NULLS ON ;
+        ///SET QUOTED_IDENTIFIER ON ;
+        ///SET ANSI_PADDING ON;
+        /// 
+        ///IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N&apos;[dbo].[Versions]&apos;) AND type in (N&apos;U&apos;)) 
+        ///BEGIN
+        ///CREATE TABLE [dbo].[Versions](
+        ///	[ID] [int] IDENTITY(1,1) NOT NULL,
+        ///	[UpdateDate] [datetime] NOT NULL,
+        ///	[Version] [nvarchar](20) NOT NULL
+        ///) ON [P [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SQL_1_0_0_0 {
+            get {
+                return ResourceManager.GetString("SQL_1_0_0_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CREATE TABLE [Versions] (
+        ///  [ID] int IDENTITY (1,1) NOT NULL
+        ///, [UpdateDate] datetime NOT NULL
+        ///, [Version] nvarchar(20) NOT NULL
+        ///);
+        ///
+        ///CREATE TABLE [Teachers] (
+        ///  [ID] nvarchar(10) NOT NULL
+        ///, [Title] nvarchar(50) NOT NULL
+        ///, [Name] nvarchar(100) NOT NULL
+        ///, [Lastname] nvarchar(150) NOT NULL
+        ///, [TitleSuffix] nvarchar(50) NOT NULL
+        ///);
+        ///
+        ///CREATE TABLE [SubjectTeachers] (
+        ///  [TeacherID] nvarchar(10) NOT NULL
+        ///, [SubjectID] nvarchar(10) NOT NULL
+        ///);
+        ///
+        ///CREATE TABLE [Subjects] (
+        ///  [ID] nvarchar(10) NOT NULL [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SQLCE_1_0_0_0 {
+            get {
+                return ResourceManager.GetString("SQLCE_1_0_0_0", resourceCulture);
+            }
+        }
     }
 }

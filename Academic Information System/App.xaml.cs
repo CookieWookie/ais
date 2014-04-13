@@ -21,6 +21,36 @@ namespace AiS
     /// </summary>
     public partial class App : Application
     {
+        private static IViewModelFactory vmFactory;
+        private static IImportManagerFactory imFactory;
+        private static IRepositoryFactory rFactory;
+        private static ApplicationViewModel appVM;
+
+        public static IViewModelFactory ViewModelFactory
+        {
+            get { return App.vmFactory; }
+        }
+        public static IImportManagerFactory ImportManagerFactory
+        {
+            get { return App.imFactory; }
+        }
+        public static IRepositoryFactory RepositoryFactory
+        {
+            get { return App.rFactory; }
+        }
+        public static ApplicationViewModel ApplicationViewModel
+        {
+            get { return App.appVM; }
+        }
+
+        static App()
+        {
+            bool sql = Convert.ToBoolean(ConfigurationManager.AppSettings["useSql"]);
+            App.rFactory = sql ? (IRepositoryFactory)new SqlRepositoryFactory() : new SqlCeRepositoryFactory();
+            App.imFactory = new ImportManagerFactory(App.RepositoryFactory);
+            App.vmFactory = new ViewModelFactory(App.RepositoryFactory, App.ImportManagerFactory);
+        }
+
         public App()
         {
             FrameworkElement.LanguageProperty.OverrideMetadata(
@@ -33,15 +63,11 @@ namespace AiS
         {
             base.OnStartup(e);
 
-            bool sql = Convert.ToBoolean(ConfigurationManager.AppSettings["useSql"]);
-
-            IRepositoryFactory repositoryFactory = sql ? (IRepositoryFactory)new SqlRepositoryFactory() : new SqlCeRepositoryFactory();
-            IImportMangerFactory importManagerFactory = new ImportManagerFactory(repositoryFactory);
-            IViewModelFactory viewModelFactory = new ViewModelFactory(repositoryFactory, importManagerFactory);
-
-            ApplicationView view = new ApplicationView();
-            ApplicationViewModel viewModel = new ApplicationViewModel(viewModelFactory.CreateMenuWindow(), viewModelFactory.CreateDefaultWindow());
-            view.DataContext = viewModel;
+            ApplicationViewModel viewModel = App.appVM = new ApplicationViewModel();
+            ApplicationView view = new ApplicationView
+            {
+                DataContext = viewModel
+            };
 
             view.ShowDialog();
         }

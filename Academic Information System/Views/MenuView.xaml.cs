@@ -22,6 +22,13 @@ namespace AiS.Views
         public MenuView()
         {
             InitializeComponent();
+            this.openWindowsContextMenu.PlacementTarget = this.openWindowsButton;
+        }
+
+        private void OpenWindowsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.openWindowsContextMenu.IsOpen = true;
+            e.Handled = true;
         }
     }
 }

@@ -3,9 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ais="clr-namespace:AiS"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+             MinHeight="25" MinWidth="560"
+             MaxHeight="25" MaxWidth="560">
     <Grid>
-            
+        <Button x:Name="openWindowsButton" Content="Otvorené okná" HorizontalAlignment="Left" Margin="10,0,0,0" Width="140" 
+                Click="OpenWindowsButton_Click" >
+            <Button.ContextMenu>
+                <ContextMenu x:Name="openWindowsContextMenu"
+                             StaysOpen="False"
+                             Placement="Bottom"
+                             Visibility="{Binding OpenWindows, Converter={StaticResource OpenWindowsMenuVisibilityConverter}, Mode=OneWay}"
+                             ItemsSource="{Binding OpenWindows, Mode=OneWay}"
+                             ItemContainerStyle="{StaticResource OpenWindowsMenuItemStyle}"/>
+            </Button.ContextMenu>
+        </Button>
+        <Button x:Name="showExamsButton" Content="Skúšky" 
+                HorizontalAlignment="Left" Margin="155,0,0,0" Width="75"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowExamCommand}}"/>
+        <Button x:Name="showStudentsButton" Content="Študenti" 
+                HorizontalAlignment="Left" Margin="235,0,0,0" Width="75"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowStudentCommand}}"/>
+        <Button x:Name="showStudyProgrammesButton" Content="Programy" 
+                HorizontalAlignment="Left" Margin="315,0,0,0" Width="75"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowStudyProgrammeCommand}}"/>
+        <Button x:Name="showSubjectsButton" Content="Predmety" 
+                HorizontalAlignment="Left" Margin="395,0,0,0" Width="75"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowSubjectCommand}}"/>
+        <Button x:Name="showTeachersButton" Content="Učitelia" 
+                HorizontalAlignment="Left" Margin="475,0,10,0" Width="75"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowTeacherCommand}}"/>
     </Grid>
 </UserControl>

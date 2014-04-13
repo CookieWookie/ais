@@ -17,9 +17,10 @@ namespace AiS.Repositories.Database.Sql
             "UPDATE [StudyProgrammes] SET [Name] = @name, [Length] = @length, [StudyType] = @studyType WHERE [ID] = @id; " +
             "ELSE " +
             "INSERT INTO [StudyProgrammes] ([ID], [Name], [Length], [StudyType]) VALUES (@id, @name, @length, @studyType);";
+        private const string DELETE = "DELETE FROM [StudyProgrammes] WHERE [ID] = @id";
 
         public StudyProgrammeRepository(string connectionString)
-            : base(connectionString, SELECT_SINGLE, SELECT, SAVE)
+            : base(connectionString, SELECT_SINGLE, SELECT, SAVE, DELETE)
         {
         }
 

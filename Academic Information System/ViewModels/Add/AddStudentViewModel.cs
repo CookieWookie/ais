@@ -5,22 +5,24 @@ using System.Text;
 using AiS.Repositories;
 using AiS.Models;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace AiS.ViewModels
 {
     public class AddStudentViewModel : BaseAddViewModel<Student>
     {
-        private readonly IRepository<Student> repository;
+        private readonly IStudentRepository repository;
         private readonly Student original;
         private readonly string windowName;
-        
+        private readonly ICommand selectStudyProgrammeCommand;
+        private readonly ObservableCollection<StudyProgramme> studyProgrammes;
+
         private string name;
         private string lastname;
         private int semester;
         private DateTime dateOfBirth;
         private StudyProgramme programme;
 
-        
         public string Name
         {
             get { return this.name; }
@@ -99,21 +101,36 @@ namespace AiS.ViewModels
         {
             get { return !this.original.Name.Equals(this.Name) || !this.original.Lastname.Equals(this.Lastname) || !this.original.Semester.Equals(this.Semester) || !this.original.DateOfBirth.Equals(this.DateOfBirth) || !this.original.StudyProgramme.Equals(this.StudyProgramme); }//toto je moje
         }
-        
-        public AddStudentViewModel(IRepository<Student> repository)
+        public ICommand SelectStudyProgrammeCommand
+        {
+            get { return this.selectStudyProgrammeCommand; }
+        }
+        public ObservableCollection<StudyProgramme> StudyProgrammes
+        {
+            get { return this.studyProgrammes; }
+        }
+
+        public AddStudentViewModel(IStudentRepository repository)
             : this(repository, new Student())
         {
             this.windowName = "Pridaj: Študent";
         }
 
-        public AddStudentViewModel(IRepository<Student> repository, Student original)
+        public AddStudentViewModel(IStudentRepository repository, Student original)
             : base()
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
+
             this.windowName = "Uprav: Študent";
             this.repository = repository;
             this.original = original;
+            this.selectStudyProgrammeCommand = new RelayCommand(o => this.StudyProgramme = (StudyProgramme)o, o => o is StudyProgramme);
+
+            this.studyProgrammes = new ObservableCollection<StudyProgramme>(this.repository.StudyProgrammeRepository.GetAll());
+            this.studyProgrammes.CollectionChanged += (sender, e) => this.OnPropertyChanged("StudyProgrammes");
+
+            this.ResetToDefault();
         }
 
         public override void ResetToDefault()
@@ -134,6 +151,7 @@ namespace AiS.ViewModels
             student.Semester = this.Semester;
             student.StudyProgramme = this.StudyProgramme;
             repository.Save(student);
+            this.Close();
         }
     }
 }

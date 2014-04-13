@@ -15,9 +15,10 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_BYTEACHER = SELECT + " JOIN [SubjectTeachers] ON [ID] = [SubjectID] WHERE [TeacherID] = @teacherId";
         private const string UPDATE = "UPDATE [Subjects] SET [Name] = @name, [Semester] = @semester WHERE [ID] = @id; ";
         private const string INSERT = "INSERT INTO [Subjects] ([ID], [Name], [Semester]) VALUES (@id, @name, @semester);";
+        private const string DELETE = "DELETE FROM [Subjects] WHERE [ID] = @id";
 
         public SubjectRepository(string connectionString)
-            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE)
+            : base(connectionString, SELECT_SINGLE, SELECT, INSERT, UPDATE, DELETE)
         {
         }
 
@@ -60,7 +61,7 @@ namespace AiS.Repositories.Database.SqlCe
             {
                 if (string.IsNullOrWhiteSpace(m.ID))
                     m.ID = this.GetID();
-                });
+            });
             return base.Save(models);
         }
     }

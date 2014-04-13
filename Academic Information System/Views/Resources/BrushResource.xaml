@@ -21,4 +21,7 @@
     <SolidColorBrush x:Key="PressedControlBorderBrush" Color="#FF2C628B"/>
     
     <SolidColorBrush x:Key="MenuItemCloseButtonMouseOver" Color="#FFFF2222"/>
+
+    <SolidColorBrush x:Key="DisabledHighlightedBackgroundBrush" Color="#0A000000"/>
+    <SolidColorBrush x:Key="DisabledHighlightedBorderBrush" Color="#21000000"/>
 </ResourceDictionary>

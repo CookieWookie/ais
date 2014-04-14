@@ -5,6 +5,7 @@ using System.Text;
 using AiS.Repositories;
 using AiS.Models;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace AiS.ViewModels
 {
@@ -19,18 +20,7 @@ namespace AiS.ViewModels
         private int length;
         private StudyType studyType;
 
-        public string ID
-        {
-            get { return this.id; }
-            set
-            {
-                if (this.id != value)
-                {
-                    this.id = value;
-                    this.OnPropertyChanged("ID");
-                }
-            }
-        }
+        
         public string Name
         {
             get { return this.name; }
@@ -39,6 +29,7 @@ namespace AiS.ViewModels
                 if (this.name != value)
                 {
                     this.name = value;
+                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("Name");
                 }
             }
@@ -54,6 +45,7 @@ namespace AiS.ViewModels
                 if (this.length != value)
                 {
                     this.length = value;
+                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("Length");
                 }
             }
@@ -66,6 +58,7 @@ namespace AiS.ViewModels
                 if (this.studyType != value)
                 {
                     this.studyType = value;
+                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("StudyType");
                 }
             }
@@ -81,7 +74,7 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { throw new NotImplementedException(); }
+            get { return !this.original.Name.Equals(this.Name) || !this.original.Length.Equals(this.Length) || !this.original.StudyType.Equals(this.StudyType); }
         }
 
         public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository)
@@ -102,12 +95,20 @@ namespace AiS.ViewModels
 
         public override void ResetToDefault()
         {
-            throw new NotImplementedException();
+            this.Name = this.original.Name;
+            this.Length = this.original.Length;
+            this.StudyType = this.original.StudyType;
+            
         }
 
         public override void Save()
         {
-            throw new NotImplementedException();
+            StudyProgramme studyProgramme = new StudyProgramme();
+            studyProgramme.Name = this.Name;
+            studyProgramme.Length = this.Length;
+            studyProgramme.StudyType = this.StudyType;
+            repository.Save(studyProgramme);
+            this.Close();
         }
     }
 }

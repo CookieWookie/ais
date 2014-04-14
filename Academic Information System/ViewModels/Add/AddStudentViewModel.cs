@@ -99,7 +99,13 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { return !this.original.Name.Equals(this.Name) || !this.original.Lastname.Equals(this.Lastname) || !this.original.Semester.Equals(this.Semester) || !this.original.DateOfBirth.Equals(this.DateOfBirth) || !this.original.StudyProgramme.Equals(this.StudyProgramme); }//toto je moje
+            get { return 
+                !this.original.Name.Equals(this.Name) || 
+                !this.original.Lastname.Equals(this.Lastname) || 
+                !this.original.Semester.Equals(this.Semester) ||
+                !this.original.DateOfBirth.Equals(this.DateOfBirth) ||
+                !this.original.StudyProgramme.Equals(this.StudyProgramme); 
+                }
         }
         public ICommand SelectStudyProgrammeCommand
         {

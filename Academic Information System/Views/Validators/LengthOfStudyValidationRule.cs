@@ -13,22 +13,27 @@ namespace AiS.Views.Validators
         {
         }
 
-        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)// cervena ciarka :-(
         {
-            DateTime dt;
-            bool b = DateTime.TryParseExact(value as string, new[] { "Rok" }, cultureInfo, DateTimeStyles.None, out dt);
-            if (value == null || !b)
+            string x = value as string;
+            int number;
+            bool a = Int32.TryParse(x, out number);
+            if (a == null)
             {
-                return new ValidationResult(false, "Hodnota nie je platná.");
+                return new ValidationResult(false, "Zadaná hodnota musí byť číslo .");// zmen co nam napise ked tak
+
             }
-            TimeSpan t = dt.TimeOfDay;
-            TimeSpan low = new TimeSpan(3);
-            TimeSpan up = new TimeSpan(6);
-            if (t < low || up < t)
+            if (a == true && (number < 3 || number > 6))
             {
-                return new ValidationResult(false, "Dĺžka štúdia musí byť od 3 rokov až po 6 rokov.");
+                return new ValidationResult(false, "Zadaná hodnota musí byť číslo>=3 alebo <=6 .");// zmen to co nam napise ked tak
+ 
             }
-            return new ValidationResult(true, "");
+            if (a == true && (number >= 3 || number <= 6))//ked tak podmienka do pice
+            {
+                return new ValidationResult(true, "");
+
+            }
+
         }
     }
 }

@@ -17,8 +17,8 @@ namespace AiS.Views.Validators
         {
             string x = value as string;
             int number;
-            bool a = Int32.TryParse(x, out number);
-            if (a == null)
+            bool b = Int32.TryParse(x, out number);
+            if (b == null || !b)
             {
                 return new ValidationResult(false, "Zadaná hodnota musí byť číslo.");
             }

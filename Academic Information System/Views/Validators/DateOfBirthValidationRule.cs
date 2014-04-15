@@ -18,13 +18,13 @@ namespace AiS.Views.Validators
             string x = value as string;
             DateTime date;
             bool b = DateTime.TryParseExact(x, new[] { "dd.MM.yyyy", "d.M.yyyy" }, cultureInfo, DateTimeStyles.None, out date);
-            if (b == null)
+            if (b == null || !b)
             {
                 return new ValidationResult(false, "Zadaná hodnota nie je platná");
             }
             DateTime today = DateTime.Now;
             
-            if (date>today)
+            if (date>=today)
             {
                 return new ValidationResult(false, "Zadaný dátum nesmie byť väčší ako dnešný");
             }

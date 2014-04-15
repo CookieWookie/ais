@@ -25,7 +25,7 @@ namespace AiS.Views.Validators
 
             if (number < 3 || number > 6)
             {
-                return new ValidationResult(false, "Dĺžka štúdia m´ôže byť v rozsahu od 3-6 rokov.");
+                return new ValidationResult(false, "Dĺžka štúdia môže byť v rozsahu od 3-6 rokov.");
             }
             
                 return new ValidationResult(true, "");

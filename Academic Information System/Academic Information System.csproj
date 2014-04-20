@@ -66,6 +66,7 @@
     <Compile Include="ViewModels\Interfaces\IAddViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IImportViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ISaveViewModel.cs" />
+    <Compile Include="ViewModels\Report\ReportSubjectViewModel.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
@@ -212,7 +213,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\Xml\" />
-    <Folder Include="ViewModels\Report\" />
     <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>

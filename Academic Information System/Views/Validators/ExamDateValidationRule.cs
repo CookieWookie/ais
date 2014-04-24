@@ -22,11 +22,11 @@ namespace AiS.Views.Validators
             {
                 return new ValidationResult(false, "Zadaná hodnota nie je platná");
             }
-            DateTime today = DateTime.Now.AddDays;
+            DateTime today = DateTime.Now.AddDays(3);
 
             if (date >= today)
             {
-                return new ValidationResult(false, "Na skusku sa da prihlasit najskor 3 dni pred jej začiatkom");
+                return new ValidationResult(false, "Na skúšku sa dá prihlásiť najneskôr 3 dni pred jej začiatkom.");
             }
 
             return new ValidationResult(true, "");

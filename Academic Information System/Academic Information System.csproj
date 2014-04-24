@@ -70,6 +70,9 @@
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportSubjectView.xaml.cs">
+      <DependentUpon>ReportSubjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowChangeCommands.cs" />
     <Compile Include="CollectionComparer.cs" />
     <Compile Include="ExtensionMethods.cs" />
@@ -213,7 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\Xml\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Add\AddExamView.xaml">
@@ -249,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Report\ReportSubjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

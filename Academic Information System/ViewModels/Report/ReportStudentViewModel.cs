@@ -5,9 +5,8 @@ using System.Text;
 
 namespace AiS.ViewModels.Report
 {
-    // bude zobrazovať počet učiteľov, ktorí učia daný predmet,
-    // počet skúšok z daného predmetu
-    public class ReportSubjectViewModel : BaseViewModel
+    // bude zobrazovať študentov v okne podľa vybratého študíjneho programu
+    public class ReportStudentViewModel : BaseViewModel
     {
         public override string WindowName
         {

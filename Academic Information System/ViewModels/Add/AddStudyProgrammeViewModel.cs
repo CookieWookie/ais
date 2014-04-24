@@ -104,6 +104,7 @@ namespace AiS.ViewModels
         public override void Save()
         {
             StudyProgramme studyProgramme = new StudyProgramme();
+            studyProgramme.ID = this.original.ID;
             studyProgramme.Name = this.Name;
             studyProgramme.Length = this.Length;
             studyProgramme.StudyType = this.StudyType;

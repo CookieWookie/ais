@@ -200,6 +200,7 @@ namespace AiS.ViewModels
         public override void Save()
         {
             Exam exam = new Exam();
+            exam.ID = this.original.ID;
             exam.Time = this.Date.Add(this.Time);
             exam.Subject = this.Subject.Clone();
             exam.Teacher = this.Teacher.Clone();

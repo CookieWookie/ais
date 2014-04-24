@@ -151,6 +151,7 @@ namespace AiS.ViewModels
         public override void Save()
         {
             Student student = new Student();
+            student.ID = this.original.ID;
             student.Name = this.Name;
             student.Lastname = this.Lastname;
             student.DateOfBirth = this.DateOfBirth;

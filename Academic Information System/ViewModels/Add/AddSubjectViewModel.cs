@@ -14,6 +14,34 @@ namespace AiS.ViewModels
         private readonly Subject original;
         private readonly string windowName;
 
+        private string name;
+        private int semester;
+
+        public string Name
+        {
+            get { return this.name; }
+            set
+            {
+                if (this.name != value)
+                {
+                    this.name = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+        public int Semester
+        {
+            get { return this.semester; }
+            set
+            {
+                if (this.semester != value)
+                {
+                    this.semester = value;
+                    this.OnPropertyChanged("Semester");
+                }
+            }
+        }
+
         public override string WindowName
         {
             get { return this.windowName; }
@@ -24,7 +52,11 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.original.Name != this.Name ||
+                   this.original.Semester !=this.Semester; 
+            }
         }
 
         public AddSubjectViewModel(ISubjectRepository repository)
@@ -46,12 +78,18 @@ namespace AiS.ViewModels
 
         public override void ResetToDefault()
         {
-            throw new NotImplementedException();
+            this.Semester = this.original.Semester;
+            this.Name = this.original.Name;
         }
 
         public override void Save()
         {
-            throw new NotImplementedException();
+            Subject subject = new Subject();
+            subject.ID = this.original.ID;
+            subject.Name = this.Name;
+            subject.Semester = this.Semester;
+            repository.Save(subject);
+            this.Close();
         }
     }
 }

@@ -138,6 +138,7 @@ namespace AiS.ViewModels
             this.Name = this.original.Name;
             this.Lastname = this.original.Lastname;
             this.TitleSuffix = this.original.TitleSuffix;
+        }
 
         public override void Save()
         {

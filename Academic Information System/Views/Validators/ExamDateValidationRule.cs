@@ -24,7 +24,7 @@ namespace AiS.Views.Validators
             }
             DateTime today = DateTime.Now.AddDays(3);
 
-            if (date >= today)
+            if (date <= today)
             {
                 return new ValidationResult(false, "Na skúšku sa dá prihlásiť najneskôr 3 dni pred jej začiatkom.");
             }

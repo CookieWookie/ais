@@ -71,6 +71,9 @@
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportStudentView.xaml.cs">
+      <DependentUpon>ReportStudentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportSubjectView.xaml.cs">
       <DependentUpon>ReportSubjectView.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Report\ReportStudentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

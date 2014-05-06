@@ -128,7 +128,7 @@ namespace AiS.ViewModels
             this.original = original;
 
             this.subjects = this.repository.SubjectRepository.GetAll().ToList();
-            
+
             this.ResetToDefault();
         }
 
@@ -151,7 +151,7 @@ namespace AiS.ViewModels
             repository.Save(teacher);
             this.Close();
         }
-        
+
         private void SetCollection(IList<Subject> value)
         {
             this.teaches = value == null ? new ObservableCollection<Subject>() : new ObservableCollection<Subject>(value);

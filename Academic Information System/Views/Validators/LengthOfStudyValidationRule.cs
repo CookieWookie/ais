@@ -27,11 +27,8 @@ namespace AiS.Views.Validators
             {
                 return new ValidationResult(false, "Dĺžka štúdia môže byť v rozsahu od 3-6 rokov.");
             }
-            
-                return new ValidationResult(true, "");
 
-
-
+            return new ValidationResult(true, "");
         }
     }
 }

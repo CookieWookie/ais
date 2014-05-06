@@ -23,8 +23,8 @@ namespace AiS.Views.Validators
                 return new ValidationResult(false, "Zadaná hodnota nie je platná");
             }
             DateTime today = DateTime.Now;
-            
-            if (date>=today)
+
+            if (date >= today)
             {
                 return new ValidationResult(false, "Zadaný dátum nesmie byť väčší ako dnešný");
             }

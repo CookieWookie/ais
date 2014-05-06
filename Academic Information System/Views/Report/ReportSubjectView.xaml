@@ -6,6 +6,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <ComboBox HorizontalAlignment="Stretch" Margin="115,10,10,0" VerticalAlignment="Top" Height="25" 
+                  ItemsSource="{Binding Path=Subjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Výber predmetu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="100"/>
+        <DataGrid HorizontalAlignment="Stretch" Margin="10,70,10,40" VerticalAlignment="Stretch"
+                  ItemsSource="{Binding Path=Teachers, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titul" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
+                <DataGridTextColumn Header="Titul suffix" Binding="{Binding TitleSuffix}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Height="25" Command="{Binding Path=CloseCommand}"/>
+
     </Grid>
 </UserControl>

@@ -6,7 +6,7 @@ using AiS.Models;
 using AiS.Repositories;
 using System.Collections.ObjectModel;
 
-namespace AiS.ViewModels.Report
+namespace AiS.ViewModels
 {
     // bude zobrazovať učiteľov, ktorí učia daný predmet,
     // počet skúšok z daného predmetu

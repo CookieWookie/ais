@@ -50,4 +50,10 @@
     <DataTemplate DataType="{x:Type viewmodel:DefaultViewModel}">
         <view:DefaultView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:ReportSubjectViewModel}">
+        <view:ReportSubjectView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:ReportStudentViewModel}">
+        <view:ReportStudentView/>
+    </DataTemplate>
 </ResourceDictionary>

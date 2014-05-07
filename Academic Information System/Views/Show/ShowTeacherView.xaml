@@ -16,7 +16,7 @@
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="Auto"/>
@@ -50,5 +50,6 @@
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
         <Button Content="Import" HorizontalAlignment="Left" Grid.Row="5" Margin="250,0,0,0" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportTeacherCommand}}"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25" Grid.Row="5"/>
     </Grid>
 </UserControl>

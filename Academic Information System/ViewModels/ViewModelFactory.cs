@@ -25,6 +25,9 @@ namespace AiS.ViewModels
         private IViewModel showSubjectViewModel;
         private IViewModel showTeacherViewModel;
 
+        private IViewModel reportSubjectViewModel;
+        private IViewModel reportStudentViewModel;
+
         public ViewModelFactory(IRepositoryFactory repositoryFactory, IImportManagerFactory importManagerFactory)
         {
             repositoryFactory.ThrowIfNull("repositoryFactory");
@@ -119,6 +122,17 @@ namespace AiS.ViewModels
         {
             return this.showTeacherViewModel ??
                 (this.showTeacherViewModel = new ShowTeacherViewModel(this.repositoryFactory.TeacherRepository));
+        }
+
+        public IViewModel CreateReportStudentWindow()
+        {
+            return this.reportStudentViewModel ??
+                (this.reportStudentViewModel = new ReportStudentViewModel(this.repositoryFactory.StudentRepository));
+        }
+        public IViewModel CreateReportSubjectWindow()
+        {
+            return this.reportSubjectViewModel ??
+                (this.reportSubjectViewModel = new ReportSubjectViewModel(this.repositoryFactory.ExamRepository));
         }
     }
 }

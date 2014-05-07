@@ -18,6 +18,10 @@ namespace AiS.Views.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value == null || !(value is StudyType))
+            {
+                return "";
+            }
             StudyType st = (StudyType)value;
             string result;
             if (!display.TryGetValue(st, out result))

@@ -220,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\Xml\" />
+    <Folder Include="Views\Themes\HelloKitty\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Add\AddExamView.xaml">
@@ -320,6 +321,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\drevo.jpg" />
+    <Resource Include="Images\lienka.jpg" />
+    <Resource Include="Images\135538.jpg" />
+    <Resource Include="Images\vodicka.JPG" />
     <Content Include="Repositories\Database\Scripts\SQLCE_1.0.0.0.sql" />
     <Content Include="Repositories\Database\Scripts\SQL_1.0.0.0.sql" />
   </ItemGroup>

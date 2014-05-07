@@ -6,7 +6,7 @@
              xmlns:ais="clr-namespace:AiS"
              mc:Ignorable="d" 
              x:Name="window"
-             MinHeight="300" MinWidth="335">
+             MinHeight="300" MinWidth="415">
     <UserControl.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudentCommand}}"/>
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudentCommand}}" 
@@ -16,7 +16,7 @@
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="Auto"/>
@@ -40,5 +40,8 @@
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studentDataGrid}"/>
         <Button Content="Import" HorizontalAlignment="Left" Grid.Row="3" Margin="250,0,0,0" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportStudentCommand}}"/>
+        <Button Content="Report" HorizontalAlignment="Left" Margin="330,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" Height="25"
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ReportStudentCommand}}"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25" Grid.Row="3"/>
     </Grid>
 </UserControl>

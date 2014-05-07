@@ -28,6 +28,9 @@ namespace AiS
         private static ICommand showSubjectCommand;
         private static ICommand showTeacherCommand;
 
+        private static ICommand reportStudentCommand;
+        private static ICommand reportSubjectCommand;
+
         public static ICommand ImportExamCommand
         {
             get
@@ -177,6 +180,27 @@ namespace AiS
                 return WindowChangeCommands.showTeacherCommand ??
                     (WindowChangeCommands.showTeacherCommand = new RelayCommand(
                         o => WindowChangeCommands.RaiseViewModelChangedEvent(App.ViewModelFactory.CreateShowTeacherWindow()),
+                        o => true));
+            }
+        }
+
+        public static ICommand ReportStudentCommand
+        {
+            get
+            {
+                return WindowChangeCommands.reportStudentCommand ??
+                    (WindowChangeCommands.reportStudentCommand = new RelayCommand(
+                        o => WindowChangeCommands.RaiseViewModelChangedEvent(App.ViewModelFactory.CreateReportStudentWindow()),
+                        o => true));
+            }
+        }
+        public static ICommand ReportSubjectCommand
+        {
+            get
+            {
+                return WindowChangeCommands.reportSubjectCommand ??
+                    (WindowChangeCommands.reportSubjectCommand = new RelayCommand(
+                        o => WindowChangeCommands.RaiseViewModelChangedEvent(App.ViewModelFactory.CreateReportSubjectWindow()),
                         o => true));
             }
         }

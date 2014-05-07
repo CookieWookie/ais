@@ -50,7 +50,7 @@ namespace AiS
 
         public int GetHashCode(IEnumerable<T> obj)
         {
-            throw new NotImplementedException();
+            return 1;
         }
     }
 }

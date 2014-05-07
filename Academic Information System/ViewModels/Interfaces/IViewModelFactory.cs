@@ -28,5 +28,8 @@ namespace AiS.ViewModels
         IViewModel CreateShowStudyProgrammeWindow();
         IViewModel CreateShowSubjectWindow();
         IViewModel CreateShowTeacherWindow();
+
+        IViewModel CreateReportStudentWindow();
+        IViewModel CreateReportSubjectWindow();
     }
 }

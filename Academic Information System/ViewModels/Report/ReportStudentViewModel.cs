@@ -18,7 +18,7 @@ namespace AiS.ViewModels
 
         public override string WindowName
         {
-            get { throw new NotImplementedException(); }
+            get { return "Report: Študent"; }
         }
         public IList<StudyProgramme> StudyProgrammes
         {
@@ -54,7 +54,9 @@ namespace AiS.ViewModels
         public ReportStudentViewModel(IStudentRepository repository)
         {
             this.repository = repository;
+            this.Refresh();
         }
+
         public override void Refresh()
         {
             this.studyProgrammes = new ObservableCollection<StudyProgramme>(this.repository.StudyProgrammeRepository.GetAll());

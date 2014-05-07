@@ -10,7 +10,7 @@
     </UserControl.InputBindings>
     <Grid>
         <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Top"  Height="25" Margin="115,10,10,0" 
-                  ItemsSource="{Binding Path=StudyProgrammes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Path=StudyProgrammes,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

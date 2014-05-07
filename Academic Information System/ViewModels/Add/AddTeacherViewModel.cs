@@ -103,12 +103,27 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.Title != this.original.Title ||
+                    this.Name != this.original.Name ||
+                    this.Lastname != this.original.Lastname ||
+                    this.TitleSuffix != this.original.TitleSuffix ||
+                    !new CollectionComparer<Subject>().Equals(this.Teaches, this.original.Teaches);
+            }
+        }
+        public ICommand AddSubjectCommand
+        {
+            get { return this.addSubjectCommand; }
+        }
+        public ICommand RemoveSubjectCommand
+        {
+            get { return this.removeSubjectCommand; }
         }
 
         public IEnumerable<Subject> Subjects
         {
-            get { throw new NotImplementedException(); }
+            get { return this.subjects.Except(this.Teaches); }
         }
 
         public AddTeacherViewModel(ITeacherRepository repository)
@@ -128,6 +143,8 @@ namespace AiS.ViewModels
             this.original = original;
 
             this.subjects = this.repository.SubjectRepository.GetAll().ToList();
+            this.addSubjectCommand = new RelayCommand(o => this.Teaches.Add((Subject)o), o => o is Subject && o != null);
+            this.removeSubjectCommand = new RelayCommand(o => this.Teaches.Remove((Subject)o), o => o is Subject);
 
             this.ResetToDefault();
         }
@@ -155,7 +172,11 @@ namespace AiS.ViewModels
         private void SetCollection(IList<Subject> value)
         {
             this.teaches = value == null ? new ObservableCollection<Subject>() : new ObservableCollection<Subject>(value);
-            this.teaches.CollectionChanged += (sender, e) => this.OnPropertyChanged("Teaches");
+            this.teaches.CollectionChanged += (sender, e) =>
+            {
+                this.OnPropertyChanged("Teaches");
+                this.OnPropertyChanged("Subjects");
+            };
         }
     }
 }

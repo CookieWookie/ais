@@ -15,12 +15,10 @@ namespace AiS.ViewModels
         private readonly StudyProgramme original;
         private readonly string windowName;
 
-        
         private string name;
         private int length;
         private StudyType studyType;
 
-        
         public string Name
         {
             get { return this.name; }
@@ -64,6 +62,11 @@ namespace AiS.ViewModels
             }
         }
 
+        public IEnumerable<StudyType> StudyTypes
+        {
+            get { return new[] { StudyType.Bachelor, StudyType.Magister }; }
+        }
+
         public override string WindowName
         {
             get { return this.windowName; }
@@ -74,7 +77,7 @@ namespace AiS.ViewModels
         }
         public override bool HasChanged
         {
-            get { return !this.original.Name.Equals(this.Name) || !this.original.Length.Equals(this.Length) || !this.original.StudyType.Equals(this.StudyType); }
+            get { return this.original.Name != this.Name || this.original.Length != this.Length || this.original.StudyType != this.StudyType; }
         }
 
         public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository)
@@ -98,7 +101,7 @@ namespace AiS.ViewModels
             this.Name = this.original.Name;
             this.Length = this.original.Length;
             this.StudyType = this.original.StudyType;
-            
+
         }
 
         public override void Save()

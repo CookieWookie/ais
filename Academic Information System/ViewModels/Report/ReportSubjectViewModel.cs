@@ -20,9 +20,8 @@ namespace AiS.ViewModels
 
         public override string WindowName
         {
-            get { throw new NotImplementedException(); }
+            get { return "Report: Predmet"; }
         }
-
         public Subject SelectedItem
         {
             get
@@ -56,6 +55,7 @@ namespace AiS.ViewModels
         public ReportSubjectViewModel(IExamRepository repository)
         {
             this.repository = repository;
+            this.Refresh();
         }
 
         public override void Refresh()

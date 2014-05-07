@@ -10,8 +10,6 @@
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}"/>
     </UserControl.InputBindings>
     <Grid>
-        <Button x:Name="closeButton" Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" 
-                Width="75" Height="25" Command="{Binding CloseCommand}"/>
         <Button x:Name="saveButton" Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" 
                 Command="{Binding SaveCommand}" IsEnabled="{Binding HasChanged}" Height="25"/>
         <Label HorizontalAlignment="Left" Margin="10,10,0,0" Content="Súbor na import" VerticalAlignment="Top" Width="280" Height="25"/>
@@ -20,5 +18,6 @@
                 HorizontalAlignment="Right" Width="27"/>
         <Button x:Name="parseFileButton" Content="Import" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="75" 
                 Command="{Binding ParseFileCommand}" IsEnabled="{Binding CanParse}" Height="25"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
     </Grid>
 </UserControl>

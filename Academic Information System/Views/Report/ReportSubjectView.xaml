@@ -10,7 +10,7 @@
     </UserControl.InputBindings>
     <Grid>
         <ComboBox HorizontalAlignment="Stretch" Margin="115,10,10,0" VerticalAlignment="Top" Height="25" 
-                  ItemsSource="{Binding Path=Subjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Path=Subjects, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -30,6 +30,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Height="25" Command="{Binding Path=CloseCommand}"/>
+        <Label Content="Počet skúšok" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="100" Height="25"/>
+        <Label Content="{Binding Path=Exams, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left" 
+               Margin="115,40,10,0" VerticalAlignment="Top" Height="25" Width="30"/>
 
     </Grid>
 </UserControl>

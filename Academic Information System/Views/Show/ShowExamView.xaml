@@ -29,7 +29,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Čas" Binding="{Binding Time}"/>
                 <DataGridTextColumn Header="Učiteľ" Binding="{Binding Teacher, Converter={StaticResource TeacherConverter}}"/>
-                <DataGridTextColumn Header="Predmet" Binding="{Binding Subject, Converter={StaticResource SubjectConverter}}"/>
+                <DataGridTextColumn Header="Predmet" Binding="{Binding Subject.Name}"/>
                 <DataGridTextColumn Header="Počet študentov" Binding="{Binding SignedStudents.Count}"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -41,7 +41,7 @@
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
                 <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>
-                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme, Converter={StaticResource StudyProgrammeConverter}}"/>
+                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" Width="75" Height="25" 

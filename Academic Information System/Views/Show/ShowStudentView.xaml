@@ -28,7 +28,7 @@
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
-                <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>
+                <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}"/>
                 <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>

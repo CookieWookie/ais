@@ -69,15 +69,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <DatePicker Height="25" Margin="90,100,10,0" VerticalAlignment="Top" x:Name="dateOfBirthDatePicker">
-            <DatePicker.SelectedDate>
-                <Binding Path="DateOfBirth" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
-                    <Binding.ValidationRules>
-                        <StaticResource ResourceKey="DateValidationRule"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </DatePicker.SelectedDate>
-        </DatePicker>
+        <DatePicker Height="25" Margin="90,100,10,0" VerticalAlignment="Top" x:Name="dateOfBirthDatePicker"
+                    SelectedDate="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
         <ComboBox Margin="90,130,10,0" VerticalAlignment="Top" Height="25" ItemsSource="{Binding StudyProgrammes, UpdateSourceTrigger=PropertyChanged}" 
                   SelectedItem="{Binding StudyProgramme, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" x:Name="programmeComboBox">
             <ComboBox.ItemTemplate>

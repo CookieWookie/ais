@@ -63,7 +63,7 @@
                   SelectedItem="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Converter={StaticResource SubjectConverter}}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -83,7 +83,7 @@
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
                 <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>
-                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme, Converter={StaticResource StudyProgrammeConverter}}"/>
+                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="plusButton" HorizontalAlignment="Left" Margin="85,104.5,0,0" VerticalAlignment="Top" 
@@ -95,7 +95,7 @@
                              ItemsSource="{Binding Students}">
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="{x:Type MenuItem}">
-                            <Setter Property="Header" Value="{Binding Converter={StaticResource StudentConverter}}"/>
+                            <Setter Property="Header" Value="{Binding Name}"/>
                             <Setter Property="Command" Value="{Binding AddStudentCommand}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>
                         </Style>

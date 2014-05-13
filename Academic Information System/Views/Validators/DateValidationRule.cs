@@ -11,9 +11,10 @@ namespace AiS.Views.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value == null || !(value is DateTime))
+            DateTime dt;
+            if (value == null || !DateTime.TryParseExact(value as string, new[] { "dd.MM.yyyy", "d.M.yyyy" }, cultureInfo, DateTimeStyles.AssumeLocal, out dt))
             {
-                return new ValidationResult(false, "Zadaná hodnota nie je platný dátum.");
+                return new ValidationResult(false, "Zadaná hodnota nie je dátum.");
             }
             return new ValidationResult(true, "");
         }

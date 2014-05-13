@@ -10,10 +10,10 @@ namespace AiS.Views.Validators
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            TimeSpan ts;
-            if (value == null || !TimeSpan.TryParseExact(value.ToString(), new[] { "HH:mm", "H:m" }, cultureInfo, out ts))
+            DateTime dt;
+            if (value == null || !DateTime.TryParseExact(value.ToString(), new[] { "HH:mm" }, cultureInfo, System.Globalization.DateTimeStyles.AssumeLocal, out dt))
             {
-                return new ValidationResult(false, "Zadaná hodnota nie je platný čas.");
+                return new ValidationResult(false, "Zadaná hodnota nie je čas.");
             }
             return new ValidationResult(true, "");
         }

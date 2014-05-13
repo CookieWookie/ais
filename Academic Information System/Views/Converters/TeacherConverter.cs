@@ -16,8 +16,8 @@ namespace AiS.Views.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            Teacher t = (Teacher)value;
-            if (string.IsNullOrWhiteSpace(t.Name) || string.IsNullOrWhiteSpace(t.Lastname))
+            Teacher t = value as Teacher;
+            if (t == null || string.IsNullOrWhiteSpace(t.Name) || string.IsNullOrWhiteSpace(t.Lastname))
             {
                 return "";
             }

@@ -48,6 +48,7 @@ namespace AiS.ViewModels
         public virtual void Delete(T value)
         {
             this.repository.Remove(value);
+            this.Data.Remove(value);
         }
 
         protected ObservableCollection<T> CreateCollection(IList<T> value)

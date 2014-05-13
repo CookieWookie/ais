@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace AiS.ViewModels
 {
-    public abstract class BaseAddViewModel<T> : BaseSaveViewModel, IAddViewModel<T>
+    public abstract class BaseAddViewModel<T> : BaseSaveViewModel, IAddViewModel<T>, IDataErrorInfo
     {
         private readonly ICommand resetToDefaultCommand;
 
@@ -23,5 +24,12 @@ namespace AiS.ViewModels
         }
 
         public abstract void ResetToDefault();
+
+        public virtual string Error
+        {
+            get { return string.Empty; }
+        }
+
+        public abstract string this[string columnName] { get; }
     }
 }

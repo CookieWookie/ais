@@ -23,7 +23,7 @@
             <RowDefinition Height="2"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <views:MenuView x:Name="menuControl" VerticalAlignment="Top" Width="560" Height="25" Grid.Row="1"/>
-        <ContentControl x:Name="contentWindow" Content="{Binding CurrentWindow}" Grid.Row="3"/>
+        <views:MenuView x:Name="menuControl" VerticalAlignment="Top" Width="560" Height="25" Grid.Row="1" KeyboardNavigation.IsTabStop="False"/>
+        <ContentControl x:Name="contentWindow" Content="{Binding CurrentWindow}" Grid.Row="3" KeyboardNavigation.IsTabStop="False"/>
     </Grid>
 </Window>

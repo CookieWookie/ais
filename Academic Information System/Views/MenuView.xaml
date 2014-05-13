@@ -7,10 +7,12 @@
              mc:Ignorable="d" 
              DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
              MinHeight="25" MinWidth="560"
-             MaxHeight="25" MaxWidth="560">
+             MaxHeight="25" MaxWidth="560"
+             KeyboardNavigation.IsTabStop="False">
     <Grid>
         <Button x:Name="openWindowsButton" Content="Otvorené okná" HorizontalAlignment="Left" Margin="10,0,0,0" Width="140" 
-                Click="OpenWindowsButton_Click" >
+                Click="OpenWindowsButton_Click"
+                KeyboardNavigation.IsTabStop="False">
             <Button.ContextMenu>
                 <ContextMenu x:Name="openWindowsContextMenu"
                              StaysOpen="False"
@@ -22,18 +24,23 @@
         </Button>
         <Button x:Name="showExamsButton" Content="Skúšky" 
                 HorizontalAlignment="Left" Margin="155,0,0,0" Width="75"
-                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowExamCommand}}"/>
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowExamCommand}}"
+                KeyboardNavigation.IsTabStop="False"/>
         <Button x:Name="showStudentsButton" Content="Študenti" 
                 HorizontalAlignment="Left" Margin="235,0,0,0" Width="75"
-                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowStudentCommand}}"/>
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowStudentCommand}}"
+                KeyboardNavigation.IsTabStop="False"/>
         <Button x:Name="showStudyProgrammesButton" Content="Programy" 
                 HorizontalAlignment="Left" Margin="315,0,0,0" Width="75"
-                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowStudyProgrammeCommand}}"/>
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowStudyProgrammeCommand}}"
+                KeyboardNavigation.IsTabStop="False"/>
         <Button x:Name="showSubjectsButton" Content="Predmety" 
                 HorizontalAlignment="Left" Margin="395,0,0,0" Width="75"
-                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowSubjectCommand}}"/>
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowSubjectCommand}}"
+                KeyboardNavigation.IsTabStop="False"/>
         <Button x:Name="showTeachersButton" Content="Učitelia" 
                 HorizontalAlignment="Left" Margin="475,0,10,0" Width="75"
-                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowTeacherCommand}}"/>
+                Command="{Binding Source={x:Static ais:WindowChangeCommands.ShowTeacherCommand}}"
+                KeyboardNavigation.IsTabStop="False"/>
     </Grid>
 </UserControl>

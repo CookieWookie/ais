@@ -23,5 +23,10 @@ namespace AiS.Views
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.nameTextBox.Focus();
+        }
     }
 }

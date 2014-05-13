@@ -13,7 +13,7 @@ namespace AiS.Repositories.Database.SqlCe
         private const string SELECT_SINGLE = SELECT + " WHERE [ID] = @id";
         private const string SELECT_BYSUBJECT = SELECT + " JOIN [SubjectTeachers] WHERE [SubjectID] = @subjectId;";
         private const string UPDATE = "UPDATE [Teachers] SET [Title] = @title, [Name] = @name, [Lastname] = @lastname, [TitleSuffix] = @titleSuffix WHERE [ID] = @id;";
-        private const string INSERT = "INSERT INTO [Teachers] ([ID], [Title], [Name], [Lastname], [TitleSuffix]) VALUES (@id, @title, @name, @lastanme, @titleSuffix);";
+        private const string INSERT = "INSERT INTO [Teachers] ([ID], [Title], [Name], [Lastname], [TitleSuffix]) VALUES (@id, @title, @name, @lastname, @titleSuffix);";
         private const string SAVE_SUBJECTS = "INSERT INTO [SubjectTeachers] ([SubjectID], [TeacherID]) VALUES (@subjectId, @id);";
         private const string DELETE = "DELETE FROM [Teachers] WHERE [ID] = @id";
 
@@ -71,21 +71,30 @@ namespace AiS.Repositories.Database.SqlCe
             {
                 connection.Open();
                 using (SqlCeTransaction transaction = connection.BeginTransaction())
-                using (SqlCeCommand command = new SqlCeCommand("DELETE FROM [SubjectTeachers] WHERE [TeacherID] = @id", connection, transaction))
+                using (SqlCeCommand command = new SqlCeCommand("", connection, transaction))
                 {
                     try
                     {
-                        command.ExecuteNonQuery();
                         models.ForEach(m =>
                         {
                             if (string.IsNullOrWhiteSpace(m.ID))
+                            {
                                 m.ID = this.GetID();
-                            SaveModel(command, m);
+                            }
+                            this.SaveModel(command, m);
+
+                            this.SetParameters(command, m);
+                            command.CommandText = "DELETE FROM [SubjectTeachers] WHERE [TeacherID] = @id";
+                            command.ExecuteNonQuery();
+
+                            command.CommandText = TeacherRepository.SAVE_SUBJECTS;
+                            command.Parameters.Add("@subjectId", System.Data.SqlDbType.NVarChar);
                             foreach (var s in m.Teaches)
                             {
-                                command.Parameters.AddWithValue("@subjectId", s.ID);
+                                command.Parameters["@subjectId"].Value = s.ID;
                                 command.ExecuteNonQuery();
                             }
+                            command.Parameters.Clear();
                             count++;
                         });
                         transaction.Commit();

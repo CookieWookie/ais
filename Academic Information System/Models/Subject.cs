@@ -14,7 +14,7 @@ namespace AiS.Models
 
         public string ID
         {
-            get { return this.id; }
+            get { return this.id ?? ""; }
             set
             {
                 if (this.id != value)
@@ -26,7 +26,7 @@ namespace AiS.Models
         }
         public string Name
         {
-            get { return this.name; }
+            get { return this.name ?? ""; }
             set
             {
                 if (this.name != value)

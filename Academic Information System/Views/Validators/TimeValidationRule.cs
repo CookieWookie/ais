@@ -6,18 +6,14 @@ using System.Windows.Controls;
 
 namespace AiS.Views.Validators
 {
-    public class NameValidationRule : ValidationRule
+    public class TimeValidationRule : ValidationRule
     {
-        public NameValidationRule()
-        {
-        }
-
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            string s = value as string;
-            if (string.IsNullOrWhiteSpace(s))
+            TimeSpan ts;
+            if (value == null || !TimeSpan.TryParseExact(value.ToString(), new[] { "HH:mm", "H:m" }, cultureInfo, out ts))
             {
-                return new ValidationResult(false, "Hodnota nie je platná.");
+                return new ValidationResult(false, "Zadaná hodnota nie je platný čas.");
             }
             return new ValidationResult(true, "");
         }

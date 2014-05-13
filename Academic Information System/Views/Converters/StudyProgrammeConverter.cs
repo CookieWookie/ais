@@ -7,7 +7,7 @@ using AiS.Models;
 
 namespace AiS.Views.Converters
 {
-    [ValueConversion(typeof(Teacher), typeof(string))]
+    [ValueConversion(typeof(StudyProgramme), typeof(string))]
     public class StudyProgrammeConverter : IValueConverter
     {
         public StudyProgrammeConverter()

@@ -31,8 +31,8 @@ namespace AiS.ViewModels
                 if (this.name != value)
                 {
                     this.name = value;
-                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("Name");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -44,8 +44,8 @@ namespace AiS.ViewModels
                 if (this.lastname != value)
                 {
                     this.lastname = value;
-                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("Lastname");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -57,8 +57,8 @@ namespace AiS.ViewModels
                 if (this.semester != value)
                 {
                     this.semester = value;
-                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("Semester");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -70,8 +70,8 @@ namespace AiS.ViewModels
                 if (this.dateOfBirth != value)
                 {
                     this.dateOfBirth = value;
-                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("DateOfBirth");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -83,8 +83,8 @@ namespace AiS.ViewModels
                 if (this.programme != value || (this.programme != null && !this.programme.Equals(value)))
                 {
                     this.programme = value;
-                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("StudyProgramme");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -101,12 +101,11 @@ namespace AiS.ViewModels
         {
             get
             {
-                return
-                    !this.original.Name.Equals(this.Name) ||
-                    !this.original.Lastname.Equals(this.Lastname) ||
-                    !this.original.Semester.Equals(this.Semester) ||
-                    !this.original.DateOfBirth.Equals(this.DateOfBirth) ||
-                    !this.original.StudyProgramme.Equals(this.StudyProgramme);
+                return this.original.Name != this.Name ||
+                    this.original.Lastname != this.Lastname ||
+                    this.original.Semester != this.Semester ||
+                    this.original.DateOfBirth != this.DateOfBirth ||
+                    !Comparers.Equals(this.StudyProgramme, this.Original.StudyProgramme);
             }
         }
         public ICommand SelectStudyProgrammeCommand
@@ -118,12 +117,59 @@ namespace AiS.ViewModels
             get { return this.studyProgrammes; }
         }
 
+        public override string this[string columnName]
+        {
+            get
+            {
+                string message = string.Empty;
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrWhiteSpace(this.Name))
+                    {
+                        message = "Meno nemôže byť prázdna hodnota.";
+                    }
+                }
+                else if (columnName == "Lastname")
+                {
+                    if (string.IsNullOrWhiteSpace(this.Lastname))
+                    {
+                        message = "Priezvisko nemôže byť prázdna hodnota.";
+                    }
+                }
+                else if (columnName == "Semester")
+                {
+                    if (this.Semester < 1 || 12 < this.Semester)
+                    {
+                        message = "Semester môže byť iba v rozsahu od 1 do 12.";
+                    }
+                }
+                else if (columnName == "DateOfBirth")
+                {
+                    if (this.DateOfBirth >= DateTime.Now.Date)
+                    {
+                        message = "Dátum narodenia nemôže byť v budúcnosti.";
+                    }
+                    else if (this.DateOfBirth < new DateTime(1900, 1, 1))
+                    {
+                        message = "Dátum narodenia nemôže byť skôr ako 1. 1. 1900.";
+                    }
+                }
+                else if (columnName == "StudyProgramme")
+                {
+                    if (this.StudyProgramme == null || string.IsNullOrWhiteSpace(this.StudyProgramme.ID))
+                    {
+                        message = "Musí byť zvolený nejaký študíjny program.";
+                    }
+                }
+                return message;
+            }
+        }
+
         public AddStudentViewModel(IStudentRepository repository)
             : this(repository, new Student())
         {
             this.windowName = "Pridaj: Študent";
         }
-
         public AddStudentViewModel(IStudentRepository repository, Student original)
             : base()
         {

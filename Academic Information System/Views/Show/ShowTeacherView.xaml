@@ -35,7 +35,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="subjectsDataGrid" Margin="10,0,10,0" Grid.Row="3" VerticalAlignment="Bottom" Height="100" AutoGenerateColumns="False"
-                  ItemsSource="{Binding SelectedItem.Teaches, ElementName=teacherDataGrid}" SelectionMode="Single"
+                  ItemsSource="{Binding SelectedItem.Teaches, ElementName=teacherDataGrid}" SelectionMode="Single" CanUserAddRows="False"
                   SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>

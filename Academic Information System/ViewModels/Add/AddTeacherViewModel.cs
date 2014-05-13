@@ -34,6 +34,7 @@ namespace AiS.ViewModels
                 {
                     this.title = value;
                     this.OnPropertyChanged("Title");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -46,6 +47,7 @@ namespace AiS.ViewModels
                 {
                     this.name = value;
                     this.OnPropertyChanged("Name");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -58,6 +60,7 @@ namespace AiS.ViewModels
                 {
                     this.lastname = value;
                     this.OnPropertyChanged("Lastname");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -70,6 +73,7 @@ namespace AiS.ViewModels
                 {
                     this.titleSuffix = value;
                     this.OnPropertyChanged("TitleSuffix");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -79,7 +83,7 @@ namespace AiS.ViewModels
             {
                 if (teaches == null)
                 {
-                    SetCollection(null);
+                    this.SetCollection(null);
                 }
                 return teaches;
             }
@@ -89,6 +93,7 @@ namespace AiS.ViewModels
                 {
                     this.SetCollection(value);
                     this.OnPropertyChanged("Teaches");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -105,10 +110,8 @@ namespace AiS.ViewModels
         {
             get
             {
-                return this.Title != this.original.Title ||
-                    this.Name != this.original.Name ||
+                return this.Name != this.original.Name ||
                     this.Lastname != this.original.Lastname ||
-                    this.TitleSuffix != this.original.TitleSuffix ||
                     !new CollectionComparer<Subject>().Equals(this.Teaches, this.original.Teaches);
             }
         }
@@ -126,12 +129,34 @@ namespace AiS.ViewModels
             get { return this.subjects.Except(this.Teaches); }
         }
 
+        public override string this[string columnName]
+        {
+            get
+            {
+                string message = string.Empty;
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrWhiteSpace(this.Name))
+                    {
+                        message = "Meno nemôže byť prázdny reťazec.";
+                    }
+                }
+                else if (columnName == "Lastname")
+                {
+                    if (string.IsNullOrWhiteSpace(this.Lastname))
+                    {
+                        message = "Priezvisko nemôže byť prázdny reťazec.";
+                    }
+                }
+                return message;
+            }
+        }
+
         public AddTeacherViewModel(ITeacherRepository repository)
             : this(repository, new Teacher())
         {
             this.windowName = "Pridaj: Učiteľ";
         }
-
         public AddTeacherViewModel(ITeacherRepository repository, Teacher original)
             : base()
         {
@@ -143,8 +168,15 @@ namespace AiS.ViewModels
             this.original = original;
 
             this.subjects = this.repository.SubjectRepository.GetAll().ToList();
-            this.addSubjectCommand = new RelayCommand(o => this.Teaches.Add((Subject)o), o => o is Subject && o != null);
-            this.removeSubjectCommand = new RelayCommand(o => this.Teaches.Remove((Subject)o), o => o is Subject);
+            this.addSubjectCommand = new RelayCommand(o =>
+            {
+                this.teaches.Add((Subject)o);
+
+            }, o => o is Subject && o != null);
+            this.removeSubjectCommand = new RelayCommand(o =>
+            {
+                this.teaches.Remove((Subject)o);
+            }, o => o is Subject);
 
             this.ResetToDefault();
         }
@@ -155,8 +187,8 @@ namespace AiS.ViewModels
             this.Name = this.original.Name;
             this.Lastname = this.original.Lastname;
             this.TitleSuffix = this.original.TitleSuffix;
+            this.Teaches = this.Original.Teaches;
         }
-
         public override void Save()
         {
             Teacher teacher = new Teacher();
@@ -165,10 +197,10 @@ namespace AiS.ViewModels
             teacher.Title = this.Title;
             teacher.Lastname = this.Lastname;
             teacher.TitleSuffix = this.TitleSuffix;
+            teacher.Teaches = this.Teaches;
             repository.Save(teacher);
             this.Close();
         }
-
         private void SetCollection(IList<Subject> value)
         {
             this.teaches = value == null ? new ObservableCollection<Subject>() : new ObservableCollection<Subject>(value);
@@ -176,6 +208,7 @@ namespace AiS.ViewModels
             {
                 this.OnPropertyChanged("Teaches");
                 this.OnPropertyChanged("Subjects");
+                this.OnPropertyChanged("HasChanged");
             };
         }
     }

@@ -48,6 +48,7 @@ namespace AiS.ViewModels
                 if (this.currentWindow != value)
                 {
                     this.currentWindow = value;
+                    this.currentWindow.Refresh();
                     this.OnPropertyChanged("CurrentWindow");
                     this.OnPropertyChanged("ApplicationName");
                 }

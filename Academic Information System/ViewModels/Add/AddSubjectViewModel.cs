@@ -26,6 +26,7 @@ namespace AiS.ViewModels
                 {
                     this.name = value;
                     this.OnPropertyChanged("Name");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -38,6 +39,7 @@ namespace AiS.ViewModels
                 {
                     this.semester = value;
                     this.OnPropertyChanged("Semester");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -54,8 +56,30 @@ namespace AiS.ViewModels
         {
             get
             {
-                return this.original.Name != this.Name ||
-                   this.original.Semester !=this.Semester; 
+                return this.original.Name != this.Name || this.original.Semester != this.Semester;
+            }
+        }
+
+        public override string this[string columnName]
+        {
+            get
+            {
+                string message = string.Empty;
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrWhiteSpace(this.Name))
+                    {
+                        message = "Názov nemôže byť prázdna hodnota.";
+                    }
+                }
+                else if (columnName == "Semester")
+                {
+                    if (this.Semester < 1 || 12 < this.Semester)
+                    {
+                        message = "Semester môže byť iba v rozsahu od 1 do 12.";
+                    }
+                }
+                return message;
             }
         }
 

@@ -10,8 +10,23 @@
     </UserControl.InputBindings>
     <Grid>
         <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
-        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25"
-                IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=nameTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=lastnameTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasChanged}" Value="False">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"/>
         <Label Content="Titul" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
         <Label Content="Meno" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
@@ -21,7 +36,7 @@
         <TextBox x:Name="titleTextBox" Height="25" Margin="85,10,10,0" VerticalAlignment="Top" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         <TextBox x:Name="nameTextBox" Height="25" Margin="85,40,10,0" VerticalAlignment="Top">
             <TextBox.Text>
-                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <StaticResource ResourceKey="NameValidationRule"/>
                     </Binding.ValidationRules>
@@ -30,26 +45,26 @@
         </TextBox>
         <TextBox x:Name="lastnameTextBox" Height="25" Margin="85,70,10,0" VerticalAlignment="Top">
             <TextBox.Text>
-                <Binding Path="Lastname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Lastname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <StaticResource ResourceKey="NameValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="titleSuffixTextBox" Height="25" Margin="85,100,10,0" VerticalAlignment="Top" Text="{Binding TitleSuffix, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-        
+        <TextBox x:Name="titleSuffixTextBox" Height="25" Margin="85,100,10,0" VerticalAlignment="Top" 
+                 Text="{Binding TitleSuffix, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
         <Button x:Name="plusButton" HorizontalAlignment="Left" Margin="85,134.5,0,0" VerticalAlignment="Top" Width="16" Height="16"
                 Style="{StaticResource PlusButtonStyle}" Click="PlusButton_Click">
             <Button.ContextMenu>
                 <ContextMenu x:Name="selectSubjectContextMenu"
                              Placement="Bottom"
                              StaysOpen="False"
-                             ItemsSource="{Binding Subjects}">
+                             ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}">
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="{x:Type MenuItem}">
-                            <Setter Property="Header" Value="{Binding Converter={StaticResource SubjectConverter}}"/>
-                            <Setter Property="Command" Value="{Binding AddSubjectCommand}"/>
+                            <Setter Property="Header" Value="{Binding Name}"/>
+                            <Setter Property="Command" Value="{Binding DataContext.AddSubjectCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>
                         </Style>
                     </ContextMenu.ItemContainerStyle>
@@ -57,11 +72,10 @@
             </Button.ContextMenu>
         </Button>
         <Button x:Name="minusButton" HorizontalAlignment="Left" Margin="115,134.5,0,0" VerticalAlignment="Top" Width="16" Height="16"
-                Style="{StaticResource MinusButtonStyle}" Command="{Binding RemoveSubjectCommand}"
+                Style="{StaticResource MinusButtonStyle}" Command="{Binding RemoveSubjectCommand}" Visibility="Visible"
                 CommandParameter="{Binding SelectedItem, ElementName=subjectDataGrid}"/>
-        
-        <DataGrid x:Name="subjectDataGrid" Margin="10,160,10,40" AutoGenerateColumns="False"
-                  ItemsSource="{Binding Teaches}" SelectionMode="Single" SelectionUnit="FullRow">
+        <DataGrid x:Name="subjectDataGrid" Margin="10,160,10,40" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ItemsSource="{Binding Teaches, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>

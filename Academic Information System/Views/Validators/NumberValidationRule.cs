@@ -6,18 +6,14 @@ using System.Windows.Controls;
 
 namespace AiS.Views.Validators
 {
-    public class NameValidationRule : ValidationRule
+    public class NumberValidationRule : ValidationRule
     {
-        public NameValidationRule()
-        {
-        }
-
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            string s = value as string;
-            if (string.IsNullOrWhiteSpace(s))
+            int number;
+            if (value == null || !int.TryParse(value.ToString(), out number))
             {
-                return new ValidationResult(false, "Hodnota nie je platná.");
+                return new ValidationResult(false, "Hodnota nie je číslo.");
             }
             return new ValidationResult(true, "");
         }

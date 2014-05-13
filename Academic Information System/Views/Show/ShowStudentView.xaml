@@ -22,14 +22,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="studentDataGrid" Grid.Row="1" Margin="10,0,10,0" AutoGenerateColumns="False"
-                  ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False">
+        <DataGrid x:Name="studentDataGrid" Grid.Row="1" Margin="10,0,10,0" AutoGenerateColumns="False" CanUserAddRows="False"
+                  ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
                 <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>
-                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme, Converter={StaticResource StudyProgrammeConverter}}"/>
+                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="3" Margin="10,0,0,0" Width="75" Height="25" 

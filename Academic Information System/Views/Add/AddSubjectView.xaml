@@ -10,25 +10,40 @@
     </UserControl.InputBindings>
     <Grid>
         <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
-        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25"
-                IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=nameTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=semesterTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasChanged}" Value="False">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"/>
         <Label Content="Názov" Height="25" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" />
         <Label Content="Semester" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="75" />
-        <TextBox Height="25" Margin="90,10,10,0" VerticalAlignment="Top">
+        <TextBox Height="25" Margin="90,10,10,0" VerticalAlignment="Top" x:Name="nameTextBox">
             <TextBox.Text>
-                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <StaticResource ResourceKey="NameValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Height="25" Margin="90,40,10,0" VerticalAlignment="Top">
+        <TextBox Height="25" Margin="90,40,10,0" VerticalAlignment="Top" x:Name="semesterTextBox">
             <TextBox.Text>
-                <Binding Path="Semester" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Semester" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
-                        <StaticResource ResourceKey="SemesterValidationRule"/>
+                        <StaticResource ResourceKey="NumberValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

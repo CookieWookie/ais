@@ -10,49 +10,81 @@
     </UserControl.InputBindings>
     <Grid>
         <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
-        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25"
-                IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=nameTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=lastnameTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=semesterTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=dateOfBirthDatePicker, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=programmeComboBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasChanged}" Value="False">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"/>
         <Label Content="Meno" Height="25" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content="Priezvisko" Height="25" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content="Semester" Height="25" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content="Dátum nar." Height="25" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Program" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="110"/>
-        <TextBox Height="25" Margin="90,10,10,0" VerticalAlignment="Top">
+        <Label Content="Program" Height="25" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox Height="25" Margin="90,10,10,0" VerticalAlignment="Top" x:Name="nameTextBox">
             <TextBox.Text>
-                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <StaticResource ResourceKey="NameValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Height="25" Margin="90,40,10,0" VerticalAlignment="Top">
+        <TextBox Height="25" Margin="90,40,10,0" VerticalAlignment="Top" x:Name="lastnameTextBox">
             <TextBox.Text>
-                <Binding Path="Lastname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Lastname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <StaticResource ResourceKey="NameValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Height="25" Margin="90,70,10,0" VerticalAlignment="Top">
+        <TextBox Height="25" Margin="90,70,10,0" VerticalAlignment="Top" x:Name="semesterTextBox">
             <TextBox.Text>
-                <Binding Path="Semester" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Semester" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
-                        <StaticResource ResourceKey="SemesterValidationRule"/>
+                        <StaticResource ResourceKey="NumberValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <DatePicker Height="25" Margin="90,100,10,0" VerticalAlignment="Top">
+        <DatePicker Height="25" Margin="90,100,10,0" VerticalAlignment="Top" x:Name="dateOfBirthDatePicker">
             <DatePicker.SelectedDate>
-                <Binding Path="DateOfBirth" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="DateOfBirth" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
-                        <StaticResource ResourceKey="DateOfBirthValidationRule"/>
+                        <StaticResource ResourceKey="DateValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </DatePicker.SelectedDate>
         </DatePicker>
+        <ComboBox Margin="90,130,10,0" VerticalAlignment="Top" Height="25" ItemsSource="{Binding StudyProgrammes, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedItem="{Binding StudyProgramme, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" x:Name="programmeComboBox">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </UserControl>

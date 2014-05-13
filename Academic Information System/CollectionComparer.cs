@@ -9,7 +9,7 @@ namespace AiS
     {
         public bool Equals(IEnumerable<T> x, IEnumerable<T> y)
         {
-            if (x != y)
+            if (x != null && y != null && !ReferenceEquals(x, y))
             {
                 List<T> one = x.ToList();
                 List<T> two = y.ToList();
@@ -44,7 +44,7 @@ namespace AiS
             }
             else
             {
-                return x == y;
+                return ReferenceEquals(x, y);
             }
         }
 

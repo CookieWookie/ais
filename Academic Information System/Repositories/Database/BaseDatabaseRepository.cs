@@ -63,6 +63,7 @@ namespace AiS.Repositories.Database
             {
                 connection.Open();
                 command.Parameters.Add(CreateParameter("@id", id));
+                command.CommandText = this.getSingleString;
                 while (command.ExecuteScalar() != null)
                 {
                     ((IDataParameter)command.Parameters["@id"]).Value = (id = this.GenerateID());
@@ -165,6 +166,7 @@ namespace AiS.Repositories.Database
             using (var connection = this.GetConnection())
             using (var command = connection.CreateCommand())
             {
+                connection.Open();
                 command.CommandText = this.deleteString;
                 this.SetParameters(command, model);
                 command.ExecuteNonQuery();

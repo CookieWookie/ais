@@ -21,7 +21,7 @@ namespace AiS.Models
 
         public string ID
         {
-            get { return this.id; }
+            get { return this.id ?? ""; }
             set
             {
                 if (value != this.id)

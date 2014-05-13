@@ -11,7 +11,9 @@ namespace AiS.ViewModels
     {
         string WindowName { get; }
         ICommand CloseCommand { get; }
+        ICommand RefreshCommand { get; }
 
+        void Refresh();
         void Close();
 
         event ViewModelClosingDelegate ViewModelClosingEvent;

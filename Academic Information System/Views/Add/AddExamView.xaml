@@ -10,8 +10,29 @@
     </UserControl.InputBindings>
     <Grid>
         <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
-        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25"
-                IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=dateTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=timeTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=subjectComboBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=teacherComboBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasChanged}" Value="False">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"/>
         <Label HorizontalAlignment="Left" Margin="10,10,0,0" Height="25" Content="Dátum" VerticalAlignment="Top" Width="75"/>
         <Label HorizontalAlignment="Left" Margin="175,10,0,0" Height="25" Content="Čas" VerticalAlignment="Top" Width="50"/>
@@ -19,58 +40,42 @@
         <Label HorizontalAlignment="Left" Margin="10,70,0,0" Height="25" Content="Vyučujúci" VerticalAlignment="Top" Width="75"/>
         <Label HorizontalAlignment="Left" Margin="10,100,0,0" Height="25" Content="Študenti" VerticalAlignment="Top" Width="75"/>
 
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="85,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85">
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="85,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" x:Name="dateTextBox">
             <TextBox.Text>
-                <Binding Path="Date" StringFormat="{}{0:dd.MM.yyyy}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Date" StringFormat="{}{0:dd.MM.yyyy}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
-                        <StaticResource ResourceKey="ExamDateValidationRule"/>
+                        <StaticResource ResourceKey="DateValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="230,10,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60">
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="230,10,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" x:Name="timeTextBox">
             <TextBox.Text>
-                <Binding Path="Time" StringFormat="{}{0:hh\:mm}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Time" StringFormat="{}{0:hh\:mm}" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
-                        <StaticResource ResourceKey="ExamTimeValidationRule"/>
+                        <StaticResource ResourceKey="TimeValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="{Binding Subject, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource SubjectConverter}}" Margin="115,40,10,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="selectSubjectButton" Content="..." HorizontalAlignment="Left" Margin="85,40,0,0" VerticalAlignment="Top" Width="30" Height="25" Click="SelectSubjectButton_Click">
-            <Button.ContextMenu>
-                <ContextMenu x:Name="selectSubjectContextMenu"
-                             Placement="Bottom"
-                             StaysOpen="False"
-                             ItemsSource="{Binding Subjects}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Header" Value="{Binding Converter={StaticResource SubjectConverter}}"/>
-                            <Setter Property="Command" Value="{Binding SelectSubjectCommand}"/>
-                            <Setter Property="CommandParameter" Value="{Binding}"/>
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
-        <Label Content="{Binding Teacher, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource TeacherConverter}}" Margin="115,70,15,0" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="selectTeacherButton" Content="..."  HorizontalAlignment="Left" Margin="85,70,0,0" VerticalAlignment="Top" Width="30" Height="25" Click="SelectTeacherButton_Click">
-            <Button.ContextMenu>
-                <ContextMenu x:Name="selectTeacherContextMenu"
-                             Placement="Bottom"
-                             StaysOpen="False"
-                             ItemsSource="{Binding Teachers}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Header" Value="{Binding Converter={StaticResource TeacherConverter}}"/>
-                            <Setter Property="Command" Value="{Binding SelectTeacherCommand}"/>
-                            <Setter Property="CommandParameter" Value="{Binding}"/>
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
+        <ComboBox Margin="85,40,10,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" x:Name="subjectComboBox"
+                  ItemsSource="{Binding Subjects, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource SubjectConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox Margin="85,70,10,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="25" x:Name="teacherComboBox"
+                  ItemsSource="{Binding Teachers, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Teacher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource TeacherConverter}}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <DataGrid x:Name="studentDataGrid" Margin="10,130,10,40" AutoGenerateColumns="False"
                   ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>

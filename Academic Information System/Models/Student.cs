@@ -17,7 +17,7 @@ namespace AiS.Models
 
         public string ID
         {
-            get { return this.id; }
+            get { return this.id ?? ""; }
             set
             {
                 if (this.id != value)
@@ -29,7 +29,7 @@ namespace AiS.Models
         }
         public string Name
         {
-            get { return this.name; }
+            get { return this.name ?? ""; }
             set
             {
                 if (this.name != value)
@@ -41,7 +41,7 @@ namespace AiS.Models
         }
         public string Lastname
         {
-            get { return this.lastname; }
+            get { return this.lastname ?? ""; }
             set
             {
                 if (this.lastname != value)
@@ -80,10 +80,10 @@ namespace AiS.Models
             get { return this.programme; }
             set
             {
-                if (this.programme != value || (this.programme != null && !this.programme.Equals(value)))
+                if (this.programme != value || !this.programme.Equals(value))
                 {
                     this.programme = value;
-                    // this.OnPropertyChanged("StudyProgramme");
+                    this.OnPropertyChanged("StudyProgramme");
                 }
             }
         }
@@ -96,12 +96,10 @@ namespace AiS.Models
         {
             return other != null && other.ID == ID;
         }
-
         public sealed override bool Equals(object obj)
         {
             return Equals(obj as Student);
         }
-
         public override int GetHashCode()
         {
             return ID.GetHashCode();

@@ -31,7 +31,7 @@ namespace AiS.Models
         }
         public string Title
         {
-            get { return this.title; }
+            get { return this.title ?? ""; }
             set
             {
                 if (value != this.title)
@@ -43,7 +43,7 @@ namespace AiS.Models
         }
         public string Name
         {
-            get { return this.name; }
+            get { return this.name ?? ""; }
             set
             {
                 if (value != this.name)
@@ -55,7 +55,7 @@ namespace AiS.Models
         }
         public string Lastname
         {
-            get { return this.lastname; }
+            get { return this.lastname ?? ""; }
             set
             {
                 if (value != this.lastname)
@@ -67,7 +67,7 @@ namespace AiS.Models
         }
         public string TitleSuffix
         {
-            get { return this.titleSuffix; }
+            get { return this.titleSuffix ?? ""; }
             set
             {
                 if (value != this.titleSuffix)

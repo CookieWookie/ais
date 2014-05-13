@@ -4,40 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Loaded="UserControl_Loaded"
+             KeyboardNavigation.IsTabStop="False">
     <UserControl.InputBindings>
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveCommand}"/>
     </UserControl.InputBindings>
     <Grid>
-        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"/>
+        <Button Content="Zavrieť" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Command="{Binding CloseCommand}" Height="25"
+                KeyboardNavigation.IsTabStop="False"/>
         <Button Content="Uložiť" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Command="{Binding SaveCommand}" Height="25"
-                IsEnabled="{Binding HasChanged, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"/>
-        <Label Content="Názov" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
-        <Label Content="Dlžka štúdia" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
-        <Label Content="Typ štúdia" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="25" Width="75"/>
-        <TextBox Height="25" Margin="90,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                KeyboardNavigation.IsTabStop="False">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=nameTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=lengthTextBox, Path=(Validation.HasError)}" Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasChanged}" Value="False">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="Reset" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding ResetToDefaultCommand}" Height="25"
+                KeyboardNavigation.IsTabStop="False"/>
+        <Label Content="Názov" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+        <Label Content="Dlžka štúdia (roky)" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+        <Label Content="Typ štúdia" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="25" Width="110"/>
+        <TextBox Height="25" Margin="125,10,10,0" VerticalAlignment="Top" x:Name="nameTextBox" TabIndex="1">
             <TextBox.Text>
-                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
                         <StaticResource ResourceKey="NameValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Height="25" Margin="90,40,10,0" TextWrapping="Wrap" VerticalAlignment="Top">
+        <TextBox Height="25" Margin="125,40,10,0" VerticalAlignment="Top" x:Name="lengthTextBox" TabIndex="2">
             <TextBox.Text>
-                <Binding Path="Length" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Length" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                     <Binding.ValidationRules>
-                        <StaticResource ResourceKey="LengthOfStudyValidationRule"/>
+                        <StaticResource ResourceKey="NumberValidationRule"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <ComboBox Margin="90,70,10,0" VerticalAlignment="Top" Height="25" ItemsSource="{Binding StudyTypes}" SelectedItem="{Binding StudyType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <ComboBox Margin="125,70,10,0" VerticalAlignment="Top" Height="25" ItemsSource="{Binding StudyTypes}" 
+                  SelectedItem="{Binding StudyType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" TabIndex="3">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Converter={StaticResource StudyTypeConverter}}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

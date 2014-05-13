@@ -80,6 +80,29 @@ namespace AiS.ViewModels
             get { return this.original.Name != this.Name || this.original.Length != this.Length || this.original.StudyType != this.StudyType; }
         }
 
+        public override string this[string columnName]
+        {
+            get
+            {
+                string message = string.Empty;
+                if (columnName == "Name")
+                {
+                    if (string.IsNullOrWhiteSpace(this.Name))
+                    {
+                        message = "Názov nemôže byť prázdna hodnota.";
+                    }
+                }
+                else if (columnName == "Length")
+                {
+                    if (this.Length < 3 || 6 < this.Length)
+                    {
+                        message = "Dĺžka štúdia musí byť v rozsahu od 3 do 6 rokov.";
+                    }
+                }
+                return message;
+            }
+        }
+
         public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository)
             : this(repository, new StudyProgramme())
         {

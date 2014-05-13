@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Comparers.cs" />
     <Compile Include="ViewModels\Base\BaseAddViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseSaveViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IAddViewModel.cs" />
@@ -77,6 +78,9 @@
     <Compile Include="Views\Report\ReportSubjectView.xaml.cs">
       <DependentUpon>ReportSubjectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Validators\DateValidationRule.cs" />
+    <Compile Include="Views\Validators\NumberValidationRule.cs" />
+    <Compile Include="Views\Validators\TimeValidationRule.cs" />
     <Compile Include="WindowChangeCommands.cs" />
     <Compile Include="CollectionComparer.cs" />
     <Compile Include="ExtensionMethods.cs" />
@@ -179,12 +183,7 @@
     <Compile Include="Views\Show\ShowTeacherView.xaml.cs">
       <DependentUpon>ShowTeacherView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Validators\DateOfBirthValidationRule.cs" />
-    <Compile Include="Views\Validators\ExamDateValidationRule.cs" />
-    <Compile Include="Views\Validators\LengthOfStudyValidationRule.cs" />
     <Compile Include="Views\Validators\NameValidationRule.cs" />
-    <Compile Include="Views\Validators\SemesterValidationRule.cs" />
-    <Compile Include="Views\Validators\ExamTimeValidationRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Exam.cs" />
@@ -283,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Resources\ErrorTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Resources\MinusButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,7 +327,7 @@
     <Resource Include="Images\drevo.jpg" />
     <Resource Include="Images\lienka.jpg" />
     <Resource Include="Images\135538.jpg" />
-    <Resource Include="Images\vodicka.JPG" />
+    <None Include="database.sdf" />
     <Content Include="Repositories\Database\Scripts\SQLCE_1.0.0.0.sql" />
     <Content Include="Repositories\Database\Scripts\SQL_1.0.0.0.sql" />
   </ItemGroup>

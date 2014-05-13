@@ -16,8 +16,6 @@ namespace AiS.ViewModels
         private readonly Exam original;
         private readonly string windowName;
 
-        private readonly ICommand selectTeacherCommand;
-        private readonly ICommand selectSubjectCommand;
         private readonly ICommand removeStudentCommand;
         private readonly ICommand addStudentCommand;
         private List<Student> students;
@@ -58,15 +56,11 @@ namespace AiS.ViewModels
         {
             get
             {
-                if (this.subject == null)
-                {
-                    this.subject = new Subject();
-                }
                 return this.subject;
             }
             set
             {
-                if (!this.Subject.Equals(value))
+                if (!Comparers.Equals(this.subject, value))
                 {
                     this.subject = value;
                     this.OnPropertyChanged("HasChanged");
@@ -78,15 +72,11 @@ namespace AiS.ViewModels
         {
             get
             {
-                if (this.teacher == null)
-                {
-                    this.teacher = new Teacher();
-                }
                 return this.teacher;
             }
             set
             {
-                if (!this.Teacher.Equals(value))
+                if (!Comparers.Equals(this.teacher, value))
                 {
                     this.teacher = value;
                     this.OnPropertyChanged("HasChanged");
@@ -141,18 +131,10 @@ namespace AiS.ViewModels
             get
             {
                 return this.original.Time != this.Date.Add(Time) ||
-                  !this.original.Subject.Equals(this.Subject) ||
-                  !this.original.Teacher.Equals(this.Teacher) ||
-                  !studentComparer.Equals(this.SignedStudents, this.original.SignedStudents);
+                    !Comparers.Equals(this.Subject, this.Original.Subject)||
+                    !Comparers.Equals(this.Teacher, this.Original.Teacher)||
+                    !studentComparer.Equals(this.SignedStudents, this.original.SignedStudents);
             }
-        }
-        public ICommand SelectTeacherCommand
-        {
-            get { return this.selectTeacherCommand; }
-        }
-        public ICommand SelectSubjectCommand
-        {
-            get { return this.selectSubjectCommand; }
         }
         public ICommand RemoveStudentCommand
         {
@@ -163,12 +145,48 @@ namespace AiS.ViewModels
             get { return this.addStudentCommand; }
         }
 
+        public override string this[string columnName]
+        {
+            get
+            {
+                string message = string.Empty;
+                if (columnName == "Time")
+                {
+                    if (this.Time < new TimeSpan(7, 30, 0) || new TimeSpan(16, 0, 0) < this.Time)
+                    {
+                        message = "Skúška musí začínať medzi 7:30 alebo 16:00.";
+                    }
+                }
+                else if (columnName == "Date")
+                {
+                    if (this.Date < DateTime.Now.AddDays(3))
+                    {
+                        message = "Dátum skúšky musí byť najmenej o 3 dni.";
+                    }
+                }
+                else if (columnName == "Subject")
+                {
+                    if (this.Subject == null || string.IsNullOrWhiteSpace(this.Subject.ID))
+                    {
+                        message = "Nie je vybraný žiaden predmet skúšky.";
+                    }
+                }
+                else if (columnName == "Teacher")
+                {
+                    if (this.Teacher == null || string.IsNullOrWhiteSpace(this.Teacher.ID))
+                    {
+                        message = "Nie je vybraný žiaden vyučujúci.";
+                    }
+                }
+                return message;
+            }
+        }
+
         public AddExamViewModel(IExamRepository repository)
             : this(repository, new Exam())
         {
             this.windowName = "Pridaj: Skúška";
         }
-
         public AddExamViewModel(IExamRepository repository, Exam original)
             : base()
         {
@@ -179,8 +197,6 @@ namespace AiS.ViewModels
             this.repository = repository;
             this.original = original;
 
-            this.selectSubjectCommand = new RelayCommand(o => this.Subject = (Subject)o, o => o is Subject);
-            this.selectTeacherCommand = new RelayCommand(o => this.Teacher = (Teacher)o, o => o is Teacher);
             this.removeStudentCommand = new RelayCommand(o => this.SignedStudents.Remove((Student)o), o => o is Student);
             this.addStudentCommand = new RelayCommand(o => this.SignedStudents.Add((Student)o), o => o is Student);
 
@@ -196,7 +212,6 @@ namespace AiS.ViewModels
             this.Teacher = this.original.Teacher.Clone();
             this.SignedStudents = this.original.SignedStudents;
         }
-
         public override void Save()
         {
             Exam exam = new Exam();
@@ -208,7 +223,6 @@ namespace AiS.ViewModels
             repository.Save(exam);
             this.Close();
         }
-
         private void SetCollection(IList<Student> value)
         {
             value = value ?? new List<Student>();

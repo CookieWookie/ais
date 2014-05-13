@@ -29,7 +29,11 @@ namespace AiS.Repositories.Import
 
         public void ParseFile(string file)
         {
-            using (StreamReader sr = new StreamReader(file))
+            this.ParseFile(file, Encoding.Default);
+        }
+        public void ParseFile(string file, Encoding encoding)
+        {
+            using (StreamReader sr = new StreamReader(file, encoding))
             {
                 string riadok = sr.ReadLine();
                 while (riadok != null)
@@ -48,7 +52,10 @@ namespace AiS.Repositories.Import
                         sp.StudyType = StudyType.Magister;
                     }
                     if (!studyProgrammes.Contains(sp))
+                    {
                         studyProgrammes.Add(sp);
+                    }
+                    riadok = sr.ReadLine();
                 }
             }
         }
@@ -57,8 +64,6 @@ namespace AiS.Repositories.Import
         {
             Repository.Save(studyProgrammes.ToArray());
             studyProgrammes.Clear();
-
-
         }
     }
 }

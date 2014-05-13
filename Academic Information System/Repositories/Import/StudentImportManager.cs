@@ -30,7 +30,11 @@ namespace AiS.Repositories.Import
 
         public void ParseFile(string file)
         {
-            using (StreamReader sr = new StreamReader(file))
+            this.ParseFile(file, Encoding.Default);
+        }
+        public void ParseFile(string file, Encoding encoding)
+        {
+            using (StreamReader sr = new StreamReader(file, encoding))
             {
                 string riadok = sr.ReadLine();
                 while (riadok != null)
@@ -42,14 +46,17 @@ namespace AiS.Repositories.Import
                     s.Lastname = delenyRiadok[2];
                     s.Semester = Convert.ToInt32(delenyRiadok[3]);
                     s.DateOfBirth = Convert.ToDateTime(delenyRiadok[4]);
-                    
+
                     StudyProgramme sp = new StudyProgramme();
                     sp.ID = delenyRiadok[5];
-                    
+
                     s.StudyProgramme = sp;
 
                     if (!students.Contains(s))
+                    {
                         students.Add(s);
+                    }
+                    riadok = sr.ReadLine();
                 }
             }
         }

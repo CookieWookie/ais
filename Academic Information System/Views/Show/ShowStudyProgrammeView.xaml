@@ -12,7 +12,6 @@
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudyProgrammeCommand}}" 
                     CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportStudyProgrammeCommand}}"/>
-        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,6 +23,9 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="studyProgrammeDataGrid" Grid.Row="1" Margin="10,0,10,0" AutoGenerateColumns="False" CanUserAddRows="False"
                   ItemsSource="{Binding Data, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studyProgrammeDataGrid}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Dĺžka štúdia" Binding="{Binding Length}"/>

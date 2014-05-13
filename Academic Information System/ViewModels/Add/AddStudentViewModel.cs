@@ -158,7 +158,7 @@ namespace AiS.ViewModels
                 {
                     if (this.StudyProgramme == null || string.IsNullOrWhiteSpace(this.StudyProgramme.ID))
                     {
-                        message = "Musí byť zvolený nejaký študíjny program.";
+                        message = "Musí byť zvolený nejaký študijný program.";
                     }
                 }
                 return message;

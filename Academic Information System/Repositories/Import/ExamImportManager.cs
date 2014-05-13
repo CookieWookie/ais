@@ -27,7 +27,11 @@ namespace AiS.Repositories.Import
 
         public void ParseFile(string file)
         {
-            using (StreamReader sr = new StreamReader(file))
+            this.ParseFile(file, Encoding.Default);
+        }
+        public void ParseFile(string file, Encoding encoding)
+        {
+            using (StreamReader sr = new StreamReader(file, encoding))
             {
                 string riadok = sr.ReadLine();
                 while (riadok != null)
@@ -35,7 +39,7 @@ namespace AiS.Repositories.Import
                     string[] delenyRiadok = riadok.Split(';');
                     Exam e = new Exam();
                     e.ID = delenyRiadok[0];
-                    e.Time = Convert.ToDateTime(delenyRiadok[1]);
+                    e.Time = DateTime.Parse(delenyRiadok[1]);
                     Subject sub = new Subject();
                     sub.ID = delenyRiadok[2];
                     e.Subject = sub;
@@ -44,12 +48,12 @@ namespace AiS.Repositories.Import
                     e.Teacher = t;
                     Student s = new Student();
                     s.ID = delenyRiadok[4];
-                    
-                    
-                    
+
                     e.SignedStudents.Add(s);
                     if (!exams.Contains(e))
+                    {
                         exams.Add(e);
+                    }
                     else
                     {
                         foreach (Exam x in exams)
@@ -61,6 +65,7 @@ namespace AiS.Repositories.Import
                             }
                         }
                     }
+                    riadok = sr.ReadLine();
                 }
             }
         }

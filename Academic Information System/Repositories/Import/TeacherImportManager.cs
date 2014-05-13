@@ -26,7 +26,11 @@ namespace AiS.Repositories.Import
 
         public void ParseFile(string file)
         {
-            using (StreamReader sr = new StreamReader(file))
+            this.ParseFile(file, Encoding.Default);
+        }
+        public void ParseFile(string file, Encoding encoding)
+        {
+            using (StreamReader sr = new StreamReader(file, encoding))
             {
                 string riadok = sr.ReadLine();
                 while (riadok != null)
@@ -42,7 +46,9 @@ namespace AiS.Repositories.Import
                     sub.ID = delenyRiadok[5];
                     t.Teaches.Add(sub);
                     if (!teachers.Contains(t))
+                    {
                         teachers.Add(t);
+                    }
                     else
                     {
                         foreach (Teacher x in teachers)
@@ -54,6 +60,7 @@ namespace AiS.Repositories.Import
                             }
                         }
                     }
+                    riadok = sr.ReadLine();
                 }
             }
         }

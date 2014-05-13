@@ -12,7 +12,6 @@
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddSubjectCommand}}" 
                     CommandParameter="{Binding Path=SelectedItem, ElementName=subjectDataGrid}"/>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportSubjectCommand}}"/>
-        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=subjectDataGrid}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,6 +23,9 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="subjectDataGrid" Grid.Row="1" Margin="10,0,10,0" AutoGenerateColumns="False" CanUserAddRows="False"
                   ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=subjectDataGrid}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Názov" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>

@@ -55,7 +55,7 @@ namespace AiS.Models
             }
             set
             {
-                if (!this.subject.Equals(value))
+                if (!Comparers.Equals(this.subject, value))
                 {
                     this.subject = value;
                     this.OnPropertyChanged("Subject");
@@ -74,7 +74,7 @@ namespace AiS.Models
             }
             set
             {
-                if (!this.teacher.Equals(value))
+                if (!Comparers.Equals(this.teacher, value))
                 {
                     this.teacher = value;
                     this.OnPropertyChanged("Teacher");

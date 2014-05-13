@@ -106,14 +106,14 @@ namespace AiS.ViewModels
         public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository)
             : this(repository, new StudyProgramme())
         {
-            this.windowName = "Pridaj: Študíjny program";
+            this.windowName = "Pridaj: Študijný program";
         }
 
         public AddStudyProgrammeViewModel(IStudyProgrammeRepository repository, StudyProgramme original)
         {
             repository.ThrowIfNull("repository");
             original.ThrowIfNull("original");
-            this.windowName = "Uprav: Študíjny program";
+            this.windowName = "Uprav: Študijný program";
             this.repository = repository;
             this.original = original;
             this.ResetToDefault();

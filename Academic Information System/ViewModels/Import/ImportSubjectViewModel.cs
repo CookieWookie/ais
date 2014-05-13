@@ -67,9 +67,32 @@ namespace AiS.ViewModels
             get { return File.Exists(this.FilePath) && this.FilePath.EndsWith(".csv", StringComparison.CurrentCultureIgnoreCase); }
         }
 
+        private readonly IEnumerable<Encoding> encodings;
+        private Encoding selectedEncoding;
+        public IEnumerable<Encoding> Encodings
+        {
+            get { return this.encodings; }
+        }
+        public Encoding SelectedEncoding
+        {
+            get
+            {
+                return this.selectedEncoding ?? (this.selectedEncoding = Encoding.Default);
+            }
+            set
+            {
+                if (this.selectedEncoding != value)
+                {
+                    this.selectedEncoding = value;
+                    this.OnPropertyChanged("SelectedEncoding");
+                }
+            }
+        }
+
         public ImportSubjectViewModel(IImportManager<Subject> importManager)
         {
             importManager.ThrowIfNull("importManager");
+            this.encodings = Encoding.GetEncodings().Select(e => e.GetEncoding()).OrderBy(e => e.EncodingName).ToList();
             this.importManager = importManager;
             this.findFileCommand = new RelayCommand(x => this.FindFile());
             this.parseFileCommand = new RelayCommand(x => this.ParseFile(), x => this.CanParse);
@@ -81,6 +104,7 @@ namespace AiS.ViewModels
             this.importManager.Save();
             this.HasChanged = false;
             FilePath = "";
+            this.Close();
         }
 
         public void FindFile()
@@ -102,7 +126,7 @@ namespace AiS.ViewModels
         {
             if (File.Exists(this.FilePath))
             {
-                importManager.ParseFile(FilePath);
+                importManager.ParseFile(FilePath, this.SelectedEncoding);
                 this.HasChanged = true;
                 FilePath = "";
             }

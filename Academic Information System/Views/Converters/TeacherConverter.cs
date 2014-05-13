@@ -21,7 +21,16 @@ namespace AiS.Views.Converters
             {
                 return "";
             }
-            return t.Title + " " + t.Name + " " + t.Lastname + ", " + t.TitleSuffix;
+            string name = t.Name + " " + t.Lastname;
+            if (!string.IsNullOrWhiteSpace(t.Title))
+            {
+                name = t.Title + " " + name;
+            }
+            if (!string.IsNullOrWhiteSpace(t.TitleSuffix))
+            {
+                name = name + ", " + t.TitleSuffix;
+            }
+            return name;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

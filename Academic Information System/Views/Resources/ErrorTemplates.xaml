@@ -14,4 +14,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
+    </Style>
 </ResourceDictionary>

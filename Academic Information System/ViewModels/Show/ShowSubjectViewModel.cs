@@ -7,7 +7,7 @@ namespace AiS.ViewModels
     {
         public override string WindowName
         {
-            get { return "Zobraz: Predmet"; }
+            get { return "Zobraz: Predmety"; }
         }
 
         public ShowSubjectViewModel(IRepository<Subject> repository)

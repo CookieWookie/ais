@@ -14,7 +14,7 @@
                   SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Converter={StaticResource StudyProgrammeConverter}}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -26,7 +26,7 @@
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
-                <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>                
+                <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}"/>                
             </DataGrid.Columns>
         </DataGrid>
         

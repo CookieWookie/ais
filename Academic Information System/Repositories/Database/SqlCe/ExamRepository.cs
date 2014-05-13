@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AiS.Models;
-using System.Data.SqlClient;
+using System.Data.SqlServerCe;
 
 namespace AiS.Repositories.Database.SqlCe
 {
@@ -92,25 +92,34 @@ namespace AiS.Repositories.Database.SqlCe
         public override int Save(params Exam[] models)
         {
             int count = 0;
-            using (SqlConnection connection = (SqlConnection)GetConnection())
+            using (SqlCeConnection connection = (SqlCeConnection)GetConnection())
             {
                 connection.Open();
-                using (SqlTransaction transaction = connection.BeginTransaction())
-                using (SqlCommand command = new SqlCommand("DELETE FROM [StudentsSignedToExam] WHERE [ExamID] = @id", connection, transaction))
+                using (SqlCeTransaction transaction = connection.BeginTransaction())
+                using (SqlCeCommand command = new SqlCeCommand("", connection, transaction))
                 {
                     try
                     {
-                        command.ExecuteNonQuery();
                         models.ForEach(m =>
                         {
                             if (string.IsNullOrWhiteSpace(m.ID))
+                            {
                                 m.ID = this.GetID();
+                            }
                             SaveModel(command, m);
+
+                            this.SetParameters(command, m);
+                            command.CommandText = "DELETE FROM [StudentsSignedToExam] WHERE [ExamID] = @id";
+                            command.ExecuteNonQuery();
+
+                            command.CommandText = ExamRepository.SAVE_STUDENTS;
+                            command.Parameters.Add("@studentId", System.Data.SqlDbType.NVarChar);
                             foreach (var s in m.SignedStudents)
                             {
-                                command.Parameters.AddWithValue("@studentId", s.ID);
+                                command.Parameters["@studentId"].Value = s.ID;
                                 command.ExecuteNonQuery();
                             }
+                            command.Parameters.Clear();
                             count++;
                         });
                         transaction.Commit();

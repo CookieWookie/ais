@@ -10,6 +10,8 @@ namespace AiS.ViewModels
     {
         ICommand FindFileCommand { get; }
         ICommand ParseFileCommand { get; }
+        IEnumerable<Encoding> Encodings { get; }
+        Encoding SelectedEncoding { get; set; }
         string FilePath { get; set; }
         bool CanParse { get; }
 

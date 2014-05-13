@@ -12,7 +12,6 @@
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddStudentCommand}}" 
                     CommandParameter="{Binding Path=SelectedItem, ElementName=studentDataGrid}"/>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportStudentCommand}}"/>
-        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studentDataGrid}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,12 +23,15 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="studentDataGrid" Grid.Row="1" Margin="10,0,10,0" AutoGenerateColumns="False" CanUserAddRows="False"
                   ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=studentDataGrid}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
                 <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}"/>
-                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
+                <DataGridTextColumn Header="Študijný program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="3" Margin="10,0,0,0" Width="75" Height="25" 

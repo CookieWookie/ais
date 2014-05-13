@@ -12,7 +12,6 @@
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddExamCommand}}" 
                     CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportExamCommand}}"/>
-        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=examDataGrid}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,6 +25,9 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="examDataGrid" Grid.Row="1" Margin="10,0,10,0" ItemsSource="{Binding Data}" 
                   SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=examDataGrid}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Čas" Binding="{Binding Time}"/>
                 <DataGridTextColumn Header="Učiteľ" Binding="{Binding Teacher, Converter={StaticResource TeacherConverter}}"/>
@@ -40,8 +42,8 @@
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
-                <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>
-                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
+                <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                <DataGridTextColumn Header="Študijný program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" Width="75" Height="25" 

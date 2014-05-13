@@ -7,7 +7,7 @@ namespace AiS.ViewModels
     {
         public override string WindowName
         {
-            get { return "Zobraz: Učiteľ"; }
+            get { return "Zobraz: Učitelia"; }
         }
 
         public ShowTeacherViewModel(IRepository<Teacher> repository)

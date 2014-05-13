@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace AiS.ViewModels
 {
@@ -13,8 +15,14 @@ namespace AiS.ViewModels
         private readonly IViewModel defaultWindow;
         private readonly IList<IViewModel> openWindows;
 
+        private readonly ImageBrush lienka;
+        private readonly ImageBrush kitty;
+        private readonly ImageBrush drevo;
+
+        private ImageBrush background;
         private readonly ICommand altF4Command;
         private readonly ICommand changeWindowCommand;
+        private readonly ICommand changeBackgroundCommand;
 
         public string ApplicationName
         {
@@ -62,9 +70,21 @@ namespace AiS.ViewModels
         {
             get { return this.altF4Command; }
         }
+        public ICommand ChangeBackgroundCommand
+        {
+            get { return this.changeBackgroundCommand; }
+        }
+        public ImageBrush Background
+        {
+            get { return this.background; }
+        }
 
         public ApplicationViewModel()
         {
+            this.lienka = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Academic Information System;component/Images/lienka.jpg")));
+            this.kitty = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Academic Information System;component/Images/kitty.jpg")));
+            this.drevo = new ImageBrush(new BitmapImage(new Uri(@"pack://application:,,,/Academic Information System;component/Images/drevo.jpg")));
+
             WindowChangeCommands.ViewModelChangedEvent += this.OnViewModelChanged;
             this.defaultWindow = App.ViewModelFactory.CreateDefaultWindow();
             this.changeWindowCommand = new RelayCommand(o =>
@@ -78,6 +98,25 @@ namespace AiS.ViewModels
                 {
                     this.Close();
                 }, o => true);
+
+            this.background = this.lienka;
+            this.changeBackgroundCommand = new RelayCommand(o =>
+                {
+                    if (this.background == this.lienka)
+                    {
+                        this.background = this.kitty;
+                    }
+                    else if (this.background == this.kitty)
+                    {
+                        this.background = this.drevo;
+                    }
+                    else
+                    {
+                        this.background = this.lienka;
+                    }
+                    this.OnPropertyChanged("Background");
+                }, o => true);
+
 
             this.openWindows = this.CreateCollection();
         }

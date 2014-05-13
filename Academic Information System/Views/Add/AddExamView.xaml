@@ -76,14 +76,14 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DataGrid x:Name="studentDataGrid" Margin="10,130,10,40" AutoGenerateColumns="False"
-                  ItemsSource="{Binding Data}" SelectionMode="Single" SelectionUnit="FullRow">
+        <DataGrid x:Name="studentDataGrid" Margin="10,130,10,40" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow"
+                  ItemsSource="{Binding SignedStudents, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Priezvisko" Binding="{Binding Lastname}"/>
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}"/>
                 <DataGridTextColumn Header="Dátum nar." Binding="{Binding DateOfBirth}"/>
-                <DataGridTextColumn Header="Študíjny program" Binding="{Binding StudyProgramme.Name}"/>
+                <DataGridTextColumn Header="Študijný program" Binding="{Binding StudyProgramme.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="plusButton" HorizontalAlignment="Left" Margin="85,104.5,0,0" VerticalAlignment="Top" 
@@ -95,8 +95,8 @@
                              ItemsSource="{Binding Students}">
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="{x:Type MenuItem}">
-                            <Setter Property="Header" Value="{Binding Name}"/>
-                            <Setter Property="Command" Value="{Binding AddStudentCommand}"/>
+                            <Setter Property="Header" Value="{Binding Converter={StaticResource StudentConverter}}"/>
+                            <Setter Property="Command" Value="{Binding DataContext.AddStudentCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
                             <Setter Property="CommandParameter" Value="{Binding}"/>
                         </Style>
                     </ContextMenu.ItemContainerStyle>
@@ -104,7 +104,7 @@
             </Button.ContextMenu>
         </Button>
         <Button x:Name="minusButton" HorizontalAlignment="Left" Margin="115,104.5,0,0" VerticalAlignment="Top" 
-                Width="16" Height="16" Style="{StaticResource MinusButtonStyle}"
+                Width="16" Height="16" Style="{StaticResource MinusButtonStyle}" Visibility="Visible"
                 Command="{Binding RemoveStudentCommand}" CommandParameter="{Binding SelectedItem, ElementName=studentDataGrid}"/>
     </Grid>
 </UserControl>

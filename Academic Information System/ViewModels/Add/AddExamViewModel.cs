@@ -99,8 +99,8 @@ namespace AiS.ViewModels
                 if (value != this.signedStudents)
                 {
                     SetCollection(value);
-                    this.OnPropertyChanged("HasChanged");
                     this.OnPropertyChanged("SignedStudents");
+                    this.OnPropertyChanged("HasChanged");
                 }
             }
         }
@@ -231,6 +231,7 @@ namespace AiS.ViewModels
                 {
                     this.OnPropertyChanged("SignedStudents");
                     this.OnPropertyChanged("Students");
+                    this.OnPropertyChanged("HasChanged");
                 };
         }
 

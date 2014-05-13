@@ -69,6 +69,7 @@
     <Compile Include="ViewModels\Interfaces\ISaveViewModel.cs" />
     <Compile Include="ViewModels\Report\ReportStudentViewModel.cs" />
     <Compile Include="ViewModels\Report\ReportSubjectViewModel.cs" />
+    <Compile Include="Views\Converters\StudentConverter.cs" />
     <Compile Include="Views\Converters\StudyTypeConverter.cs" />
     <Compile Include="Views\Converters\TeacherConverter.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
@@ -215,7 +216,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\Xml\" />
     <Folder Include="Views\Themes\HelloKitty\" />
   </ItemGroup>
   <ItemGroup>
@@ -323,7 +323,7 @@
   <ItemGroup>
     <Resource Include="Images\drevo.jpg" />
     <Resource Include="Images\lienka.jpg" />
-    <Resource Include="Images\135538.jpg" />
+    <Resource Include="Images\kitty.jpg" />
     <None Include="database.sdf" />
     <Content Include="Repositories\Database\Scripts\SQLCE_1.0.0.0.sql" />
     <Content Include="Repositories\Database\Scripts\SQL_1.0.0.0.sql" />

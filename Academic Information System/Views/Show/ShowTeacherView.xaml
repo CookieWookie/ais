@@ -12,7 +12,6 @@
         <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" 
                     CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
         <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportTeacherCommand}}"/>
-        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
     </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,6 +25,9 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="teacherDataGrid" Margin="10,0,10,0" Grid.Row="1" ItemsSource="{Binding Data}" CanUserAddRows="False" 
                   SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Titul" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Meno" Binding="{Binding Name}"/>

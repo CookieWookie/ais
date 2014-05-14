@@ -7,12 +7,6 @@
              mc:Ignorable="d" 
              x:Name="window"
              MinHeight="300" MinWidth="335">
-    <UserControl.InputBindings>
-        <KeyBinding Key="N" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddExamCommand}}"/>
-        <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddExamCommand}}" 
-                    CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
-        <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportExamCommand}}"/>
-    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -29,7 +23,8 @@
                 <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=examDataGrid}"/>
             </DataGrid.InputBindings>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Čas" Binding="{Binding Time}"/>
+                <DataGridTextColumn Header="Dátum" Binding="{Binding Time, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                <DataGridTextColumn Header="Čas" Binding="{Binding Time, StringFormat=\{0:HH:mm\}}"/>
                 <DataGridTextColumn Header="Učiteľ" Binding="{Binding Teacher, Converter={StaticResource TeacherConverter}}"/>
                 <DataGridTextColumn Header="Predmet" Binding="{Binding Subject.Name}"/>
                 <DataGridTextColumn Header="Počet študentov" Binding="{Binding SignedStudents.Count}"/>
@@ -49,8 +44,10 @@
         <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" Width="75" Height="25" 
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddExamCommand}}"/>
         <Button Content="Upraviť" HorizontalAlignment="Left" Grid.Row="5" Margin="90,0,0,0" Width="75" Height="25"
+                IsEnabled="{Binding SelectedItem, ElementName=examDataGrid, Converter={StaticResource IsNotNullConverter}, UpdateSourceTrigger=PropertyChanged}"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddExamCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=examDataGrid}"/>
-        <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="5" Margin="170,0,0,0" Width="75" Height="25"
+        <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="5" Margin="170,0,0,0" Width="75" Height="25" 
+                IsEnabled="{Binding SelectedItem, ElementName=examDataGrid, Converter={StaticResource IsNotNullConverter}, UpdateSourceTrigger=PropertyChanged}"
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=examDataGrid}"/>
         <Button Content="Import" HorizontalAlignment="Left" Grid.Row="5" Margin="250,0,0,0" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportExamCommand}}"/>

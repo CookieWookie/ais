@@ -7,12 +7,6 @@
              mc:Ignorable="d" 
              x:Name="window"
              MinHeight="300" MinWidth="335">
-    <UserControl.InputBindings>
-        <KeyBinding Key="N" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}"/>
-        <KeyBinding Key="E" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" 
-                    CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
-        <KeyBinding Key="I" Modifiers="Control" Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportTeacherCommand}}"/>
-    </UserControl.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -47,8 +41,10 @@
         <Button Content="Pridať" HorizontalAlignment="Left" Grid.Row="5" Margin="10,0,0,0" Width="75" Height="25" 
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}"/>
         <Button Content="Upraviť" HorizontalAlignment="Left" Grid.Row="5" Margin="90,0,0,0" Width="75" Height="25"
+                IsEnabled="{Binding SelectedItem, ElementName=teacherDataGrid, Converter={StaticResource IsNotNullConverter}, UpdateSourceTrigger=PropertyChanged}"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.AddTeacherCommand}}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
         <Button Content="Odstrániť" HorizontalAlignment="Left" Grid.Row="5" Margin="170,0,0,0" Width="75" Height="25"
+                IsEnabled="{Binding SelectedItem, ElementName=teacherDataGrid, Converter={StaticResource IsNotNullConverter}, UpdateSourceTrigger=PropertyChanged}"
                 Command="{Binding DeleteCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=teacherDataGrid}"/>
         <Button Content="Import" HorizontalAlignment="Left" Grid.Row="5" Margin="250,0,0,0" Width="75" Height="25"
                 Command="{Binding Source={x:Static ais:WindowChangeCommands.ImportTeacherCommand}}"/>

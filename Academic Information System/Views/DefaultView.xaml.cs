@@ -22,6 +22,7 @@ namespace AiS.Views
     {
         public DefaultView()
         {
+            InitializeComponent();
         }
     }
 }

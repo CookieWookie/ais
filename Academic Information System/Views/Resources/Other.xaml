@@ -8,6 +8,7 @@
     <Converters:TeacherConverter x:Key="TeacherConverter"/>
     <Converters:OpenWindowsMenuVisibilityConverter x:Key="OpenWindowsMenuVisibilityConverter"/>
     <Converters:StudentConverter x:Key="StudentConverter"/>
+    <Converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
     
     <Validators:NameValidationRule x:Key="NameValidationRule"/>
     <Validators:NumberValidationRule x:Key="NumberValidationRule"/>

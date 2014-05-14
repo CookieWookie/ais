@@ -9,7 +9,7 @@ namespace AiS.ViewModels
     {
         public override string WindowName
         {
-            get { return ""; }
+            get { return "X"; }
         }
 
         public DefaultViewModel()

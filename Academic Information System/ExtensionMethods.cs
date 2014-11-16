@@ -8,6 +8,7 @@ using System.ComponentModel;
 
 public static class ExtensionMethods
 {
+	// comment
     public static void ThrowIfNull<T>(this T source)
     {
         if (ReferenceEquals(source, null))
